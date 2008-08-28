@@ -505,7 +505,7 @@ class tx_feuserregister_controller_frontenduserregistration extends tx_lib_contr
     }
     
     function sendMail($mailConfig){
-      #t3lib_div::debug($mailConfig);
+//        debug($mailConfig);
         $htmlmailClassName = tx_div::makeInstanceClassName('t3lib_htmlmail');
         $this->htmlMail = t3lib_div::makeInstance('t3lib_htmlmail');
 		$this->htmlMail->start();
@@ -521,8 +521,9 @@ class tx_feuserregister_controller_frontenduserregistration extends tx_lib_contr
 		$this->htmlMail->addPlain($mailConfig['plainText']);
 		$this->htmlMail->setHTML($this->htmlMail->encodeMsg($mailConfig['htmlText']));
 		$this->hookHandler->call('beforeSendMail', $this, $mailConfig);
-//		t3lib_div::debug('send email to: ' . $mailConfig['recipient']);
+//		debug('send email to: ' . $mailConfig['recipient']);
 		$this->htmlMail->send($mailConfig['recipient']);    
+//		debug('mail sent2');
 		$this->hookHandler->call('afterSendMail', $this, $mailConfig);
     }
     
@@ -577,12 +578,13 @@ class tx_feuserregister_controller_frontenduserregistration extends tx_lib_contr
     	);
     	
     	$mailconfig = $this->configurations->get($configpath);
-    	#t3lib_div::debug($mailconfig);
-    	#t3lib_div::debug($configpath);
+//    	 debug($mailconfig);
+//    	debug($configpath);
+//    	debug($key);
     	$allowedMailConfig = $mailconfig;
     	foreach ($mailconfig as $key => $val){    		
 	      	if (strpos($allowedMailConfig[$key],'ields.')) {
-	      	   #t3lib_div::debug(substr($allowedMailConfig[$key],7));
+//	      	  debug(substr($allowedMailConfig[$key],7));
 	          $allowedMailConfig[$key] = $this->parameters->get(substr($allowedMailConfig[$key],7));          
 	        }
     		if (!in_array($key, $allowedMailConfigVars)) unset($allowedMailConfig[$key]);
@@ -597,8 +599,10 @@ class tx_feuserregister_controller_frontenduserregistration extends tx_lib_contr
 	        }
     		if (!in_array($key, $allowedMailConfigVars)) unset($allowedMailConfig[$key]);
     	}
-    	#t3lib_div::debug($allowedMailConfig);
-    	
+//    	  		debug('bar');
+//	    debug($allowedMailConfig);
+//    	  	  debug('foo');
+//	    
     	
     	return $allowedMailConfig;    	
     }
@@ -841,7 +845,7 @@ class tx_feuserregister_controller_frontenduserregistration extends tx_lib_contr
 	 */
     function createAction() {
 #    	debug($this->parameters->_iterator);
-#    	t3lib_div::debug('create');
+//    	debug('create');
     	$modelClassName = tx_div::makeInstanceClassName('tx_feuserregister_model_frontenduserregistration');
       $viewClassName = tx_div::makeInstanceClassName('tx_feuserregister_view_feuserregister');
       $entryClassName = tx_div::makeInstanceClassName($this->configurations->get('config.entryClassName'));
@@ -895,12 +899,13 @@ class tx_feuserregister_controller_frontenduserregistration extends tx_lib_contr
         		//FIXME: Abfrage einbauen welches Handling / welche Mails erwünscht ist
         		$emailConfigs = $this->configurations->get('config.email.');
         		if (count($emailConfigs)){
+//        			debug($emailConfigs);
       				foreach ($emailConfigs as $key => $value){
-#            	  t3lib_div::debug($emailConfigs);	
-	          	  $templateNameHtml = $this->configurations->get('config.email.'.$key.'templateNameHtml');
+#            	 		 t3lib_div::debug($emailConfigs);	
+	          	 		 $templateNameHtml = $this->configurations->get('config.email.'.$key.'templateNameHtml');
 	        			$templateNameText = $this->configurations->get('config.email.'.$key.'templateNameText');
 	        			
-	        			
+//	        			debug($this->configurations->get('config.email.'.$key.'templatePath'));
 				        $view->setTemplatePath($this->configurations->get('config.email.'.$key.'templatePath'));
 #				        debug($this->configurations->get('config.email.'.$key.'templatePath'));
 				        $pathToLanguageFile = $this->configurations->get('config.email.'.$key.'pathToLanguageFile');
@@ -909,13 +914,14 @@ class tx_feuserregister_controller_frontenduserregistration extends tx_lib_contr
     						$translator = new $translatorClassName($this);
     						$translator->setPathToLanguageFile('EXT:feuserregister/locallang.xml');
     						$this->translator = &$translator;
-    	        			
+//    	        			debug('before fetch');	
     						$mailConfig = $this->fetchMailConfig('config.email.'.$key);
-    						
-    						
+//    						debug($mailConfig);
+//    						debug('before plain');
     						$plainTextMail = $view->renderMail($templateNameText);
+//    						debug('bef html');
     						$htmlTextMail = $view->renderMail($templateNameHtml);
-    								  
+//							debug('before trans');    								  
     						$mailConfig['plainText'] = $translator->translate($plainTextMail);
     						$mailConfig['htmlText'] = $translator->translate($htmlTextMail);
                 #  t3lib_div::debug($plainTextMail);	
@@ -924,7 +930,7 @@ class tx_feuserregister_controller_frontenduserregistration extends tx_lib_contr
 #    						debug($templateNameHtml);
 #    						debug($templateNameText);
     						
-#    						debug($mailConfig);
+//    						debug($mailConfig);
     						
     						$this->sendMail($mailConfig);		        					
         			}
@@ -933,7 +939,7 @@ class tx_feuserregister_controller_frontenduserregistration extends tx_lib_contr
             $this->lowerStep();
           }
         }
-//		t3lib_div::debug($this->getSteps());
+//		debug('mail sent');
 		$model->load($this->parameters);
         for($model->rewind(); $model->valid(); $model->next()) {
             $entry = new $entryClassName($model->current(), $this);
@@ -973,13 +979,36 @@ class tx_feuserregister_controller_frontenduserregistration extends tx_lib_contr
 		}
 		
 		$template = $this->checkErrors($template);
-#		debug('TEMPLATE:');
+//		debug('TEMPLATE:');
 //		t3lib_div::debug($GLOBALS['TSFE']);
-#		debug($template);
+//		debug($template);
 //		t3lib_div::debug($this->origKeysMapping);
 //		t3lib_div::debug($next);
 
-		
+		if ($template == 'feuserregister_after_save' && $this->configurations->get('config.redirectAfterLoginMode')) {
+			$mode = $this->configurations->get('config.redirectAfterLoginMode');
+//			debug($mode);
+			switch ($mode) {
+				case 'page_intern':
+					if ($this->configurations->get('config.redirectRegistrationValue')) {
+						$pid = $this->configurations->get('config.redirectRegistrationValue');
+//						debug($pid);
+						$linkObj= $linkObj->destination($pid);
+						
+						$linkObj->redirect();
+					}					
+				break;
+				case 'page_extern':
+					if ($this->configurations->get('config.redirectRegistrationValue')) {
+						$redirect_url = $this->configurations->get('config.redirectRegistrationValue');
+					}					
+				break;
+				default:
+			}
+#			header('Location: '.t3lib_div::locationHeaderUrl($this->redirectUrl));
+//			exit;
+		}
+//		debug('dfr');
 		$out .= $view->render($template);
 
 		$out = $translator->translate($out);
@@ -1638,12 +1667,14 @@ class tx_feuserregister_controller_frontenduserregistration extends tx_lib_contr
     	if ($this->isAfterPreview()) return TRUE;
     	$stepParam = $this->parameters->offsetExists('step');
     	$keysToValidate = $this->getKeysToValidate();
+//    	debug($this->parameters->_iterator);
     	if ($stepParam && !empty($keysToValidate)) {
 #    		debug($keysToValidate);
     		foreach ($keysToValidate as $key) {
 	    		$config = $this->steps[$this->currentStep]['fields.'][$key];
 	    		$validationMethods = $this->getValidationMethods($config);
 	    		$key = substr($key,0,-1);
+	    		#debug($validationMethods);
 	    		foreach ($validationMethods as $vm) {
 	    			$extraValidationParam = '';
 	    			if ($config['validate.'][$vm]) $extraValidationParam = $config['validate.'][$vm];
@@ -1656,25 +1687,27 @@ class tx_feuserregister_controller_frontenduserregistration extends tx_lib_contr
 	    				(method_exists($this, $method) && !$this->$method($key, $fieldvalue, $extraValidationParam))
 	    				||
 	    				($this->hookHandler->call('addExtraValidationMethods', $this, $method, $key, $fieldvalue, $extraValidationParam))
-	    				) {
-	    				$validationsPassed = FALSE;
-	    				if ($method == 'validationMethod_validateEquals') {
-#	    					$config['validate.']['err_confirm_message'] = $this->cObjectWrapper->cObject->stdWrap($config['validate.']['err_confirm_message'], $config['validate.']['err_confirm_message.']);
-							$this->stepRequirementErrors[$key.'_validate'] = $config['validate.']['err_confirm_message'];	    						    					
-	    				} else {
-#	    					debug($config);
-#	    					debug($config['validate.']['err_message']);
-#							$config['validate.']['err_message'] = $this->cObjectWrapper->cObject->stdWrap($config['validate.']['err_message'], $config['validate.']['err_message.']);	    					
-							$this->stepRequirementErrors[$key] = $config['validate.']['err_message'];	    					
+	    				) 
+	    				{
+		    				$validationsPassed = FALSE;
+		    				if ($method == 'validationMethod_validateEquals') {
+	#	    					$config['validate.']['err_confirm_message'] = $this->cObjectWrapper->cObject->stdWrap($config['validate.']['err_confirm_message'], $config['validate.']['err_confirm_message.']);
+								$this->stepRequirementErrors[$key.'_validate'] = $config['validate.']['err_confirm_message'];	    						    					
+		    				} else {
+	#	    					debug($config);
+	#	    					debug($config['validate.']['err_message']);
+	#							$config['validate.']['err_message'] = $this->cObjectWrapper->cObject->stdWrap($config['validate.']['err_message'], $config['validate.']['err_message.']);	    					
+								$this->stepRequirementErrors[$key] = $config['validate.']['err_message'];	    					
+		    				}
+	#	    				debug('validation failed');
+//		    				debug($key);
+	#	    				debug($fieldvalue); 
+	#	    				debug($method);
 	    				}
-#	    				debug('validation failed');
-#	    				debug($key);
-#	    				debug($fieldvalue); 
-#	    				debug($method);
-	    			}
 	    		}
 	    	}    	
     	}
+//    	debug($this->stepRequirementErrors);
     	//Nach einer Preview ist Validierung nicht notwendig
     	if (!$this->isAfterPreview && !$validationsPassed) {
 	    	$this->showPreview = FALSE;	
@@ -1682,7 +1715,6 @@ class tx_feuserregister_controller_frontenduserregistration extends tx_lib_contr
 	    	$this->validationsPassed = FALSE;
 	    	return FALSE;
     	}
-    	
     	return TRUE;
 
 #		debug($keysToValidate);
@@ -1711,6 +1743,7 @@ class tx_feuserregister_controller_frontenduserregistration extends tx_lib_contr
 		if ($captchaStr != '' && $captchaStr != $this->parameters->get('captcha_input')) {
 			//error handling
 			$this->stepRequirementErrors['captcha_input_error'] = 'captcha_input_error';
+			$this->parameters->offsetUnset('captcha_input');			
 			return FALSE;
 		}
 		return TRUE;
@@ -1723,6 +1756,8 @@ class tx_feuserregister_controller_frontenduserregistration extends tx_lib_contr
      *	@var $field fieldname
      */
     function validationMethod_required($fieldname, $fieldvalue) {
+//    	debug($fieldname);
+//    	debug($fieldvalue);
     	return (isset($fieldvalue) && (!empty($fieldvalue) || $fieldvalue === '0'));
     }
 
@@ -1813,6 +1848,19 @@ class tx_feuserregister_controller_frontenduserregistration extends tx_lib_contr
 #    	debug($fieldname);
 #    	debug($this->parameters->_iterator);
     	return (strlen($fieldvalue) >= $minlen);
+    }
+    
+    /**
+     * 
+     * method validationMethod_validateselection($field)
+     *
+     *	@var $field fieldname
+     */
+    function validationMethod_validateselection($fieldname, $fieldvalue) {
+//    	debug($fieldname);
+//    	debug($fieldvalue);
+//    	debug($this->parameters->_iterator);
+    	return ($fieldvalue != 'feuserregister_invalid');
     }
     
     

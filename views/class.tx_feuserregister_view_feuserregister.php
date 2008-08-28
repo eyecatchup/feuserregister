@@ -137,6 +137,7 @@ class tx_feuserregister_view_feuserregister extends tx_lib_smartyView {
 	        	$labelMarker[$tmp.'_validate_label'] = $validate_label;
 	        	
 	        	$value = $this->controller->parameters->get($tmp);	        	
+	        	$valueMarkerArray[$tmp] = $value;
 	        	
 	        	$origValue = $value;
 				//debug($key,'key', __FILE__ , __LINE__);
@@ -212,6 +213,7 @@ class tx_feuserregister_view_feuserregister extends tx_lib_smartyView {
 	        				} else {
 				        		$markerArray[$tmp.'_validate'] = $input_validate;
 				        		$markerArray[$tmp.'_validate_label'] = $validate_label;
+						        $valueMarkerArray[$tmp.'_validate_value'] = $value_validate;
 	        				}
 						}
 					}
@@ -245,6 +247,7 @@ class tx_feuserregister_view_feuserregister extends tx_lib_smartyView {
 #        t3lib_div::debug($markerArray);        
         $ret = $this->assignMarker($markerArray);
         $ret = $this->assignLabelMarker($markerArray, $labelMarker);
+        $ret = $this->assignValueMarker($markerArray, $valueMarkerArray);
         
         $this->smarty->assign('savebutton','<input type="submit" class="feuserregsiter_button" name="feuserregister[feuserregister_submitbutton_'.$this->controller->action.']" id="feuserregister_submitbutton" value="'.$savebuttonlabel.'" />');
         $this->smarty->assign('backbutton','<input type="submit" class="feuserregsiter_button" id="feuserregister_backbutton" name="feuserregister[backbutton_'.$this->controller->action.']" value="'.$backButtonLabel.'" />');
@@ -281,18 +284,20 @@ class tx_feuserregister_view_feuserregister extends tx_lib_smartyView {
         $username = 'username';
         $label = '%%%'.$username.'%%%';
         $markerArray[$username.'_label'] = $label;
-        $markerArray[$username.'_value'] = $this->controller->parameters->get($username);	        	
+        $valueMarkerArray[$username.'_value'] = $this->controller->parameters->get($username);	        	
         
         // Wrap around the value	        	
         $input = $this->controller->functionsObject->getTCAMarker($tmp, $conf, $value, 0);
         
         $markerArray[$tmp] = $input;
-
+        $valueMarkerArray[$tmp.'_value'] = $value;
+        
         $input = $this->controller->functionsObject->getTCAMarker($username, $conf, $value, 0);
         
         $markerArray[$username] = $input;
 
         $ret = $this->assignMarker($markerArray);
+        $ret = $this->assignValueMarker($markerArray, $valueMarkerArray);
         $this->smarty->assign('savebutton', $hidden.'<input class="feuserregsiter_button" type="submit" value="%%%send%%%" />');
 #		debug($markerArray);
 #		debug($view);
@@ -415,7 +420,7 @@ class tx_feuserregister_view_feuserregister extends tx_lib_smartyView {
 #	        					t3lib_div::debug($markerArray);
 	        				} else {
 				        		$markerArray[$tmp.'_validate'] = $input_validate;
-				        		$markerArray[$tmp.'_validate_label'] = $validate_label;
+				        		$valueMarkerArray[$tmp.'_validate_label'] = $validate_label;
 	        				}
 						}
 					}
@@ -468,7 +473,7 @@ class tx_feuserregister_view_feuserregister extends tx_lib_smartyView {
 	 * @return	string		typically an (x)html string
 	 */
     function renderMail($view){
-        
+//        debug($view);
     	$this->_loadSmarty();
         
         
@@ -482,12 +487,15 @@ class tx_feuserregister_view_feuserregister extends tx_lib_smartyView {
 	  		  $markerArray[$key] = $value; 
 	      }
 		}
+//		debug('before pT');
 		// pT = processType
         $pT = $this->controller->configurations->get('config.registerProcessType');
         if ($pT == 5) {
         	$markerArray['password_input'] = $this->controller->randPassword;
         }
+//        debug('bef assign');
         $ret = $this->assignMarker($markerArray);
+//        debug('bef deispl');
         return $this->smarty->display($view.'.tmpl');
 	 }
 	 
@@ -535,7 +543,15 @@ class tx_feuserregister_view_feuserregister extends tx_lib_smartyView {
 	   }
    	   return true;
    }
-
+	 
+   	 function assignValueMarker($markerarray, $valueMarker){
+//   	 	debug($valueMarker);
+	   foreach ($valueMarker as $name => $value){
+         $this->smarty->assign($name.'_value', $value);
+	   }
+   	   return true;
+   	 }
+   
 	 function assignMarker($markerarray, $mode='create'){
 #	   debug($markerarray);
        $markerarray = $this->getAdditionalMarker($markerarray);
@@ -567,6 +583,7 @@ class tx_feuserregister_view_feuserregister extends tx_lib_smartyView {
    }
    
    function renderError($name) {
+//   	debug($name);
    	$out = '';
    	$error = $this->controller->stepRequirementErrors[$name];
    	$confirm = FALSE;
@@ -578,6 +595,9 @@ class tx_feuserregister_view_feuserregister extends tx_lib_smartyView {
  	$nextStep = $this->controller->getNextStep();
  	$origKey = $this->controller->origKeysMapping[$nextStep];
    	$conf = $this->controller->configurations->get('config.steps.'.$origKey.'fields.'.$name.'.');
+   	if ($name == 'captcha_input_error') {
+   		$conf = $this->controller->configurations->get('config.steps.'.$origKey.'fields.captcha_input.');
+   	}
 #   	t3lib_div::debug('renderError');
 #  	t3lib_div::debug('config.steps.'.$origKey.'fields.'.$name.'.');
 #	debug($conf);
@@ -590,7 +610,7 @@ class tx_feuserregister_view_feuserregister extends tx_lib_smartyView {
 		else {
 			if (is_array($conf['validate.']['err_message.'])) {
 				$error_lang = $this->controller->cObjectWrapper->cObject->stdWrap($error_lang, $conf['validate.']['err_message.']);
-			}
+			} 
 		}
 	}
    	return $this->controller->cObjectWrapper->cObject->stdWrap($error_lang, $conf['error.']);

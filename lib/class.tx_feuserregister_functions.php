@@ -622,7 +622,8 @@ class tx_feuserregister_functions {
 										$deftext = $itemArray[$i][0];
 										$deftext = substr($deftext, 0, strlen($deftext) - 2);
 									}
-									$colContent .= '<option>%%%'.$this->cObj->caseshift($colName,'lower').'_select_first%%%</option>';
+									$colContent .= '<option value="feuserregister_invalid">%%%'.$this->cObj->caseshift($colName,'lower').'_select_first%%%</option>';
+									
 									$i = 0;
 									foreach ($itemArray as $k => $item)	{
 										$fieldIdValidate = $this->controller->getFieldId($colName, $i);
@@ -667,7 +668,7 @@ class tx_feuserregister_functions {
                     $invalidUIDs = explode(',',$conf['invalidUIDs']);
                   }
 								//debug($invalidUIDs,'TCA :: select :: invalidUIDs', __FILE__ , __LINE__);
-									$colContent .= '<option>%%%'.$this->cObj->caseshift($colName,'lower').'_select_first%%%</option>';
+									$colContent .= '<option value="feuserregister_invalid">%%%'.$this->cObj->caseshift($colName,'lower').'_select_first%%%</option>';
 									while ($row2 = $TYPO3_DB->sql_fetch_assoc($res)) {
 								//debug($row2['uid'],'row2 uid', __FILE__ , __LINE__);
 									  if (in_array($row2['uid'], $invalidUIDs)) continue;
@@ -696,7 +697,7 @@ class tx_feuserregister_functions {
 												$colContent .= '<dt><input class="' . $this->getClassName('checkbox') . '" id="'. $this->getClassName($colName) . '-' . $row2['uid'] .'" name="'.$designator.'['.$colName.']['.$row2['uid']. ']" value="'.$row2['uid'].'" type="checkbox"' . (in_array($row2['uid'], $valuesArray) ? ' checked="checked"' : '') . ' /></dt>
 												<dd><label for="'. $this->getClassName($colName) . '-' . $row2['uid'] .'">'.$titleText.'</label></dd>';
 											} else {
-											 
+											 	#debug($titleText);
 												$colContent .= '<option value="'.$row2['uid'].'"' . (in_array($row2['uid'], $valuesArray) ? 'selected="selected"' : '') . '>'.$titleText.'</option>';
 											}
 										}
