@@ -36,14 +36,14 @@ abstract class tx_feuserregister_model_dbtable {
 	protected $_table = '';
 	
 	protected $_data = array ();
-	protected $_dataDefinition = array ();
+	protected $_dataDefinitions = array ();
 	
 	public function __construct($uid = null) {
 		$res = $GLOBALS['TYPO3_DB']->sql_query("describe {$this->_table}");
 		if ($GLOBALS['TYPO3_DB']->sql_num_rows($res)) {
 			while ( $tableDefinition = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res) ) {
 				$this->_data[$tableDefinition['Field']] = '';
-				$this->_dataDefinition[$tableDefinition['Field']] = $tableDefinition['Type'];
+				$this->_dataDefinitions[$tableDefinition['Field']] = $tableDefinition['Type'];
 			}
 		}
 		if ($uid !== null) {
@@ -108,7 +108,7 @@ abstract class tx_feuserregister_model_dbtable {
 		if (array_key_exists('tstamp', $this->_data)) {
 			$this->_data['tstamp'] = time();
 		}
-		$GLOBALS ['TYPO3_DB']->exec_UPDATEquery($this->_table, 'uid = ' . $this->_data['uid'], $this->_data);
+		$GLOBALS ['TYPO3_DB']->exec_UPDATEquery($this->_table, 'uid = ' . $this->_data['uid'], $this->_prepareDataForDatabase());
 		return ($GLOBALS ['TYPO3_DB']->sql_affected_rows ());
 	}
 	
@@ -119,9 +119,55 @@ abstract class tx_feuserregister_model_dbtable {
 		if (array_key_exists('crdate', $this->_data)) {
 			$this->_data['crdate'] = time();
 		}
-		$GLOBALS ['TYPO3_DB']->exec_INSERTquery($this->_table, $this->_data);
+		$GLOBALS ['TYPO3_DB']->exec_INSERTquery($this->_table, $this->_prepareDataForDatabase());
 		$this->_data['uid'] = $GLOBALS['TYPO3_DB']->sql_insert_id();
 		return $this->_data['uid'];
+	}
+	
+	protected function _prepareDataForDatabase() {
+		$preparedData = array();
+		foreach ($this->_dataDefinitions as $field => $type) {
+			switch (strtoupper($type)) {
+				case 'TINYINT':
+				case 'SMALLINT':
+				case 'MEDIUMINT':
+				case 'INT':
+				case 'INTEGER':
+				case 'BIGINT':
+				case 'YEAR':
+					$preparedData[$field] = intval($this->_data[$field]);
+				break;
+				case 'FLOAT':
+					$preparedData[$field] = floatval($this->_data[$field]);
+				break;
+				case 'DOUBLE':
+				case 'REAL':
+					$preparedData[$field] = doubleval($this->_data[$field]);
+				break;
+				case 'DECIMAL':
+				case 'NUMERIC':
+				case 'DATE':
+				case 'DATETIME':
+				case 'TIMESTAMP':
+				case 'TIME':
+				case 'CHAR':
+				case 'VARCHAR':
+				case 'TINYBLOB':
+				case 'TINYTEXT':
+				case 'BLOB':
+				case 'TEXT':
+				case 'MEDIUMBLOB':
+				case 'MEDIUMTEXT':
+				case 'LONGBLOB':
+				case 'LONGTEXT':
+				case 'ENUM':
+				case 'SET':
+				default:
+					$preparedData[$field] = $GLOBALS['TYPO3_DB']->quoteStr($this->_data[$field], $this->_table);
+				break;
+			}
+		}
+		return $preparedData;
 	}
 }
 

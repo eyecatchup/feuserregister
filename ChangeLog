@@ -1,3 +1,4 @@
 2009-03-19 Frank NŠgler  <typo3@naegler.net>
 
 	* project moved to svn.typo3.org
+	* added prepare function before write data to database (avoiding SQL injection) 
