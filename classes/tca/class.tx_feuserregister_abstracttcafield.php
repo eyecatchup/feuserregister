@@ -22,7 +22,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 /**
- * $Id: class.tx_feuserregister_abstracttcafield.php 371 2009-03-19 14:19:19Z franae $
+ * $Id$
  */
 
 abstract class tx_feuserregister_AbstractTcaField {

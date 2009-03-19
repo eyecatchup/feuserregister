@@ -22,7 +22,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 /**
- * $Id: class.tx_feuserregister_validator_dateformat.php 352 2009-03-19 12:31:58Z franae $
+ * $Id$
  */
 
 require_once(PATH_feuserregister . 'classes/validators/class.tx_feuserregister_abstractvalidator.php');

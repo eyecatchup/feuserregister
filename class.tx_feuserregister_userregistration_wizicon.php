@@ -22,7 +22,7 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 /**
- * $Id: class.tx_feuserregister_controller_userregistration.php 309 2009-03-01 19:52:28Z franae $
+ * $Id$
  */
 
 /**

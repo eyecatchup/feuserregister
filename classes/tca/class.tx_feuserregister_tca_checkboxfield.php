@@ -22,7 +22,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 /**
- * $Id: class.tx_feuserregister_tca_checkboxfield.php 358 2009-03-19 13:55:27Z franae $
+ * $Id$
  */
 
 require_once(PATH_feuserregister . 'classes/tca/class.tx_feuserregister_abstracttcafield.php');

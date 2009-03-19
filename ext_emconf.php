@@ -8,7 +8,7 @@
 # Manual updates:
 # Only the data in the array - anything else is removed by next write.
 # "version" and "dependencies" must not be touched!
-# $Id: ext_emconf.php 372 2009-03-19 20:37:04Z franae $
+# $Id$
 ########################################################################
 
 $EM_CONF[$_EXTKEY] = array(

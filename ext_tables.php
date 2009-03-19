@@ -4,7 +4,7 @@ if (!defined ('TYPO3_MODE')) {
 }
 
 /**
- * $Id: ext_tables.php 351 2009-03-19 10:42:12Z franae $
+ * $Id$
  */ 
 
 $tempColumns = array (

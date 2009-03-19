@@ -22,7 +22,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/ 
 /**
- * $Id: class.tx_feuserregister_model_field.php 355 2009-03-19 13:05:52Z franae $
+ * $Id$
  */
 
 require_once(PATH_t3lib.'class.t3lib_tceforms.php');

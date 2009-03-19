@@ -22,7 +22,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 /**
- * $Id: class.tx_feuserregister_exception_transformer.php 352 2009-03-19 12:31:58Z franae $
+ * $Id$
  */
 
 class tx_feuserregister_exception_Transformer extends Exception {

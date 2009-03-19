@@ -1,5 +1,5 @@
 #
-# $Id: ext_tables.sql 343 2009-03-18 21:15:57Z franae $
+# $Id$
 #
 
 #

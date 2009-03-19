@@ -22,7 +22,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 /**
- * $Id: class.tx_feuserregister_command_confirm.php 352 2009-03-19 12:31:58Z franae $
+ * $Id$
  */
 require_once(PATH_feuserregister . 'interfaces/interface.tx_feuserregister_interface_command.php');
 

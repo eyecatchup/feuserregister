@@ -22,7 +22,7 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 /**
- * $Id: class.tx_feuserregister_controller_userregistration.php 370 2009-03-19 14:18:02Z franae $
+ * $Id$
  */
 
 define('PATH_feuserregister', t3lib_extMgm::extPath('feuserregister'));

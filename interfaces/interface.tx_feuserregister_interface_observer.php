@@ -22,7 +22,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 /**
- * $Id: interface.tx_feuserregister_interface_observer.php 352 2009-03-19 12:31:58Z franae $
+ * $Id$
  */
 
 interface tx_feuserregister_interface_Observer {

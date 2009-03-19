@@ -22,7 +22,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 /**
- * $Id: class.tx_feuserregister_transformer_timestamp.php 293 2009-02-26 23:24:36Z franae $
+ * $Id$
  */
 
 require_once(PATH_feuserregister . 'classes/transformer/class.tx_feuserregister_abstracttransformer.php');

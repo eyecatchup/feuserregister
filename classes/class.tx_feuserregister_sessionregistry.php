@@ -22,7 +22,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 /**
- * $Id: class.tx_feuserregister_registry.php 293 2009-02-26 23:24:36Z franae $
+ * $Id$
  */
 
 class tx_feuserregister_SessionRegistry extends tx_feuserregister_Registry {
