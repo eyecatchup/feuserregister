@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields
+			belonging to extension 'feuserregister'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="error_validator_between">the value is not between ###MIN### and ###MAX###</label>
+			<label index="error_validator_boolean">the value is not a boolean</label>
+			<label index="error_validator_dateformat">the value has a wrong dateformat. example: ###FORMAT###</label>
+			<label index="error_validator_email">the value is not an email address</label>
+			<label index="error_validator_equalField">the value is not equal with field ###FIELD###</label>
+			<label index="error_validator_equalValue">the value is not equal with the value ###VALUE###</label>
+			<label index="error_validator_float">the value is not a float</label>
+			<label index="error_validator_int">the value is not a integer</label>
+			<label index="error_validator_ip">the value is not an ip address</label>
+			<label index="error_validator_ipv4">the value is not an ipv4 address</label>
+			<label index="error_validator_ipv6">the value is not an ipv6 address</label>
+			<label index="error_validator_length">the length of the value is not between ###MIN### and ###MAX###</label>
+			<label index="error_validator_regexp">the value does'nt match the regexp</label>
+			<label index="error_validator_required">this field is required</label>
+			<label index="error_validator_uniqueInDb">the value is allready used</label>
+			<label index="error_validator_uniqueInPid">the value is allready used</label>
+			<label index="error_validator_url">the value is not an valid url</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="error_validator_between">Der Werte liegt nicht zwischen ###MIN### und ###MAX###</label>
+			<label index="error_validator_boolean">Der Wert ist kein boolean</label>
+			<label index="error_validator_dateformat">Der Wert hat ein ungültiges Format. Beispiel: ###FORMAT###</label>
+			<label index="error_validator_email">Der Wert ist keine gültige E-Mail-Adresse</label>
+			<label index="error_validator_equalField">Der Wert ist nicht identisch mit dem Feld ###FIELD###</label>
+			<label index="error_validator_equalValue">Der Wert ist nicht identisch mit dem Wert ###VALUE###</label>
+			<label index="error_validator_float">Der Wert ist kein float</label>
+			<label index="error_validator_int">Der Wert ist kein integer</label>
+			<label index="error_validator_ip">Der Wert ist keine IP-Adresse</label>
+			<label index="error_validator_ipv4">Der Wert ist keine IPv4-Adresse</label>
+			<label index="error_validator_ipv6">Der Wert ist keine IPv6-Adresse</label>
+			<label index="error_validator_length">Die Länge des Wertes liegt nicht zwischen ###MIN### und ###MAX###</label>
+			<label index="error_validator_regexp">Der Wert entspricht nicht dem regulären Ausdruck</label>
+			<label index="error_validator_required">Dies ist ein Pflichtfeld</label>
+			<label index="error_validator_uniqueInDb">Dieser Wert wird bereits verwendet</label>
+			<label index="error_validator_uniqueInPid">Dieser Wert wird bereits verwendet</label>
+			<label index="error_validator_url">Der Wert ist keine URL</label>
+		</languageKey>
+	</data>
+</T3locallang>

@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<!-- $Id: template_error.html 293 2009-02-26 23:24:36Z franae $ -->
+</head>
+<body>
+
+<p>default error subpart for any exceptions.</p>
+<!-- ###TEMPLATE_ERROR### begin -->
+	<h2>###EXCEPTION_MESSAGE###</h2>
+	<p>Datei: ###EXCEPTION_FILE###</p>
+	<p>Zeile: ###EXCEPTION_LINE###</p>
+	<p>Code:  ###EXCEPTION_CODE###</p>
+	<p>Trace:</p>
+	<pre>###EXCEPTION_TRACE###</pre>
+<!-- ###TEMPLATE_ERROR### end -->
+
+<p>You can use the exception code number in subpart marker for custom error messages.</p>
+<!-- ###TEMPLATE_ERROR_1000### begin -->
+	<h2>###EXCEPTION_CODE###: ###EXCEPTION_MESSAGE###</h2>
+	<p>Datei: ###EXCEPTION_FILE###</p>
+	<p>Zeile: ###EXCEPTION_LINE###</p>
+	<p>Code:  ###EXCEPTION_CODE###</p>
+	<p>Trace:</p>
+	<pre>###EXCEPTION_TRACE###</pre>
+<!-- ###TEMPLATE_ERROR_1000### end -->
+
+</body>
+</html>
