@@ -1,0 +1,49 @@
+{$stepmessage}
+{if $step == 0}
+  <h2>{$stepheader1}</h2>
+{/if}
+{if $step == 1}
+  <h2>{$stepheader2}</h2>
+{/if}
+{if $step == 2}
+  <h2>{$stepheader3}</h2>
+{/if}
+<form id="feuserregisterform" class="tx_feuserregister_create" method="post"  action="{$form_action}" >
+  <dl class="form-design">
+  {$username_error}
+  {$username_label} {$username}
+  {$username_validate_label} {$username_validate}
+  {$usergroup_label} {$usergroup}
+  {$by_invitation_label} {$by_invitation}
+  {$gender_label} {$gender}
+  {$status_label} {$status}
+  {$www_label} {$www}
+  {$password_error}
+  {$password_label} {$password}
+  {$password_validate_label} {$password_validate}
+  {$password_validate_error}
+
+  {$company}
+  {$first_name_label} {$first_name} {$first_name_error}
+  {$last_name_label} {$last_name}
+  {$a_address}
+  {$zip}
+  {$city}
+  {$country}
+  {$telephone}
+  {$fax}
+  {$tx_enetextuserregister_bacompany}
+  {$tx_enetextuserregister_bastreet}
+  {$tx_enetextuserregister_bazip}
+  {$tx_enetextuserregister_bacity}
+  {$tx_enetextuserregister_bacountry}
+  {$email_label}  {$email} {$email_error}
+  {$email_validate_label} {$email_validate} {$email_validate_error}
+  {$module_sys_dmail_category}
+  {$tx_enetextuserregister_agb}
+  {$tx_enetextuserregister_datenschutz}
+</dl>  
+{$hiddenFields}
+{$savebutton}
+</form>
+{$belowFormMarker}

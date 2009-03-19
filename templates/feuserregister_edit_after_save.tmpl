@@ -1,0 +1,23 @@
+<?php if (!defined ('TYPO3_MODE')) 	die ('Access denied.'); ?>
+Vielen Dank, Ihre Registrierung ist jetzt komplett.
+{$stepmessage}
+<form class="tx_feuserregister_create" method="post"  action="{$form_action}" >
+  <input type="hidden" name="feuserregister[action]" value="edit"/>
+  <input type="hidden" name="feuserregister[step]" value="{$step}"/>
+  <input type="hidden" name="feuserregister[no_cache]" value="1"/>
+  <input type="hidden" name="feuserregister[preview]" value="{$preview}"/>
+  {if $username_isset == 1}
+  {$username_error}
+  {$username}
+  {/if}
+  {$usergroup}
+  {$by_invitation}
+  {$gender}
+  {$status}
+  {$password}
+  {$first_name}
+  {$last_name}
+  {$email}
+  {$module_sys_dmail_category}
+  {$savebutton}
+</form>

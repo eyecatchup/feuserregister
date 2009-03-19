@@ -1,0 +1,22 @@
+{$stepmessage}
+step2
+<form id="feuserregisterform" class="tx_feuserregister_create" method="post"  action="{$form_action}" >
+  {if $username_isset == 1}
+  {$username_error}
+  {$username}
+  {/if}
+  {$usergroup}
+  {$by_invitation}
+  {$gender}
+  {$status}
+  {$password}  {$password_validate}
+
+  {$first_name}
+  {$last_name}
+  {$email}
+  {$email_validate}
+  {$module_sys_dmail_category}
+  {$address}
+  {$savebutton}
+</form>
+{$belowFormMarker}

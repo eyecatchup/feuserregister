@@ -1,0 +1,2 @@
+smartyViewTemplate
+create
