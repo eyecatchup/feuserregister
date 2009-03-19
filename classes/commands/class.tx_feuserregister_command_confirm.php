@@ -2,7 +2,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2009 Frank N�gler <typo3@naegler.net>
+ *  (c) 2009 Frank Naegler <typo3@naegler.net>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -28,14 +28,14 @@ require_once(PATH_feuserregister . 'interfaces/interface.tx_feuserregister_inter
 
 class tx_feuserregister_command_Confirm implements tx_feuserregister_interface_Command {
 	const MODE = 'confirm';
-	
+
 	protected $_configuration = null;
 	protected $_controller = null;
 	protected $_request = null;
 	protected $_templateContent = '';
 	
 	public function __construct() {
-		$this->_request = t3lib_div::GParrayMerged('tx_feuserregister');
+		$this->_request = t3lib_div::makeInstance('tx_feuserregister_Request');
 		$this->_configuration = tx_feuserregister_Registry::get('tx_feuserregister_configuration');
 		$this->_controller = tx_feuserregister_Registry::get('tx_feuserregister_controller');
 
@@ -52,7 +52,7 @@ class tx_feuserregister_command_Confirm implements tx_feuserregister_interface_C
 	 */
 	public function execute() {
 		$this->_controller->notifyObservers('onConfirmStart');
-		$hashCode = $GLOBALS['TYPO3_DB']->quoteStr($this->_request['confirmationCode'], 'fe_users');
+		$hashCode = $GLOBALS['TYPO3_DB']->quoteStr($this->_request->get('confirmationCode'), 'fe_users');
 		$feuser = t3lib_div::makeInstance('tx_feuserregister_model_FeUser');
 		$feuser->select("md5(concat(uid,crdate,'{$GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']}')) = '{$hashCode}' AND disable = 1");
 		if ($feuser->uid) {

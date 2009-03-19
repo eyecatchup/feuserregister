@@ -2,7 +2,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2009 Frank N�gler <typo3@naegler.net>
+ *  (c) 2009 Frank Naegler <typo3@naegler.net>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,12 +26,12 @@
  */
 
 class tx_feuserregister_CommandResolver {
-	protected $path;
-	protected $request;
+	protected $_path;
+	protected $_request;
 	
 	public function __construct() {
-		$this->path				= PATH_feuserregister . 'classes/commands';
-		$this->request			= t3lib_div::GParrayMerged('tx_feuserregister');
+		$this->_path			= PATH_feuserregister . 'classes/commands';
+		$this->_request			= t3lib_div::makeInstance('tx_feuserregister_Request');
 	}
 
 	/**
@@ -40,7 +40,7 @@ class tx_feuserregister_CommandResolver {
 	 * @return tx_feuserregister_interface_Command
 	 */
 	public function getCommand() {
-		switch ($this->request['cmd']) {
+		switch ($this->_request->get('cmd')) {
 			case 'register':
 				$cmdName = 'register';
 			break;
@@ -82,7 +82,7 @@ class tx_feuserregister_CommandResolver {
 	protected function loadCommand($cmdName) {
 		$cmdName = ucfirst($cmdName);
 		$class = "tx_feuserregister_command_{$cmdName}";
-		$file  = "{$this->path}/class.".strtolower($class).".php";
+		$file  = "{$this->_path}/class.".strtolower($class).".php";
 		$class = t3lib_div::makeInstanceClassName($class);
 		if (!file_exists($file)) {
 			return false;

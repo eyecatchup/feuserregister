@@ -2,7 +2,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2009 Frank N�gler <typo3@naegler.net>
+ *  (c) 2009 Frank Naegler <typo3@naegler.net>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -60,9 +60,10 @@ class tx_feuserregister_model_Field {
 			'EXT:feuserregister/lang/locallang_fields.xml', 
 			$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']
 		);
-		$this->_request = t3lib_div::GParrayMerged('tx_feuserregister');
+		$this->_request = t3lib_div::makeInstance('tx_feuserregister_Request');
+		$requestData	= $this->_request->get('data');
 		$sessionUser = t3lib_div::makeInstance('tx_feuserregister_model_SessionUser');
-		$this->_value = (isset($this->_request['data'][$this->_fieldName])) ? $this->_request['data'][$this->_fieldName] : $sessionUser->get($this->_fieldName);
+		$this->_value = (isset($requestData[$this->_fieldName])) ? $requestData[$this->_fieldName] : $sessionUser->get($this->_fieldName);
 		
 			// init validators
 		$validators = $this->_fieldConfiguration['validators'];

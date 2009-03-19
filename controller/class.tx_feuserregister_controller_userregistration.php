@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2009 Frank N�gler <typo3@naegler.net>
+*  (c) 2009 Frank Naegler <typo3@naegler.net>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -59,7 +59,7 @@ require_once(PATH_feuserregister . 'view/class.tx_feuserregister_view_error.php'
 /**
  * central application controller for the feuserregister extension, this is the "plugin"
  *
- * @author	Frank N�gler <typo3@naegler.net>
+ * @author	Frank Naegler <typo3@naegler.net>
  * @package TYPO3
  * @subpackage feuserregister
  */

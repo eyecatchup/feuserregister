@@ -2,7 +2,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2009 Frank N�gler <typo3@naegler.net>
+ *  (c) 2009 Frank Naegler <typo3@naegler.net>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -33,7 +33,7 @@ class tx_feuserregister_command_Edit implements tx_feuserregister_interface_Comm
 	protected $_request = null;
 
 	public function __construct() {
-		$this->_request = t3lib_div::GParrayMerged('tx_feuserregister');
+		$this->_request = t3lib_div::makeInstance('tx_feuserregister_Request');
 		$this->_controller = tx_feuserregister_Registry::get('tx_feuserregister_controller');
 		$feuserClassName = t3lib_div::makeInstanceClassName('tx_feuserregister_model_FeUser');
 		$feuser = tx_feuserregister_SessionRegistry::get('tx_feuserregister_feuser');
@@ -64,7 +64,7 @@ class tx_feuserregister_command_Edit implements tx_feuserregister_interface_Comm
 		$this->_controller->notifyObservers('onEditStart');
 		$stepManager = t3lib_div::makeInstance('tx_feuserregister_model_StepManager');
 		$currentStep = $stepManager->getCurrentStep();
-		switch ($this->_request['action']) {
+		switch ($this->_request->get('action')) {
 			case 'previousStep':
 				$this->_controller->notifyObservers('onEnterPreviousStep');
 				if ($currentStep->isValid()) {
@@ -82,10 +82,10 @@ class tx_feuserregister_command_Edit implements tx_feuserregister_interface_Comm
 				$this->_controller->notifyObservers('onEnterGetStep');
 				if ($currentStep->isValid()) {
 					$currentStep->storeData();
-					$currentStep = $stepManager->getStepByNumber($this->_request['step']);
+					$currentStep = $stepManager->getStepByNumber($this->_request->get('step'));
 					if ($currentStep === null) {
 						$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_StepManager');
-						throw new $exceptionClass('step '.$this->_request['step'].' not available', 3200);
+						throw new $exceptionClass('step '.$this->_request->get('step').' not available', 3200);
 					} else {
 						$currentStep->setValidate(false);
 					}

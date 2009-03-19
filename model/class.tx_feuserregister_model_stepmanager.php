@@ -2,7 +2,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2009 Frank N�gler <typo3@naegler.net>
+ *  (c) 2009 Frank Naegler <typo3@naegler.net>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -36,7 +36,7 @@ class tx_feuserregister_model_StepManager {
 		$this->_configuration	= tx_feuserregister_Registry::get('tx_feuserregister_configuration');
 		$stepConfigurations		= $this->_configuration[$mode.'.'];
 		$this->_stepCounter		= count($stepConfigurations);
-		$this->_request			= t3lib_div::GParrayMerged('tx_feuserregister');
+		$this->_request			= t3lib_div::makeInstance('tx_feuserregister_Request');
 		$firstStep				= null;
 		
 		foreach ($stepConfigurations as $stepName => $stepConfiguration) {
@@ -61,8 +61,8 @@ class tx_feuserregister_model_StepManager {
 				break;
 			}
 		}
-		if (isset($this->_request['step'])) {
-			$this->_currentStep = $this->_request['step'];
+		if (isset($this->_request->get('step'))) {
+			$this->_currentStep = $this->_request->get('step');
 		} else {
 			$this->_currentStep = $firstStep;
 		}

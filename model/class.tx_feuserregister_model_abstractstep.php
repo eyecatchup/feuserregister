@@ -2,7 +2,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2009 Frank N�gler <typo3@naegler.net>
+ *  (c) 2009 Frank Naegler <typo3@naegler.net>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -50,7 +50,7 @@ abstract class tx_feuserregister_model_AbstractStep {
 				}
 			}
 		}
-		$this->_request = t3lib_div::GParrayMerged('tx_feuserregister');
+		$this->_request = t3lib_div::makeInstance('tx_feuserregister_Request');
 		
 		$mode = tx_feuserregister_Registry::get('tx_feuserregister_mode');
 		$template = (strlen($mode)) ? $mode : 'register';

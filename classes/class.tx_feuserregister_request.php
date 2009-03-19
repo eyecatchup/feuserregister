@@ -22,20 +22,32 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 /**
- * $Id$
+ * $Id: class.tx_feuserregister_registry.php 18083 2009-03-19 21:01:59Z neoblack $
  */
 
-class tx_feuserregister_exception_Field extends Exception {
-	protected $code	= 6000;
+class tx_feuserregister_Request {
+	protected $_request = array();
 	
-	public function __construct($message = null, $code = 6000) {
-		$this->code = $code;
-		parent::__construct($message, $this->code);
+	public function __construct() {
+		$this->_request = t3lib_div::GParrayMerged('tx_feuseregister');
+	}
+	
+	/**
+	 * getter method.
+	 *
+	 * @param string $index - get the value associated with $index
+	 * @return mixed
+	 */
+	public static function get($index) {
+		if (array_key_exists($index, $this->_request)) {
+			return $this->_request[$index];
+		}
+		return null;
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/feuserregister/exceptions/class.tx_feuserregister_exception_field.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/feuserregister/exceptions/class.tx_feuserregister_exception_field.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/feuserregister/classes/class.tx_feuserregister_request.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/feuserregister/classes/class.tx_feuserregister_request.php']);
 }
 
 ?>

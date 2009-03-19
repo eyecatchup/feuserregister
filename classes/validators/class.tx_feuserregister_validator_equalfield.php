@@ -2,7 +2,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2009 Frank N�gler <typo3@naegler.net>
+ *  (c) 2009 Frank Naegler <typo3@naegler.net>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -37,9 +37,10 @@ class tx_feuserregister_validator_EqualField extends tx_feuserregister_AbstractV
 	 * @return boolean
 	 */
 	public function validate() {
-		$request = t3lib_div::GParrayMerged('tx_feuserregister');
+		$request = t3lib_div::makeInstance('tx_feuserregister_Request');
+		$requestData = $request->get('data');
 		$this->_errorMessage = str_replace('###FIELD###', $this->_options['field'], $this->_errorMessage);
-		return (strcmp($this->_value, $request['data'][$this->_options['field']]) === 0) ? true : false;
+		return (strcmp($this->_value, $requestData[$this->_options['field']]) === 0) ? true : false;
 	}
 }
 
