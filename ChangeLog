@@ -3,3 +3,4 @@
 	* project moved to svn.typo3.org
 	* added prepare function before write data to database (avoiding SQL injection)
 	* added class tx_feuserregister_Request to encapsulate every access to the request parameters
+	* added t3lib_div:removeXSS() to tx_feuserregister_Request->get()

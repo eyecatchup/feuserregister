@@ -40,7 +40,7 @@ class tx_feuserregister_Request {
 	 */
 	public static function get($index) {
 		if (array_key_exists($index, $this->_request)) {
-			return $this->_request[$index];
+			return t3lib_div::removeXSS($this->_request[$index]);
 		}
 		return null;
 	}
