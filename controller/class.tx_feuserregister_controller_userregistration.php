@@ -33,6 +33,7 @@ require_once(PATH_feuserregister . 'classes/class.tx_feuserregister_localization
 require_once(PATH_feuserregister . 'classes/class.tx_feuserregister_mailer.php');
 require_once(PATH_feuserregister . 'classes/class.tx_feuserregister_validatorfactory.php');
 require_once(PATH_feuserregister . 'classes/class.tx_feuserregister_registry.php');
+require_once(PATH_feuserregister . 'classes/class.tx_feuserregister_request.php');
 require_once(PATH_feuserregister . 'classes/class.tx_feuserregister_sessionregistry.php');
 require_once(PATH_feuserregister . 'classes/class.tx_feuserregister_tcafieldfactory.php');
 require_once(PATH_feuserregister . 'classes/class.tx_feuserregister_transformerfactory.php');
