@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for extension 'feuserregister'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="mvc1_name">Frontend User Registration</label>
+			<label index="mvc1_title">Frontend User Registration</label>
+			<label index="mvc1_plus_wiz_description">Frontend user registration module with many functions</label>
+			<label index="yes">ja</label>
+			<label index="no">nein</label>
+			<label index="foo">Ich bin ein Foo!</label>
+			<label index="usergroup">Benutzergruppe</label>
+			<label index="status">Status</label>
+			<label index="module_sys_dmail_category">Direct Mail Kat.</label>
+			<label index="by_invitation">auf Einladung</label>
+			<label index="username_exist">Dieser Benutzername existiert bereits</label>
+			<label index="stepmessage2">Die gelben Formularfelder sind Pflichtfelder. Der Speichernbutton wird aktiviert, sobald sie die Pflichtfelder korrekt ausgefüllt haben.</label>
+            <label index="fe_users_gender_I_0">Hr.</label>
+            <label index="fe_users_gender_I_1">Fr.</label>
+            <label index="fe_users.status">Status:</label>
+            <label index="fe_users.status.I.1">Student</label>
+            <label index="fe_users.status.I.2">Schüler</label>
+            <label index="fe_users.status.I.3">Angestellt</label>
+            <label index="fe_users.status.I.4">Selbstständig</label>
+            <label index="fe_users.status.I.5">halbtags beschäftigt</label>
+            <label index="fe_users.status.I.6">Rentner</label>
+			<label index="confirm_message_top">Bitte klicken Sie auf den Link, um Ihre Registrierung abzuschliessen.</label>
+			<label index="confirm_message_bottom">Vielen Dank, Cross Content Media</label>   
+            <label index="gender">Anrede</label>
+            <label index="gender_err">Bitte wählen Sie Ihre Anrede aus.</label>
+            <label index="gender_tooltip">Anrede</label>
+            <label index="gender_select_first">Bitte auswählen</label>
+            <label index="fe_users_gender_I_0">Herr</label>
+            <label index="fe_users_gender_I_1">Frau</label>		
+            <label index="first_name">Vorname:</label>	
+            <label index="first_name_tooltip">Vorname</label>	
+            <label index="first_name_err">Bitte tragen Sie Ihren Vornamen ein, dieser muss aus min. 2 Zeichen bestehen.</label>	
+            <label index="first_nametooltip">Vorname</label>	
+            <label index="last_name">Nachname:</label>
+            <label index="last_name_tooltip">Nachname</label>	
+            <label index="last_name_err">Bitte tragen Sie Ihren Nachnamen ein, dieser muss aus min. 2 Zeichen bestehen.</label>	
+            <label index="company">Firma:</label>
+            <label index="company_tooltip">Firma</label>	
+            <label index="address">Straße:</label>
+            <label index="address_tooltip">Straße</label>	
+            <label index="address_err">Bitte tragen Sie Ihre Straße und Hausnummer ein.</label>	
+            <label index="zip">PLZ:</label>
+            <label index="zip_tooltip">PLZ</label>	
+            <label index="zip_err">Bitte tragen Sie Ihre PLZ ein.</label>	
+            <label index="city">Ort:</label>
+            <label index="city_tooltip">Ort</label>
+            <label index="city_err">Bitte tragen Sie Ihren Ort ein.</label>	
+            <label index="country">Land:</label>
+            <label index="country_tooltip">Land</label>	
+            <label index="country_err">Bitte tragen Sie Ihr Land ein.</label>	
+            <label index="telephone">Telefon:</label>	
+            <label index="telephone_tooltip">Telefon</label>	
+            <label index="telephone_err">Bitte tragen Sie Ihre Telefonnummer ein.</label>	
+            <label index="date_of_birth">Gebutsdatum:</label>	
+            <label index="date_of_birth_tooltip">Gebutsdatum</label>	
+            <label index="username">Benutzername:</label>	
+            <label index="username_tooltip">Benutzername</label>	
+            <label index="username_err">Bitte tragen Sie Ihren gewünschten Benutzernamen ein.</label>	
+            <label index="email">E-Mailadresse:</label>	
+            <label index="email_tooltip">E-Mailadresse</label>	
+            <label index="email_validate_label">E-Mailadresse bestätigen:</label>	
+            <label index="email_err">Bitte tragen sie eine korrekte E-Mailadresse ein.</label>	
+            <label index="email_confirm_err">Die E-Mailadressen haben nicht übereingestimmt.</label>
+            <label index="password">Passwort:</label>	
+            <label index="password_tooltip">Passwort</label>		
+            <label index="password_label">Passwort:</label>	
+            <label index="password_validate_label">Passwort wiederholen:</label>
+            <label index="password_validate_tooltip">Passwort wiederholung</label>	
+            <label index="password_confirm_err">Die beiden Passwörter haben nicht überein gestimmt.</label>	
+            <label index="password_err">Das Passwort muss mindestens 7 Zeichen enthalten und darf nicht abcdefg oder passwort sein.</label>	
+			
+			  	       
+		</languageKey>
+		<languageKey index="de" type="array">	
+            <label index="gender">Anrede</label>
+            <label index="gender_err">Bitte wählen Sie Ihre Anrede aus.</label>
+            <label index="gender_tooltip">Anrede</label>
+            <label index="gender_select_first">Bitte auswählen</label>
+            <label index="fe_users_gender_I_0">Herr</label>
+            <label index="fe_users_gender_I_1">Frau</label>		
+            <label index="first_name">Vorname:</label>	
+            <label index="first_name_tooltip">Vorname</label>	
+            <label index="first_name_err">Bitte tragen Sie Ihren Vornamen ein, dieser muss aus min. 2 Zeichen bestehen.</label>	
+            <label index="first_nametooltip">Vorname</label>	
+            <label index="last_name">Nachname:</label>
+            <label index="last_name_tooltip">Nachname</label>	
+            <label index="last_name_err">Bitte tragen Sie Ihren Nachnamen ein, dieser muss aus min. 2 Zeichen bestehen.</label>	
+            <label index="company">Firma:</label>
+            <label index="company_tooltip">Firma</label>	
+            <label index="address">Straße:</label>
+            <label index="address_tooltip">Straße</label>	
+            <label index="address_err">Bitte tragen Sie Ihre Straße und Hausnummer ein.</label>	
+            <label index="zip">PLZ:</label>
+            <label index="zip_tooltip">PLZ</label>	
+            <label index="zip_err">Bitte tragen Sie Ihre PLZ ein.</label>	
+            <label index="city">Ort:</label>
+            <label index="city_tooltip">Ort</label>
+            <label index="city_err">Bitte tragen Sie Ihren Ort ein.</label>	
+            <label index="country">Land:</label>
+            <label index="country_tooltip">Land</label>	
+            <label index="country_err">Bitte tragen Sie Ihr Land ein.</label>	
+            <label index="telephone">Telefon:</label>	
+            <label index="telephone_tooltip">Telefon</label>	
+            <label index="telephone_err">Bitte tragen Sie Ihre Telefonnummer ein.</label>	
+            <label index="date_of_birth">Gebutsdatum:</label>	
+            <label index="date_of_birth_tooltip">Gebutsdatum</label>	
+            <label index="username">Benutzername:</label>	
+            <label index="username_tooltip">Benutzername</label>	
+            <label index="username_err">Bitte tragen Sie Ihren gewünschten Benutzernamen ein.</label>	
+            <label index="email">E-Mailadresse:</label>	
+            <label index="email_tooltip">E-Mailadresse</label>	
+            <label index="email_validate_label">E-Mailadresse bestätigen:</label>	
+            <label index="email_err">Bitte tragen sie eine korrekte E-Mailadresse ein.</label>	
+            <label index="email_confirm_err">Die E-Mailadressen haben nicht übereingestimmt.</label>
+            <label index="password">Passwort:</label>	
+            <label index="password_tooltip">Passwort</label>		
+            <label index="password_label">Passwort:</label>	
+            <label index="password_validate_label">Passwort wiederholen:</label>
+            <label index="password_validate_tooltip">Passwort wiederholung</label>	
+            <label index="password_confirm_err">Die beiden Passwörter haben nicht überein gestimmt.</label>	
+            <label index="password_err">Das Passwort muss mindestens 7 Zeichen enthalten und darf nicht abcdefg oder passwort sein.</label>	
+
+
+		</languageKey>			
+	</data>
+</T3locallang>
