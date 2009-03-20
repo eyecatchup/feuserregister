@@ -87,6 +87,7 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 				$feuser->set($field->getFieldName(), $field->getValue(tx_feuserregister_model_Field::PARSE_DATEBASE));
 			}
 		}
+		$this->_controller->notifyObservers('onEditBeforeSave', array('feuser' => $feuser));
 		if (count($confirmValues) > 0) {
 			$confirmValuesDb = serialize($confirmValues);
 			$feuser->set('tx_feuserregister_temporarydata', $confirmValuesDb);
@@ -100,23 +101,26 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 						), 0, 1, $this->_configuration['pages.']['confirm'])
 					)
 				);
-				tx_feuserregister_Mailer::send('user', 'onupdate', $marker);
 			}
 		}	
-		if ($this->_configuration['global.']['adminEmail.']['onUpdate']) {
-			tx_feuserregister_Mailer::send('admin', 'onupdate', $marker);
-		}
 		if ($this->_configuration['global.']['userGroupsAfterUpdate']) {
 			$feuser->set('usergroup', $this->_configuration['global.']['userGroupsAfterRegistration']);
 		}
 		if ($feuser->save()) {
 			$this->clearData();
 			tx_feuserregister_SessionRegistry::set('tx_feuserregister_reloadhash', $reloadHash);
+			if ($this->_configuration['global.']['adminEmail.']['onUpdate']) {
+				tx_feuserregister_Mailer::send('admin', 'onupdate', $marker);
+			}
+			if (strlen(trim($this->_configuration['global.']['confirmationOnUpdateFields'])) > 0 || $this->_configuration['global.']['userEmail.']['onUpdate']) {
+				tx_feuserregister_Mailer::send('user', 'onupdate', $marker);
+			}
 		} else {
 			$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_Database');
 			throw new $exceptionClass('error while updae fe user', 1200);
 		}
 		tx_feuserregister_Registry::set('tx_feuserregister_feuser', $feuser);
+		$this->_controller->notifyObservers('onEditAfterSave', array('feuser' => $feuser));
 		return t3lib_parsehtml::substituteMarkerArray($this->_templateContent, $marker, '', 0, 1);
 	}
 
@@ -126,13 +130,15 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 			->set('usergroup', $this->_configuration['global.']['userGroupsAfterRegistration'])
 			->set('disable', 1)
 			->save();
-					
+
 		foreach ($allFields as $field) {
 			if ($this->_configuration['global.']['useFieldAsUsername'] && $this->_configuration['global.']['useFieldAsUsername'] === $field->getFieldName()) {
 				$feuser->set('username', $field->getValue(tx_feuserregister_model_Field::PARSE_DATEBASE));
 			}
 			$feuser->set($field->getFieldName(), $field->getValue(tx_feuserregister_model_Field::PARSE_DATEBASE));
 		}
+		
+		$this->_controller->notifyObservers('onRegisterBeforeSave', array('feuser' => $feuser));
 			
 		if ($this->_configuration['global.']['emailConfirmation'] || $this->_configuration['global.']['userEmail.']['onRegister']) {
 			$controller = tx_feuserregister_Registry::get('tx_feuserregister_controller');
@@ -144,21 +150,24 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 					), 0, 1, $this->_configuration['pages.']['confirm'])
 				)
 			);
-			tx_feuserregister_Mailer::send('user', 'onregister', $marker);
 		} else {
 			$feuser->set('disable', 0);
-		}
-		if ($this->_configuration['global.']['adminEmail.']['onRegister']) {
-			tx_feuserregister_Mailer::send('admin', 'onregister', $marker);
 		}
 		if ($feuser->save()) {
 			$this->clearData();
 			tx_feuserregister_SessionRegistry::set('tx_feuserregister_reloadhash', $reloadHash);
+			if ($this->_configuration['global.']['emailConfirmation'] || $this->_configuration['global.']['userEmail.']['onRegister']) {
+				tx_feuserregister_Mailer::send('user', 'onregister', $marker);
+			}
+			if ($this->_configuration['global.']['adminEmail.']['onRegister']) {
+				tx_feuserregister_Mailer::send('admin', 'onregister', $marker);
+			}
 		} else {
 			$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_Database');
 			throw new $exceptionClass('error while creating fe user', 1100);
 		}
 		tx_feuserregister_Registry::set('tx_feuserregister_feuser', $feuser);
+		$this->_controller->notifyObservers('onRegisterAfterSave', array('feuser' => $feuser));
 		return t3lib_parsehtml::substituteMarkerArray($this->_templateContent, $marker, '', 0, 1);
 	}
 

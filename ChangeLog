@@ -4,6 +4,8 @@
 	* added stdWraps for fields, labels and errorMessages
 	* added Oberserver call in step model
 	* added field type hidden
+	* bugfix send mails only on successfully save
+	+ added Oberserver call in step success
 
 2009-03-19 Frank Naegler  <typo3@naegler.net>
 

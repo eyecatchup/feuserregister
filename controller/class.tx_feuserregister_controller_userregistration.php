@@ -161,7 +161,7 @@ class tx_feuserregister_controller_UserRegistration extends tslib_pibase impleme
 	 * @param tx_feuserregister_interface_Observer $observer
 	 */
 	public function attachObserver(tx_feuserregister_interface_Observer $observer) {
-		$this->_oberservers[] = $observer;
+		$this->_observers[] = $observer;
 	}
 	
 	/**
