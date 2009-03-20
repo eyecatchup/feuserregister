@@ -85,7 +85,6 @@ plugin.tx_feuserregister {
 		}
 		password {
 			type = password
-			maskOnPreview = 1
 			validators = required,length
 			validatorOptions {
 				length {

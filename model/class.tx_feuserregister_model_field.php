@@ -337,9 +337,6 @@ class tx_feuserregister_model_Field {
 				$value = htmlspecialchars($value);
 			break;
 			case self::TYPE_PASSWORD:
-				if ($this->_fieldConfiguration['maskOnPreview']) {
-					$value = str_repeat('*', strlen($value));
-				}
 				$value = htmlspecialchars($value);
 			break;
 			case self::TYPE_TCA:
