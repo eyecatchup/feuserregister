@@ -26,6 +26,7 @@
  */
 
 class tx_feuserregister_ValidatorFactory {
+	const VALIDATOR_AGE			= 'age';
 	const VALIDATOR_BETWEEN		= 'between';
 	const VALIDATOR_BLACKLIST	= 'blacklist';
 	const VALIDATOR_BOOLEAN		= 'boolean';
@@ -47,6 +48,9 @@ class tx_feuserregister_ValidatorFactory {
 	
 	static public function getValidator($typ) {
 		switch ($typ) {
+			case self::VALIDATOR_AGE:
+				$validatorClass = 'tx_feuserregister_validator_Age';
+			break;
 			case self::VALIDATOR_BETWEEN:
 				$validatorClass = 'tx_feuserregister_validator_Between';
 			break;
