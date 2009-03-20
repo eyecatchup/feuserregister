@@ -36,6 +36,8 @@ class tx_feuserregister_model_Field {
 	const TYPE_TEXT			= 'text';
 	const TYPE_TEXTAREA		= 'textarea';
 	
+	protected $_configuration = array();
+	protected $_controller = null;
 	protected $_databaseTransformers = array();
 	protected $_errorString = '';
 	protected $_fieldName = null;
@@ -55,7 +57,11 @@ class tx_feuserregister_model_Field {
 	
 	public function __construct($fieldname) {
 		$this->_fieldName = $fieldname;
-		$this->_fieldConfiguration = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']['fields.'][$fieldname.'.'];
+		$this->_configuration = tx_feuserregister_Registry::get('tx_feuserregister_configuration');
+		$this->_fieldConfiguration = $this->_configuration['fields.'][$fieldname.'.'];
+		
+		$this->_controller = tx_feuserregister_Registry::get('tx_feuserregister_controller');
+		
 		$this->_localizationManager = tx_feuserregister_LocalizationManager::getInstance(
 			'EXT:feuserregister/lang/locallang_fields.xml', 
 			$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']
@@ -127,10 +133,18 @@ class tx_feuserregister_model_Field {
 	}
 	
 	public function getErrorString() {
+		$wrapConfig = (isset($this->_fieldConfiguration['errorWrap.'])) ? $this->_fieldConfiguration['errorWrap.'] : $this->_configuration['defaultWraps.']['error.'];
+		if (is_array($wrapConfig)) {
+			return $this->_controller->cObj->stdWrap($this->_errorString, $wrapConfig);
+		}
 		return $this->_errorString;
 	}
 	
 	public function getField() {
+		$wrapConfig = (isset($this->_fieldConfiguration['fieldWrap.'])) ? $this->_fieldConfiguration['fieldWrap.'] : $this->_configuration['defaultWraps.']['fields.'];
+		if (is_array($wrapConfig)) {
+			return $this->_controller->cObj->stdWrap($this->_htmlField, $wrapConfig);
+		}
 		return $this->_htmlField;
 	}
 	
@@ -139,10 +153,23 @@ class tx_feuserregister_model_Field {
 	}
 	
 	public function getLabel() {
+		$label = '';
 		if ($this->_fieldConfiguration['type'] == 'TCA') {
-			return $this->_tcaField->getLabel();
+			$label = $this->_tcaField->getLabel();
+		} else {
+			$label = $this->_localizationManager->getLL('label_field_'.$this->_fieldName);
 		}
-		return $this->_localizationManager->getLL('label_field_'.$this->_fieldName);
+		
+		if ($this->_configuration['global.']['useRequiredStringInLabel']) {
+			$label .= ' ' . $this->getRequiredString();
+		}
+		
+		$wrapConfig = (isset($this->_fieldConfiguration['labelWrap.'])) ? $this->_fieldConfiguration['labelWrap.'] : $this->_configuration['defaultWraps.']['fields.'];
+		if (is_array($wrapConfig)) {
+			$label = $this->_controller->cObj->stdWrap($label, $wrapConfig);
+		}
+		$label = str_replace('###FIELDNAME###', $this->_fieldName, $label);
+		return $label;
 	}
 	
 	public function getRequiredString() {
@@ -202,6 +229,7 @@ class tx_feuserregister_model_Field {
 		$attributes[] = "type=\"text\"";
 		$attributes[] = "name=\"tx_feuserregister[data][{$this->_fieldName}]\"";
 		$attributes[] = "value=\"{$value}\"";
+		$attributes[] = "id=\"tx-feuserregister-field-{$this->_fieldName}\"";
 		if ($this->_fieldConfiguration['maxLength']) {
 			$attributes[] = 'maxlength="'.$this->_fieldConfiguration['maxLength'].'"';
 		}
@@ -218,6 +246,7 @@ class tx_feuserregister_model_Field {
 		$attributes[] = "type=\"password\"";
 		$attributes[] = "name=\"tx_feuserregister[data][{$this->_fieldName}]\"";
 		$attributes[] = "value=\"{$value}\"";
+		$attributes[] = "id=\"tx-feuserregister-field-{$this->_fieldName}\"";
 		if ($this->_fieldConfiguration['maxLength']) {
 			$attributes[] = 'maxlength="'.$this->_fieldConfiguration['maxLength'].'"';
 		}
@@ -232,6 +261,7 @@ class tx_feuserregister_model_Field {
 		$value = $this->getValue(self::PARSE_HTML);
 		$attributes = array();
 		$attributes[] = "name=\"tx_feuserregister[data][{$this->_fieldName}]\"";
+		$attributes[] = "id=\"tx-feuserregister-field-{$this->_fieldName}\"";
 		if ($this->_fieldConfiguration['maxLength']) {
 			$attributes[] = 'maxlength="'.$this->_fieldConfiguration['maxLength'].'"';
 		}

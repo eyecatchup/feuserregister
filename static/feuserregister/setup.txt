@@ -15,6 +15,7 @@ plugin.tx_feuserregister {
 	}
 	global {
 		requiredString = *
+		useRequiredStringInLabel = 0
 		useFieldAsUsername = email
 		# required
 		userGroupsAfterRegistration =
@@ -59,9 +60,10 @@ plugin.tx_feuserregister {
 		mails		= EXT:feuserregister/resources/template_mails.html
 	}
 	defaultWraps {
-		field = |
-		label = |
-		error = <span class="error">|</span>
+		# all wraps are stdWrap's
+		field.wrap = <span class="field">|</span>
+		label.wrap = <label for="tx-feuserregister-field-###FIELDNAME###">|</label>
+		error.wrap = <span class="error">|</span>
 	}
 	fields {
 		# default validators:
@@ -73,6 +75,9 @@ plugin.tx_feuserregister {
 		username {
 			type = text
 			validators = required,uniqueInDb
+			# labelWrap = stdWrap
+			# fieldWrap = stdWrap
+			# errorWrap = stdWrap
 		}
 		email {
 			type = text

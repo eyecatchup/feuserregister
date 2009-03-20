@@ -104,7 +104,7 @@ abstract class tx_feuserregister_AbstractTcaField {
 	public function setFieldname($fieldName) {
 		$this->_fieldName = $fieldName;
 		$this->_attributes['name'] = "tx_feuserregister[data][{$this->_fieldName}]";
-		$this->_attributes['id'] = "tx-feuserregister-{$this->_fieldName}";
+		$this->_attributes['id'] = "tx-feuserregister-field-{$this->_fieldName}";
 	}
 	
 	/**
