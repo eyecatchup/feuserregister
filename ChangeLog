@@ -8,6 +8,7 @@
 	* added observer call in step success
 	* added observer call in step preview
 	* change dependeny to TYPO3 4.3 in case of bug in t3liv_div::removeXSS() see bugtracker: http://bugs.typo3.org/view.php?id=9945
+	* bugfix age validator
 
 2009-03-19 Frank Naegler  <typo3@naegler.net>
 

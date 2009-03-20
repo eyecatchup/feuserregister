@@ -2,7 +2,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2009 Frank N�gler <typo3@naegler.net>
+ *  (c) 2009 Frank Naegler <typo3@naegler.net>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -39,8 +39,9 @@ class tx_feuserregister_validator_Age extends tx_feuserregister_AbstractValidato
 		$this->_errorMessage = str_replace('###MINAGE###', $this->_options['minAge'], $this->_errorMessage);
 		$this->_errorMessage = str_replace('###MAXAGE###', $this->_options['maxAge'], $this->_errorMessage);
 		
+		$value = $this->_value;
 		if (isset($this->_options['format'])) {
-			$transformer = new tx_feuserregister_transformer_Timestamp();
+			$transformer = t3lib_div::makeInstance('tx_feuserregister_transformer_Timestamp');
 			$transformer->setValue($this->_value);
 			$transformer->setOptions(array(
 				'inFormat'	=> $this->_options['format']
@@ -52,7 +53,7 @@ class tx_feuserregister_validator_Age extends tx_feuserregister_AbstractValidato
 			$minDate = strtotime($this->_options['minAge']);
 			$maxDate = strtotime($this->_options['maxAge']);
 			
-			return ($value >= $minDate && $value <= $maxDate ? true : false);
+			return ($value >= $minDate && $value <= $maxDate) ? true : false;
 		}
 		if ($this->_options['minAge']) {
 			$minDate = strtotime($this->_options['minAge']);
