@@ -61,7 +61,7 @@ class tx_feuserregister_model_StepManager {
 				break;
 			}
 		}
-		if (isset($this->_request->get('step'))) {
+		if (strlen($this->_request->get('step'))) {
 			$this->_currentStep = $this->_request->get('step');
 		} else {
 			$this->_currentStep = $firstStep;

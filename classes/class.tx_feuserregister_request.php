@@ -29,7 +29,7 @@ class tx_feuserregister_Request {
 	protected $_request = array();
 	
 	public function __construct() {
-		$this->_request = t3lib_div::GParrayMerged('tx_feuseregister');
+		$this->_request = t3lib_div::GParrayMerged('tx_feuserregister');
 	}
 	
 	/**
@@ -38,9 +38,21 @@ class tx_feuserregister_Request {
 	 * @param string $index - get the value associated with $index
 	 * @return mixed
 	 */
-	public static function get($index) {
+	public function get($index) {
 		if (array_key_exists($index, $this->_request)) {
-			return t3lib_div::removeXSS($this->_request[$index]);
+			if (is_array($this->_request[$index])) {
+				$tmpData = array();
+				foreach ($this->_request[$index] as $key => $value) {
+					if (!is_array($value)) {
+						$tmpData[$key] = t3lib_div::removeXSS($value);
+						// $tmpData[$key] = $value;
+					}
+				}
+				return $tmpData;
+			} else {
+				//return $this->_request[$index];
+				return t3lib_div::removeXSS($this->_request[$index]);
+			}
 		}
 		return null;
 	}
