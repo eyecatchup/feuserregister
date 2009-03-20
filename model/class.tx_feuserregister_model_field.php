@@ -31,6 +31,7 @@ require_once(PATH_feuserregister . 'classes/transformer/class.tx_feuserregister_
 class tx_feuserregister_model_Field {
 	const PARSE_DATEBASE	= 'db';
 	const PARSE_HTML		= 'html';
+	const TYPE_HIDDEN		= 'hidden';
 	const TYPE_PASSWORD		= 'password';
 	const TYPE_TCA			= 'TCA';
 	const TYPE_TEXT			= 'text';
@@ -113,6 +114,9 @@ class tx_feuserregister_model_Field {
 		}
 
 		switch ($this->_fieldConfiguration['type']) {
+			case self::TYPE_HIDDEN:
+				$this->_createHiddenField();
+			break;
 			case self::TYPE_PASSWORD:
 				$this->_createPasswordField();
 			break;
@@ -223,6 +227,20 @@ class tx_feuserregister_model_Field {
 		return $this->_isValid;
 	}
 	
+	protected function _createHiddenField() {
+		$value = $this->getValue(self::PARSE_HTML);
+		$attributes = array();
+		$attributes[] = "type=\"hidden\"";
+		$attributes[] = "name=\"tx_feuserregister[data][{$this->_fieldName}]\"";
+		$attributes[] = "value=\"{$value}\"";
+		$attributes[] = "id=\"tx-feuserregister-field-{$this->_fieldName}\"";
+		if ($this->_fieldConfiguration['additionalAttributes']) {
+			$attributes[] = $this->_fieldConfiguration['additionalAttributes'];
+		}
+		
+		$this->_htmlField = '<input '.implode(' ', $attributes).'/>';
+	}
+	
 	protected function _createTextField() {
 		$value = $this->getValue(self::PARSE_HTML);
 		$attributes = array();
@@ -288,6 +306,9 @@ class tx_feuserregister_model_Field {
 	protected function _prepareForDatabase() {
 		$value = $this->_value;
 		switch ($this->_fieldConfiguration['type']) {
+			case self::TYPE_HIDDEN:
+					// we don't need to prepare this field type
+			break;
 			case self::TYPE_PASSWORD:
 					// we don't need to prepare this field type
 					// use transformer if you need support for md5 or salted passwords
@@ -312,6 +333,9 @@ class tx_feuserregister_model_Field {
 	protected function _prepareForHtml() {
 		$value = $this->_value;
 		switch ($this->_fieldConfiguration['type']) {
+			case self::TYPE_HIDDEN:
+				$value = htmlspecialchars($value);
+			break;
 			case self::TYPE_PASSWORD:
 				if ($this->_fieldConfiguration['maskOnPreview']) {
 					$value = str_repeat('*', strlen($value));

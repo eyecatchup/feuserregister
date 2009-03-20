@@ -3,6 +3,7 @@
 	* added new validator: tx_feuserregister_validator_Age
 	* added stdWraps for fields, labels and errorMessages
 	* added Oberserver call in step model
+	* added field type hidden
 
 2009-03-19 Frank Naegler  <typo3@naegler.net>
 
