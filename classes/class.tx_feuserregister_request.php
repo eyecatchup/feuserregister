@@ -45,12 +45,10 @@ class tx_feuserregister_Request {
 				foreach ($this->_request[$index] as $key => $value) {
 					if (!is_array($value)) {
 						$tmpData[$key] = t3lib_div::removeXSS($value);
-						// $tmpData[$key] = $value;
 					}
 				}
 				return $tmpData;
 			} else {
-				//return $this->_request[$index];
 				return t3lib_div::removeXSS($this->_request[$index]);
 			}
 		}
