@@ -134,7 +134,7 @@ class tx_feuserregister_model_Field {
 	
 	public function getErrorString() {
 		$wrapConfig = (isset($this->_fieldConfiguration['errorWrap.'])) ? $this->_fieldConfiguration['errorWrap.'] : $this->_configuration['defaultWraps.']['error.'];
-		if (is_array($wrapConfig)) {
+		if (is_array($wrapConfig) && strlen($this->_errorString) > 0) {
 			return $this->_controller->cObj->stdWrap($this->_errorString, $wrapConfig);
 		}
 		return $this->_errorString;
