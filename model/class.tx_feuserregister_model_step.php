@@ -41,6 +41,9 @@ class tx_feuserregister_model_Step extends tx_feuserregister_model_AbstractStep 
 		$lllMarker		= $this->_getLllMarker();
 		
 		$marker = array_merge($fieldMarker, $labelMarker, $requiredMarker, $errorMarker, $globalMarker, $lllMarker);
+		
+		$this->_controller->notifyObservers('renderStepAdditionalMarker', array('marker' => &$marker));
+		
 		return t3lib_parsehtml::substituteMarkerArray($this->_templateContent, $marker, '', 0, 1);
 	}
 }
