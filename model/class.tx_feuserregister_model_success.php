@@ -30,6 +30,8 @@ require_once(PATH_feuserregister . 'model/class.tx_feuserregister_model_abstract
 class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractStep {
 	
 	public function render() {
+		$this->_configuration = tx_feuserregister_Registry::get('tx_feuserregister_configuration');
+		
 		$fieldMarker	= $this->_getFieldMarker();
 		$labelMarker	= $this->_getLabelmarker();
 		$globalMarker	= $this->_getGlobalMarker();
@@ -37,7 +39,7 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 		
 		$marker = array_merge($fieldMarker, $labelMarker, $globalMarker, $lllMarker);
 
-		$this->_configuration = tx_feuserregister_Registry::get('tx_feuserregister_configuration');
+		$this->_controller->notifyObservers('renderSuccessAdditionalMarker', array('marker' => &$marker));
 		
 		$allFields = array();
 		foreach ($this->_steps as $step) {

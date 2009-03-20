@@ -2,10 +2,11 @@
 
 	* added new validator: tx_feuserregister_validator_Age
 	* added stdWraps for fields, labels and errorMessages
-	* added Oberserver call in step model
+	* added observer call in step model
 	* added field type hidden
 	* bugfix send mails only on successfully save
-	+ added Oberserver call in step success
+	* added observer call in step success
+	* added observer call in step preview
 
 2009-03-19 Frank Naegler  <typo3@naegler.net>
 
