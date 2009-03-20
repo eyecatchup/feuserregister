@@ -58,6 +58,9 @@ class tx_feuserregister_tca_CheckboxField extends tx_feuserregister_AbstractTcaF
 			if ($this->_value) {
 				$this->_attributes['checked'] = 'checked';
 			}
+			if (strlen($this->_value) == 0) {
+				$this->_attributes['value'] = 1;
+			}
 			$element = "<input{$this->_getAttributesString()} />";
 			return $element;
 		}
