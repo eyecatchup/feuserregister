@@ -52,16 +52,15 @@ class tx_feuserregister_validator_Age extends tx_feuserregister_AbstractValidato
 		if ($this->_options['minAge'] && $this->_options['maxAge']) {
 			$minDate = strtotime($this->_options['minAge']);
 			$maxDate = strtotime($this->_options['maxAge']);
-			
-			return ($value >= $minDate && $value <= $maxDate) ? true : false;
+			return ($value <= $minDate && $value >= $maxDate) ? true : false;
 		}
 		if ($this->_options['minAge']) {
 			$minDate = strtotime($this->_options['minAge']);
-			return ($value >= $minDate) ? true : false;
+			return ($value <= $minDate) ? true : false;
 		}
 		if ($this->_options['maxAge']) {
 			$maxDate = strtotime($this->_options['maxAge']);
-			return ($value <= $maxDate) ? true : false;
+			return ($value >= $maxDate) ? true : false;
 		}
 	}
 }
