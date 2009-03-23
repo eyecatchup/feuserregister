@@ -71,6 +71,7 @@ class tx_feuserregister_model_Field {
 		$requestData	= $this->_request->get('data');
 		$sessionUser = t3lib_div::makeInstance('tx_feuserregister_model_SessionUser');
 		$this->_value = (isset($requestData[$this->_fieldName])) ? $requestData[$this->_fieldName] : $sessionUser->get($this->_fieldName);
+		$this->_controller->notifyObservers('afterInitFieldValue', array('field' => &$this));
 		
 			// init validators
 		$validators = $this->_fieldConfiguration['validators'];
@@ -209,6 +210,10 @@ class tx_feuserregister_model_Field {
 	
 	public function setErrorString($errorString) {
 		return $this->_errorString = $errorString;
+	}
+
+	public function setValue($value) {
+		$this->_value = $value;
 	}
 	
 	public function validate() {
