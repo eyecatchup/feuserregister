@@ -27,7 +27,6 @@
 
 require_once(PATH_feuserregister . 'classes/validators/class.tx_feuserregister_abstractvalidator.php');
 
-
 class tx_feuserregister_validator_UniqueInPid extends tx_feuserregister_AbstractValidator {
 	protected $_name = 'uniqueInPid';
 	
