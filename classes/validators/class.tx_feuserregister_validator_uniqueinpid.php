@@ -37,7 +37,8 @@ class tx_feuserregister_validator_UniqueInPid extends tx_feuserregister_Abstract
 	 * @return boolean
 	 */
 	public function validate() {
-		$feuserClassName = t3lib_div::makeInstance('tx_feuserregister_model_FeUser');
+		$feuserClassName	= t3lib_div::makeInstance('tx_feuserregister_model_FeUser');
+		$pageSelect			= t3lib_div::makeInstance('t3lib_pageSelect');
 		
 		$res = $GLOBALS ['TYPO3_DB']->sql_query('describe fe_users');
 		while ($data = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
@@ -47,7 +48,7 @@ class tx_feuserregister_validator_UniqueInPid extends tx_feuserregister_Abstract
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'uid',
 			'fe_users',
-			'pid = ' . $this->_options['pid'] . ' AND ' . $this->_fieldname . ' = ' . $value
+			'pid = ' . $this->_options['pid'] . ' AND ' . $this->_fieldname . ' = ' . $value . $pageSelect->enableFields('fe_users')
 		);
 		$result = ($GLOBALS['TYPO3_DB']->sql_num_rows($res) > 0) ? false : true;
 

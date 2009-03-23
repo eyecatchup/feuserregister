@@ -38,6 +38,7 @@ class tx_feuserregister_validator_UniqueInDb extends tx_feuserregister_AbstractV
 	 */
 	public function validate() {
 		$feuserClassName = t3lib_div::makeInstance('tx_feuserregister_model_FeUser');
+		$pageSelect			= t3lib_div::makeInstance('t3lib_pageSelect');
 		
 		$res = $GLOBALS ['TYPO3_DB']->sql_query('describe fe_users');
 		while ($data = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
@@ -47,7 +48,7 @@ class tx_feuserregister_validator_UniqueInDb extends tx_feuserregister_AbstractV
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'uid',
 			'fe_users',
-			$this->_fieldname . ' = ' . $value
+			$this->_fieldname . ' = ' . $value . $pageSelect->enableFields('fe_users')
 		);
 		$result = ($GLOBALS['TYPO3_DB']->sql_num_rows($res) > 0) ? false : true;
 		
