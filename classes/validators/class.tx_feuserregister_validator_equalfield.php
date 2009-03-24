@@ -39,9 +39,19 @@ class tx_feuserregister_validator_EqualField extends tx_feuserregister_AbstractV
 	public function validate() {
 		$request = t3lib_div::makeInstance('tx_feuserregister_Request');
 		$requestData = $request->get('data');
-		$this->_errorMessage = str_replace('###FIELD###', $this->_options['field'], $this->_errorMessage);
+		$this->_errorMessage = str_replace('###FIELDS###', $this->_options['fieldList'], $this->_errorMessage);
 		
-		$result = (strcmp($this->_value, $requestData[$this->_options['field']]) === 0) ? true : false;
+		$fields = t3lib_div::trimExplode(',', $this->_options['fieldList']);
+		
+		$result = true;
+		if (is_array($fields)) {
+			foreach ($fields as $field) {
+				if (strcmp($this->_value, $requestData[$field]) !== 0) {
+					$result = false;
+					break;
+				} 
+			}
+		}
 		
 		return (($this->_options['negate'])) ? !$result : $result;
 	}
