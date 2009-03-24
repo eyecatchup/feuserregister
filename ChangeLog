@@ -3,6 +3,7 @@
 	* added TS-Option aliasField
 	* remove first parameter from __construct of stepManager
 	* added observer call globalMarkerConfirm to confirm step
+	* added option negate for the equalField validator
 
 2009-03-23 Frank Naegler  <typo3@naegler.net>
 

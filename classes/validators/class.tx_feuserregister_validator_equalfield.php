@@ -40,7 +40,10 @@ class tx_feuserregister_validator_EqualField extends tx_feuserregister_AbstractV
 		$request = t3lib_div::makeInstance('tx_feuserregister_Request');
 		$requestData = $request->get('data');
 		$this->_errorMessage = str_replace('###FIELD###', $this->_options['field'], $this->_errorMessage);
-		return (strcmp($this->_value, $requestData[$this->_options['field']]) === 0) ? true : false;
+		
+		$result = (strcmp($this->_value, $requestData[$this->_options['field']]) === 0) ? true : false;
+		
+		return (($this->_options['negate'])) ? !$result : $result;
 	}
 }
 
