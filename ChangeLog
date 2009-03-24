@@ -1,3 +1,7 @@
+2009-03-24 Frank Naegler  <typo3@naegler.net>
+
+	* added TS-Option aliasField
+
 2009-03-23 Frank Naegler  <typo3@naegler.net>
 
 	* bugfix #2947 missing enableFields in validators: uniqueInDb and uniqueInPid

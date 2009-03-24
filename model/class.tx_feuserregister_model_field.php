@@ -70,6 +70,9 @@ class tx_feuserregister_model_Field {
 		$this->_request = t3lib_div::makeInstance('tx_feuserregister_Request');
 		$requestData	= $this->_request->get('data');
 		$sessionUser = t3lib_div::makeInstance('tx_feuserregister_model_SessionUser');
+		if (strlen(trim($sessionUser->get($this->_fieldName))) == 0 && isset($this->_fieldConfiguration['aliasField'])) {
+			$sessionUser->set($this->_fieldName, $sessionUser>get($this->_fieldConfiguration['aliasField']));
+		}
 		$this->_value = (isset($requestData[$this->_fieldName])) ? $requestData[$this->_fieldName] : $sessionUser->get($this->_fieldName);
 		$this->_controller->notifyObservers('afterInitFieldValue', array('field' => &$this));
 		
