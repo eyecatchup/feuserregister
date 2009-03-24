@@ -100,7 +100,7 @@ plugin.tx_feuserregister {
 			validators  = required,equalField
 			validatorOptions {
 				equalField {
-					field = password
+					fieldList = password
 				}
 			}
 		}
