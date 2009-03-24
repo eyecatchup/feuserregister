@@ -131,6 +131,9 @@ class tx_feuserregister_command_Confirm implements tx_feuserregister_interface_C
 			$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']
 		);
 		$marker = $localizationManager->getAllAsMarkerArray();
+		$this->_controller->notifyObservers('globalMarkerConfirm', array(
+			'markerArray'	=> &$marker
+		));
 		return $marker;
 	}
 }
