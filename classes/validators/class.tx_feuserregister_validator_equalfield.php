@@ -60,7 +60,7 @@ class tx_feuserregister_validator_EqualField extends tx_feuserregister_AbstractV
 			}
 		}
 		
-		return ($this->_options['negate']) ? !$result : $result;
+		return $result;
 	}
 }
 
