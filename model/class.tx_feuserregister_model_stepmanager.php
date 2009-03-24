@@ -32,7 +32,8 @@ class tx_feuserregister_model_StepManager {
 	protected $_request = null;
 	protected $_configuration = null;
 	
-	public function __construct($mode = 'register') {
+	public function __construct() {
+		$mode 					= tx_feuserregister_Registry::get('tx_feuserregister_mode');
 		$this->_configuration	= tx_feuserregister_Registry::get('tx_feuserregister_configuration');
 		$stepConfigurations		= $this->_configuration[$mode.'.'];
 		$this->_stepCounter		= count($stepConfigurations);
