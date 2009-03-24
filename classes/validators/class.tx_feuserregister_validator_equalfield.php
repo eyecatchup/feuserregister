@@ -46,14 +46,21 @@ class tx_feuserregister_validator_EqualField extends tx_feuserregister_AbstractV
 		$result = true;
 		if (is_array($fields)) {
 			foreach ($fields as $field) {
-				if (strcmp($this->_value, $requestData[$field]) !== 0) {
-					$result = false;
-					break;
+				if (isset($this->_options['negate'])) {
+					if (strcmp($this->_value, $requestData[$field]) === 0) {
+						$result = false;
+						break;
+					}
+				} else {
+					if (strcmp($this->_value, $requestData[$field]) !== 0) {
+						$result = false;
+						break;
+					}
 				} 
 			}
 		}
 		
-		return (($this->_options['negate'])) ? !$result : $result;
+		return ($this->_options['negate']) ? !$result : $result;
 	}
 }
 
