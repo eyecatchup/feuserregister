@@ -26,18 +26,26 @@
  */
 
 class tx_feuserregister_TransformerFactory {
+	const TRANSFORMER_BR2NL				= 'br2nl';
 	const TRANSFORMER_DATE				= 'date';
 	const TRANSFORMER_MD5				= 'md5';
+	const TRANSFORMER_NL2BR				= 'nl2br';
 	const TRANSFORMER_T3SEC_SALTEDPW	= 't3sec_saltedpw';
 	const TRANSFORMER_TIMESTAMP			= 'timestamp';
 	
 	static public function getTransformer($typ) {
 		switch ($typ) {
+			case self::TRANSFORMER_BR2NL:
+				$transformerClass = 'tx_feuserregister_transformer_Br2Nl';
+			break;
 			case self::TRANSFORMER_DATE:
 				$transformerClass = 'tx_feuserregister_transformer_Date';
 			break;
 			case self::TRANSFORMER_MD5:
 				$transformerClass = 'tx_feuserregister_transformer_Md5';
+			break;
+			case self::TRANSFORMER_NL2BR:
+				$transformerClass = 'tx_feuserregister_transformer_Nl2Br';
 			break;
 			case self::TRANSFORMER_T3SEC_SALTEDPW:
 				$transformerClass = 'tx_feuserregister_transformer_T3sec_saltedpw';
