@@ -28,6 +28,7 @@
 class tx_feuserregister_TransformerFactory {
 	const TRANSFORMER_BR2NL				= 'br2nl';
 	const TRANSFORMER_DATE				= 'date';
+	const TRANSFORMER_HTMLSPECIALCHARS	= 'htmlspecialchars';
 	const TRANSFORMER_MD5				= 'md5';
 	const TRANSFORMER_NL2BR				= 'nl2br';
 	const TRANSFORMER_T3SEC_SALTEDPW	= 't3sec_saltedpw';
@@ -40,6 +41,9 @@ class tx_feuserregister_TransformerFactory {
 			break;
 			case self::TRANSFORMER_DATE:
 				$transformerClass = 'tx_feuserregister_transformer_Date';
+			break;
+			case self::TRANSFORMER_HTMLSPECIALCHARS:
+				$transformerClass = 'tx_feuserregister_transformer_Htmlspecialchars';
 			break;
 			case self::TRANSFORMER_MD5:
 				$transformerClass = 'tx_feuserregister_transformer_Md5';

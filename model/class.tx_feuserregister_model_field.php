@@ -354,7 +354,7 @@ class tx_feuserregister_model_Field {
 				$value = htmlspecialchars($value);
 			break;
 			case self::TYPE_TEXTAREA:
-				$value = nl2br(htmlspecialchars($value));
+				// we don't need to prepare this field type use transformer to
 			break;
 			default:
 				$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_Field');
