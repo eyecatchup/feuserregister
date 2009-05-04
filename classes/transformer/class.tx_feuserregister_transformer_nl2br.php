@@ -36,7 +36,7 @@ class tx_feuserregister_transformer_Nl2Br extends tx_feuserregister_AbstractTran
 	 * @return mixed
 	 */
 	public function transform() {
-		return nl2br($this->_value);
+		return str_replace("\n\r", '', nl2br($this->_value));
 	}
 }
 
