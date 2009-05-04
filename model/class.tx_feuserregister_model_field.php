@@ -96,27 +96,36 @@ class tx_feuserregister_model_Field {
 		}
 
 			// init transformers
-		$transformers = $this->_fieldConfiguration['transformers'];
-		if (strlen($transformers)) {
-			$transformers = t3lib_div::trimExplode(',', $transformers);
+		$dbTransformers = $this->_fieldConfiguration['transformers.']['db'];
+		if (strlen($dbTransformers)) {
+			$dbTransformers = t3lib_div::trimExplode(',', $dbTransformers);
 		}
-		if (is_array($transformers)) {
-			foreach ($transformers as $transformer) {
+		if (is_array($dbTransformers)) {
+			foreach ($dbTransformers as $transformer) {
 				$transformerObject = tx_feuserregister_TransformerFactory::getTransformer($transformer);
 				if (is_array($this->_fieldConfiguration['transformerOptions.'][$transformerObject->getName().'.'])) {
 					$transformerObject->setOptions($this->_fieldConfiguration['transformerOptions.'][$transformerObject->getName().'.']);
-				}
-				switch ($transformerObject->getType()) {
-					case tx_feuserregister_AbstractTransformer::TYPE_DATABASE:
-						$this->_databaseTransformers[] = $transformerObject;
-					break;
-					case tx_feuserregister_AbstractTransformer::TYPE_HTML:
-						$this->_htmlTransformers[] = $transformerObject;
-					break;
+					$transformerObject->setType(tx_feuserregister_AbstractTransformer::TYPE_DATABASE);
+					$this->_databaseTransformers[] = $transformerObject;
 				}
 			}
 		}
-
+		
+		$htmlTransformers = $this->_fieldConfiguration['transformers.']['html'];
+		if (strlen($htmlTransformers)) {
+			$htmlTransformers = t3lib_div::trimExplode(',', $htmlTransformers);
+		}
+		if (is_array($htmlTransformers)) {
+			foreach ($htmlTransformers as $transformer) {
+				$transformerObject = tx_feuserregister_TransformerFactory::getTransformer($transformer);
+				if (is_array($this->_fieldConfiguration['transformerOptions.'][$transformerObject->getName().'.'])) {
+					$transformerObject->setOptions($this->_fieldConfiguration['transformerOptions.'][$transformerObject->getName().'.']);
+					$transformerObject->setType(tx_feuserregister_AbstractTransformer::TYPE_HTML);
+					$this->_htmlTransformers[] = $transformerObject;
+				}
+			}
+		}
+		
 		switch ($this->_fieldConfiguration['type']) {
 			case self::TYPE_HIDDEN:
 				$this->_createHiddenField();

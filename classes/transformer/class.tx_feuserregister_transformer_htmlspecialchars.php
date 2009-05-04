@@ -29,7 +29,6 @@ require_once(PATH_feuserregister . 'classes/transformer/class.tx_feuserregister_
 
 class tx_feuserregister_transformer_Htmlspecialchars extends tx_feuserregister_AbstractTransformer {
 	protected $_name = 'htmlspecialchars';
-	protected $_type = tx_feuserregister_AbstractTransformer::TYPE_HTML;
 
 	/**
 	 * @see tx_feuserregister_AbstractTransformer::transform()

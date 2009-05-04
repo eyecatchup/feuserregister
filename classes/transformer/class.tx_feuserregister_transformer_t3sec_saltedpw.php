@@ -29,7 +29,6 @@ require_once(PATH_feuserregister . 'classes/transformer/class.tx_feuserregister_
 
 class tx_feuserregister_transformer_T3sec_saltedpw extends tx_feuserregister_AbstractTransformer {
 	protected $_name = 't3sec_saltedpw';
-	protected $_type = tx_feuserregister_AbstractTransformer::TYPE_DATABASE;
 
 	/**
 	 * @see tx_feuserregister_AbstractTransformer::transform()

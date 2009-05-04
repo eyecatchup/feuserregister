@@ -29,7 +29,6 @@ require_once(PATH_feuserregister . 'classes/transformer/class.tx_feuserregister_
 
 class tx_feuserregister_transformer_Nl2Br extends tx_feuserregister_AbstractTransformer {
 	protected $_name = 'nl2br';
-	protected $_type = tx_feuserregister_AbstractTransformer::TYPE_DATABASE;
 
 	/**
 	 * @see tx_feuserregister_AbstractTransformer::transform()

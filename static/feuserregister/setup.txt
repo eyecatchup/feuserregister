@@ -121,7 +121,10 @@ plugin.tx_feuserregister {
 					format = %d.%m.%Y
 				}
 			}
-			transformers = timestamp,date
+			transformers {
+				db = timestamp
+				html = date
+			}
 			transformerOptions {
 				timestamp {
 					inFormat = %d.%m.%Y

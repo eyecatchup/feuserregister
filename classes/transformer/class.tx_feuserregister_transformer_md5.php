@@ -29,7 +29,6 @@ require_once(PATH_feuserregister . 'classes/transformer/class.tx_feuserregister_
 
 class tx_feuserregister_transformer_Md5 extends tx_feuserregister_AbstractTransformer {
 	protected $_name = 'md5';
-	protected $_type = tx_feuserregister_AbstractTransformer::TYPE_DATABASE;
 
 	/**
 	 * @see tx_feuserregister_AbstractTransformer::transform()

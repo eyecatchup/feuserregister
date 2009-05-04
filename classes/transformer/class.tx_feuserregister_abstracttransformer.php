@@ -74,7 +74,11 @@ abstract class tx_feuserregister_AbstractTransformer {
 	 * @param string $type
 	 */
 	public function setType($type) {
-		$this->_type = $type;
+		if ($type == self::TYPE_DATABASE || $type == self::TYPE_HTML) {
+			$this->_type = $type;
+		} else {
+			die('unknown transformer type');
+		}
 	}
 	
 	/**
