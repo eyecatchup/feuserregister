@@ -121,8 +121,8 @@ class tx_feuserregister_model_Field {
 				if (is_array($this->_fieldConfiguration['transformerOptions.'][$transformerObject->getName().'.'])) {
 					$transformerObject->setOptions($this->_fieldConfiguration['transformerOptions.'][$transformerObject->getName().'.']);
 					$transformerObject->setType(tx_feuserregister_AbstractTransformer::TYPE_HTML);
-					$this->_htmlTransformers[] = $transformerObject;
 				}
+				$this->_htmlTransformers[] = $transformerObject;
 			}
 		}
 		
