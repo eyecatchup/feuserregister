@@ -31,6 +31,7 @@ class tx_feuserregister_TransformerFactory {
 	const TRANSFORMER_HTMLSPECIALCHARS	= 'htmlspecialchars';
 	const TRANSFORMER_MD5				= 'md5';
 	const TRANSFORMER_NL2BR				= 'nl2br';
+	const TRANSFORMER_STRIPTAGS			= 'striptags';
 	const TRANSFORMER_T3SEC_SALTEDPW	= 't3sec_saltedpw';
 	const TRANSFORMER_TIMESTAMP			= 'timestamp';
 	
@@ -50,6 +51,9 @@ class tx_feuserregister_TransformerFactory {
 			break;
 			case self::TRANSFORMER_NL2BR:
 				$transformerClass = 'tx_feuserregister_transformer_Nl2Br';
+			break;
+			case self::TRANSFORMER_STRIPTAGS:
+				$transformerClass = 'tx_feuserregister_transformer_StripTags';
 			break;
 			case self::TRANSFORMER_T3SEC_SALTEDPW:
 				$transformerClass = 'tx_feuserregister_transformer_T3sec_saltedpw';
