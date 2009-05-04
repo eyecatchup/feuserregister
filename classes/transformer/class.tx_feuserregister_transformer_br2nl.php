@@ -36,7 +36,7 @@ class tx_feuserregister_transformer_Br2Nl extends tx_feuserregister_AbstractTran
 	 * @return mixed
 	 */
 	public function transform() {
-		return preg_replace('/\<br(\s*)?\/?\>/i', "\n", $this->_value);
+		return preg_replace('/\<br(\s*)?\/?\>/i', "\n\r", $this->_value);
 	}
 }
 
