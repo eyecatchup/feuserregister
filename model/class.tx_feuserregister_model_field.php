@@ -217,7 +217,6 @@ class tx_feuserregister_model_Field {
 				$value = $this->_value;
 			break;
 		}
-		debug("$format: {$this->getFieldName()}", $value);
 		return $value;
 	}
 	
