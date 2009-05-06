@@ -131,7 +131,7 @@ abstract class tx_feuserregister_model_AbstractStep {
 
 	protected function _getGlobalMarker() {
 		$marker = array(
-			'###FORM_URL###' 		=> htmlspecialchars(t3lib_div::linkThisScript()), 
+			'###FORM_URL###' 		=> $this->_controller->cObj->typoLink_URL(array('parameter' => $GLOBALS['TSFE']->id)), 
 			'###HIDDEN_FIELDS###' 	=> $this->_getHiddenFields()
 		);
 		$this->_controller->notifyObservers('globalMarker', array(
