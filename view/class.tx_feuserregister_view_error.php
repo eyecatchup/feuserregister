@@ -55,14 +55,19 @@ class tx_feuserregister_view_Error {
 	}
 	
 	protected function _createMarker() {
-		$this->_marker = array();
+		$localizationManager = tx_feuserregister_LocalizationManager::getInstance(
+			'EXT:feuserregister/lang/locallang_fields.xml', 
+			$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']
+		);
+		$this->_marker = $localizationManager->getAllAsMarkerArray();
+		
 		if ($this->_model instanceof Exception) {
-			$this->_marker['exception_message']		= $this->_model->getMessage();
-			$this->_marker['exception_code']		= $this->_model->getCode();
-			$this->_marker['exception_file']		= $this->_model->getFile();
-			$this->_marker['exception_line']		= $this->_model->getLine();
-			$this->_marker['exception_trace']		= $this->_model->getTrace();
-			$this->_marker['exception_tracestring']	= $this->_model->getTraceAsString();
+			$this->_marker['###EXCEPTION_MESSAGE###']		= $this->_model->getMessage();
+			$this->_marker['###EXCEPTION_CODE###']			= $this->_model->getCode();
+			$this->_marker['###EXCEPTION_FILE###']			= $this->_model->getFile();
+			$this->_marker['###EXCEPTION_LINE###']			= $this->_model->getLine();
+			$this->_marker['###EXCEPTION_TRACE###']			= $this->_model->getTrace();
+			$this->_marker['###EXCEPTION_TRACESTRING###']	= $this->_model->getTraceAsString();
 		}
 	}
 }
