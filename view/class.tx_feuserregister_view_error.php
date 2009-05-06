@@ -51,7 +51,7 @@ class tx_feuserregister_view_Error {
 	
 	public function render() {
 		$this->_createMarker();
-		return t3lib_parsehtml::substituteMarkerArray($this->_templateContent, $this->_marker, '###|###', 1, 1);
+		return t3lib_parsehtml::substituteMarkerArray($this->_templateContent, $this->_marker, '', 0, 1);
 	}
 	
 	protected function _createMarker() {
