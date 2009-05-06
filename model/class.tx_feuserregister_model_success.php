@@ -60,7 +60,10 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 			if ($mode === 'register') {
 				return $this->_processRegister($allFields, $marker,$reloadHash);
 			}
-		}		
+		} else {
+			$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_StepManager');
+			throw new $exceptionClass('second reload', 3300);
+		}
 	}
 	
 	protected function _processEdit($allFields, $marker, $reloadHash) {

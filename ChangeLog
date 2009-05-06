@@ -1,5 +1,6 @@
 2009-05-06 Frank Naegler  <typo3@naegler.net>
 
+	* added exception on reload after success
 	* added LLL marker in error view
 	* replace t3lib_div::linkThisScript() with typoLink_URL(array('parameter' => $GLOBALS['TSFE']->id)) in case of a realurl or t3lib_div bug
 	
