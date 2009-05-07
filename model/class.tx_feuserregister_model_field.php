@@ -346,6 +346,13 @@ class tx_feuserregister_model_Field {
 	protected function _createTCAField() {
 		$GLOBALS['TSFE']->includeTCA();
 		$fieldConfig = $GLOBALS['TCA']['fe_users']['columns'][$this->_fieldName];
+		
+		$requestData	= $this->_request->get('data');
+		
+		if ($fieldConfig['config']['type'] == 'check' && !isset($requestData[$this->_fieldName])) {
+			$this->_value = '';
+		}
+		
 		$this->_tcaField = tx_feuserregister_TcaFieldFactory::getTcaField($fieldConfig['config']['type']);
 		$this->_tcaField->setConfiguration($fieldConfig);
 		$this->_tcaField->setFieldConfiguration($this->_fieldConfiguration);

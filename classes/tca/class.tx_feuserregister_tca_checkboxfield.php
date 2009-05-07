@@ -88,16 +88,6 @@ class tx_feuserregister_tca_CheckboxField extends tx_feuserregister_AbstractTcaF
 		}
 		return '';
 	}
-	
-	public function setValue($value) {
-		$request = t3lib_div::makeInstance('tx_feuserregister_Request');
-		$requestData	= $request->get('data');
-		if (!isset($requestData[$this->_fieldName])) {
-			$this->_value = 0;
-		} else {
-			$this->_value = $value;
-		}
-	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/feuserregister/classes/tca/class.tx_feuserregister_tca_checkboxfield.php'])	{
