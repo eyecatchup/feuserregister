@@ -157,7 +157,7 @@ plugin.tx_feuserregister {
 			validators = required
 		}
 		country_static {
-			type = static_info_table
+			type = static_info_tables
 			# staticType: LANGUAGES, SUBDIVISIONS, CURRENCIES, COUNTRIES
 			staticType = COUNTRIES
 			# CSSClassName = 
