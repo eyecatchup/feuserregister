@@ -156,6 +156,17 @@ plugin.tx_feuserregister {
 			type = text
 			validators = required
 		}
+		country_static {
+			type = static_info_table
+			staticType = COUNTRIES
+			# CSSClassName = 
+			# countryCode = 
+			# submitFlag = 
+			# title =
+			# where = 
+			# lang =
+			# local =
+		}
 		tx_feuserregister_test {
 			type = TCA
 		}

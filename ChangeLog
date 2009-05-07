@@ -1,3 +1,7 @@
+2009-05-07 Frank Naegler  <typo3@naegler.net>
+
+	* added support for static_info_tables 
+
 2009-05-06 Frank Naegler  <typo3@naegler.net>
 
 	* added option disableEnableFields to validators: uniqueInDb and uniqueInPid

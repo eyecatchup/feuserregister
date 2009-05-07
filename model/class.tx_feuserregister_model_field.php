@@ -29,13 +29,14 @@ require_once(PATH_t3lib.'class.t3lib_tceforms.php');
 require_once(PATH_feuserregister . 'classes/transformer/class.tx_feuserregister_abstracttransformer.php');
 
 class tx_feuserregister_model_Field {
-	const PARSE_DATEBASE	= 'db';
-	const PARSE_HTML		= 'html';
-	const TYPE_HIDDEN		= 'hidden';
-	const TYPE_PASSWORD		= 'password';
-	const TYPE_TCA			= 'TCA';
-	const TYPE_TEXT			= 'text';
-	const TYPE_TEXTAREA		= 'textarea';
+	const PARSE_DATEBASE			= 'db';
+	const PARSE_HTML				= 'html';
+	const TYPE_HIDDEN				= 'hidden';
+	const TYPE_PASSWORD				= 'password';
+	const TYPE_STATIC_INFO_TABLES	= 'static_info_tables';
+	const TYPE_TCA					= 'TCA';
+	const TYPE_TEXT					= 'text';
+	const TYPE_TEXTAREA				= 'textarea';
 	
 	protected $_configuration = array();
 	protected $_controller = null;
@@ -135,6 +136,9 @@ class tx_feuserregister_model_Field {
 			break;
 			case self::TYPE_TCA:
 				$this->_createTCAField();
+			break;
+			case self::TYPE_STATIC_INFO_TABLES:
+				$this->_createStaticInfoTablesField();
 			break;
 			case self::TYPE_TEXT:
 				$this->_createTextField();
@@ -258,6 +262,38 @@ class tx_feuserregister_model_Field {
 		$this->_htmlField = '<input '.implode(' ', $attributes).'/>';
 	}
 	
+	protected function _createStaticInfoTablesField() {
+		if (t3lib_extMgm::isLoaded('static_info_tables')) {
+			require_once(t3lib_extMgm::extPath('static_info_tables').'pi1/class.tx_staticinfotables_pi1.php');
+			$staticInfoObj = &t3lib_div::getUserObj('&tx_staticinfotables_pi1');
+			if ($staticInfoObj->needsInit()){
+				$staticInfoObj->init();
+			}
+			
+			switch ($this->_fieldConfiguration['staticType']) {
+				case 'LANGUAGES':
+					$this->_htmlField = $staticInfoObj->buildStaticInfoSelector('LANGUAGES', $this->_fieldName, $this->_fieldConfiguration['CSSClassName'], array(), '', $this->_fieldConfiguration['submitFlag'], "tx-feuserregister-field-{$this->_fieldName}", $this->_fieldConfiguration['title']);
+				break;
+				case 'SUBDIVISIONS':
+					$this->_htmlField = $staticInfoObj->buildStaticInfoSelector('SUBDIVISIONS', $this->_fieldName, $this->_fieldConfiguration['CSSClassName'], array(), $this->_fieldConfiguration['countryCode'], $this->_fieldConfiguration['submitFlag'], "tx-feuserregister-field-{$this->_fieldName}", $this->_fieldConfiguration['title']);
+				break;
+				case 'CURRENCIES':
+					$this->_htmlField = $staticInfoObj->buildStaticInfoSelector('CURRENCIES', $this->_fieldName, $this->_fieldConfiguration['CSSClassName'], array(), '', $this->_fieldConfiguration['submitFlag'], "tx-feuserregister-field-{$this->_fieldName}", $this->_fieldConfiguration['title']);
+				break;
+				case 'COUNTRIES':
+				default:
+					$this->_htmlField = $staticInfoObj->buildStaticInfoSelector('COUNTRIES', $this->_fieldName, $this->_fieldConfiguration['CSSClassName'], array(), '', $this->_fieldConfiguration['submitFlag'], "tx-feuserregister-field-{$this->_fieldName}", $this->_fieldConfiguration['title'], $this->_fieldConfiguration['where'], $this->_fieldConfiguration['lang'], $this->_fieldConfiguration['local']);
+				break;
+			}
+			$value = $this->getValue(self::PARSE_HTML);
+			
+			
+		} else {
+			$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_Field');
+			throw new $exceptionClass('field of type: ' . $this->_fieldConfiguration['type'] . ' need the extension "static_info_tables".', 6100);
+		}
+	}
+	
 	protected function _createTextField() {
 		$value = $this->getValue(self::PARSE_HTML);
 		$attributes = array();
@@ -330,6 +366,9 @@ class tx_feuserregister_model_Field {
 					// we don't need to prepare this field type
 					// use transformer if you need support for md5 or salted passwords
 			break;
+			case self::TYPE_STATIC_INFO_TABLES:
+					// at this moment we don't need to prepare this field type
+			break;
 			case self::TYPE_TCA:
 				$value = $this->_tcaField->getValue(tx_feuserregister_AbstractTcaField::PARSE_DATABASE);
 			break;
@@ -355,6 +394,9 @@ class tx_feuserregister_model_Field {
 			break;
 			case self::TYPE_PASSWORD:
 				$value = htmlspecialchars($value);
+			break;
+			case self::TYPE_STATIC_INFO_TABLES:
+					// at this moment we don't need to prepare this field type
 			break;
 			case self::TYPE_TCA:
 				$value = $this->_tcaField->getValue(tx_feuserregister_AbstractTcaField::PARSE_HTML);
