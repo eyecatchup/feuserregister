@@ -158,6 +158,7 @@ plugin.tx_feuserregister {
 		}
 		country_static {
 			type = static_info_table
+			# staticType: LANGUAGES, SUBDIVISIONS, CURRENCIES, COUNTRIES
 			staticType = COUNTRIES
 			# CSSClassName = 
 			# countryCode = 
