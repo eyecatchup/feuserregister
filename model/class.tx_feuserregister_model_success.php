@@ -92,7 +92,7 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 				$feuser->set($field->getFieldName(), $field->getValue(tx_feuserregister_model_Field::PARSE_DATEBASE));
 			}
 		}
-		$this->_controller->notifyObservers('onEditBeforeSave', array('feuser' => $feuser));
+		$this->_controller->notifyObservers('onEditBeforeSave', array('feuser' => &$feuser));
 		if (count($confirmValues) > 0) {
 			$confirmValuesDb = serialize($confirmValues);
 			$feuser->set('tx_feuserregister_temporarydata', $confirmValuesDb);
@@ -125,7 +125,7 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 			throw new $exceptionClass('error while updae fe user', 1200);
 		}
 		tx_feuserregister_Registry::set('tx_feuserregister_feuser', $feuser);
-		$this->_controller->notifyObservers('onEditAfterSave', array('feuser' => $feuser));
+		$this->_controller->notifyObservers('onEditAfterSave', array('feuser' => &$feuser));
 		return t3lib_parsehtml::substituteMarkerArray($this->_templateContent, $marker, '', 0, 1);
 	}
 
@@ -143,7 +143,7 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 			$feuser->set($field->getFieldName(), $field->getValue(tx_feuserregister_model_Field::PARSE_DATEBASE));
 		}
 		
-		$this->_controller->notifyObservers('onRegisterBeforeSave', array('feuser' => $feuser, 'allFields' => $allFields));
+		$this->_controller->notifyObservers('onRegisterBeforeSave', array('feuser' => &$feuser, 'allFields' => $allFields));
 			
 		if ($this->_configuration['global.']['emailConfirmation'] || $this->_configuration['global.']['userEmail.']['onRegister']) {
 			$controller = tx_feuserregister_Registry::get('tx_feuserregister_controller');
@@ -172,7 +172,7 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 			throw new $exceptionClass('error while creating fe user', 1100);
 		}
 		tx_feuserregister_Registry::set('tx_feuserregister_feuser', $feuser);
-		$this->_controller->notifyObservers('onRegisterAfterSave', array('feuser' => $feuser, 'allFields' => $allFields));
+		$this->_controller->notifyObservers('onRegisterAfterSave', array('feuser' => &$feuser, 'allFields' => $allFields));
 		return t3lib_parsehtml::substituteMarkerArray($this->_templateContent, $marker, '', 0, 1);
 	}
 
