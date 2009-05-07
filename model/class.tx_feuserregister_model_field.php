@@ -272,17 +272,17 @@ class tx_feuserregister_model_Field {
 			
 			switch ($this->_fieldConfiguration['staticType']) {
 				case 'LANGUAGES':
-					$this->_htmlField = $staticInfoObj->buildStaticInfoSelector('LANGUAGES', $this->_fieldName, $this->_fieldConfiguration['CSSClassName'], array(), '', $this->_fieldConfiguration['submitFlag'], "tx-feuserregister-field-{$this->_fieldName}", $this->_fieldConfiguration['title']);
+					$this->_htmlField = $staticInfoObj->buildStaticInfoSelector('LANGUAGES', "tx_feuserregister[data][{$this->_fieldName}]", $this->_fieldConfiguration['CSSClassName'], array(), '', $this->_fieldConfiguration['submitFlag'], "tx-feuserregister-field-{$this->_fieldName}", $this->_fieldConfiguration['title']);
 				break;
 				case 'SUBDIVISIONS':
-					$this->_htmlField = $staticInfoObj->buildStaticInfoSelector('SUBDIVISIONS', $this->_fieldName, $this->_fieldConfiguration['CSSClassName'], array(), $this->_fieldConfiguration['countryCode'], $this->_fieldConfiguration['submitFlag'], "tx-feuserregister-field-{$this->_fieldName}", $this->_fieldConfiguration['title']);
+					$this->_htmlField = $staticInfoObj->buildStaticInfoSelector('SUBDIVISIONS', "tx_feuserregister[data][{$this->_fieldName}]", $this->_fieldConfiguration['CSSClassName'], array(), $this->_fieldConfiguration['countryCode'], $this->_fieldConfiguration['submitFlag'], "tx-feuserregister-field-{$this->_fieldName}", $this->_fieldConfiguration['title']);
 				break;
 				case 'CURRENCIES':
-					$this->_htmlField = $staticInfoObj->buildStaticInfoSelector('CURRENCIES', $this->_fieldName, $this->_fieldConfiguration['CSSClassName'], array(), '', $this->_fieldConfiguration['submitFlag'], "tx-feuserregister-field-{$this->_fieldName}", $this->_fieldConfiguration['title']);
+					$this->_htmlField = $staticInfoObj->buildStaticInfoSelector('CURRENCIES', "tx_feuserregister[data][{$this->_fieldName}]", $this->_fieldConfiguration['CSSClassName'], array(), '', $this->_fieldConfiguration['submitFlag'], "tx-feuserregister-field-{$this->_fieldName}", $this->_fieldConfiguration['title']);
 				break;
 				case 'COUNTRIES':
 				default:
-					$this->_htmlField = $staticInfoObj->buildStaticInfoSelector('COUNTRIES', $this->_fieldName, $this->_fieldConfiguration['CSSClassName'], array(), '', $this->_fieldConfiguration['submitFlag'], "tx-feuserregister-field-{$this->_fieldName}", $this->_fieldConfiguration['title'], $this->_fieldConfiguration['where'], $this->_fieldConfiguration['lang'], $this->_fieldConfiguration['local']);
+					$this->_htmlField = $staticInfoObj->buildStaticInfoSelector('COUNTRIES', "tx_feuserregister[data][{$this->_fieldName}]", $this->_fieldConfiguration['CSSClassName'], array(), '', $this->_fieldConfiguration['submitFlag'], "tx-feuserregister-field-{$this->_fieldName}", $this->_fieldConfiguration['title'], $this->_fieldConfiguration['where'], $this->_fieldConfiguration['lang'], $this->_fieldConfiguration['local']);
 				break;
 			}
 			$value = $this->getValue(self::PARSE_HTML);
