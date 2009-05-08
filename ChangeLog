@@ -1,3 +1,7 @@
+2009-05-08 Frank Naegler  <typo3@naegler.net>
+
+	* added hook for logout session clearing 
+
 2009-05-07 Frank Naegler  <typo3@naegler.net>
 
 	* added support for static_info_tables 
