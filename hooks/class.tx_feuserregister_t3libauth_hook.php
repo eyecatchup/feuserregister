@@ -24,7 +24,7 @@
 /**
  * $Id: class.tx_feuserregister_exception_confirm.php 18089 2009-03-19 23:03:02Z neoblack $
  */
-
+require_once(t3lib_extMgm::extPath('feuserregister') . 'classes/class.tx_feuserregister_registry.php');
 require_once(t3lib_extMgm::extPath('feuserregister') . 'classes/class.tx_feuserregister_sessionregistry.php');
 
 class tx_feuserregister_t3libauth_hook {
