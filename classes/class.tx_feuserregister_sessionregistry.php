@@ -26,6 +26,8 @@
  */
 
 class tx_feuserregister_SessionRegistry extends tx_feuserregister_Registry {
+	const SESSION_SPACE = 'ses';
+	
 	/**
 	 * getter method.
 	 *
@@ -33,7 +35,7 @@ class tx_feuserregister_SessionRegistry extends tx_feuserregister_Registry {
 	 * @return mixed
 	 */
 	public static function get($index) {
-		return unserialize($GLOBALS['TSFE']->fe_user->getKey('ses', $index));
+		return unserialize($GLOBALS['TSFE']->fe_user->getKey(self::SESSION_SPACE, $index));
 	}
 
 	/**
@@ -44,7 +46,7 @@ class tx_feuserregister_SessionRegistry extends tx_feuserregister_Registry {
  	 * @return mixed
 	 */
 	public static function set($index, $value) {
-		$GLOBALS['TSFE']->fe_user->setKey('ses', $index, serialize($value));
+		$GLOBALS['TSFE']->fe_user->setKey(self::SESSION_SPACE, $index, serialize($value));
 		$GLOBALS['TSFE']->fe_user->storeSessionData();
 	}
 }

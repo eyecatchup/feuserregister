@@ -5,6 +5,7 @@
 	<projects>
 		<project>SRC:typo3_src_4.2.4</project>
 		<project>SRC:typo3_src-4.2.1</project>
+		<project>SRC:typo3_src_4.3_alpha2</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
