@@ -185,7 +185,7 @@ class tx_feuserregister_model_Field {
 			$label .= ' ' . $this->getRequiredString();
 		}
 		
-		$wrapConfig = (isset($this->_fieldConfiguration['labelWrap.'])) ? $this->_fieldConfiguration['labelWrap.'] : $this->_configuration['defaultWraps.']['fields.'];
+		$wrapConfig = (isset($this->_fieldConfiguration['labelWrap.'])) ? $this->_fieldConfiguration['labelWrap.'] : $this->_configuration['defaultWraps.']['label.'];
 		if (is_array($wrapConfig)) {
 			$label = $this->_controller->cObj->stdWrap($label, $wrapConfig);
 		}
