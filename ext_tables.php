@@ -87,6 +87,28 @@ t3lib_extMgm::addPlugin(
 	'list_type'
 );
 
+//////////// //////////// //////////// //////////// 
+// NEW EXT_BASE PART
+//////////// //////////// //////////// //////////// 
+
+// require_once(t3lib_extMgm::extPath('feuserregister').'Classes/Controller/UserController.php');
+
+Tx_Extbase_Utility_Plugin::registerPlugin(
+	'Feuserregister',																	// The name of the extension in UpperCamelCase
+	'FeuserregisterPi1',																			// A unique name of the plugin in UpperCamelCase
+	'Frontend User Registration (extbase)',																// A title shown in the backend dropdown field
+	array(																			// An array holding the controller-action-combinations that are accessible 
+		'User' => 'index,new,create,edit,update',	// The first controller and its first action will be the default 
+		),
+	array(																			// An array of non-cachable controller-action-combinations (they must already be enabled)
+		'User' => 'index,new,create,edit,update',
+		)
+);
+
+t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Frontend User Registration');
+
+// @TODO: move TCA stuff from top and change to new ext_base style???
+
 if (TYPO3_MODE == 'BE') {
 	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_feuserregister_userregistration_wizicon'] = t3lib_extMgm::extPath($_EXTKEY).'class.tx_feuserregister_userregistration_wizicon.php';
 }
