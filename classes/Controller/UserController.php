@@ -39,7 +39,9 @@ class Tx_FeUserRegister_Controller_UserController extends Tx_Extbase_MVC_Control
 	 *
 	 * @return void
 	 */
-	public function initializeAction() {		
+	public function initializeAction() {
+		// print_r($this->settings);
+		// $this->request->
 	}	
 
 	/**
