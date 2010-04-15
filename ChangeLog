@@ -1,6 +1,7 @@
 2010-04-15  OLiver Hader  <oliver@typo3.org>
 
 	* Fixed bug: Wrong plugin registration lead to PHP fatal error
+	* Information: Added short notice to add include statics after e.g. CSC
 
 2009-05-08 Frank Naegler  <typo3@naegler.net>
 
