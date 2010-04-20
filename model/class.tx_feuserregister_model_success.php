@@ -67,7 +67,9 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 	}
 	
 	protected function _processEdit($allFields, $marker, $reloadHash) {
+		/* @var $feuser tx_feuserregister_model_FeUser */
 		$feuser = tx_feuserregister_SessionRegistry::get('tx_feuserregister_feuser');
+		/* @var $currentFeuser tx_feuserregister_model_FeUser */
 		$currentFeuser = tx_feuserregister_SessionRegistry::get('tx_feuserregister_currentFeuser');
 		$confirmFields = t3lib_div::trimExplode(',', $this->_configuration['global.']['confirmationOnUpdateFields']);					
 		$confirmValues = array();
@@ -130,6 +132,7 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 	}
 
 	protected function _processRegister($allFields, $marker, $reloadHash) {
+		/* @var $feuser tx_feuserregister_model_FeUser */
 		$feuser = t3lib_div::makeInstance('tx_feuserregister_model_FeUser');
 		$feuser->set('pid', $this->_configuration['pages.']['storagePid'])
 			->set('usergroup', $this->_configuration['global.']['userGroupsAfterRegistration'])

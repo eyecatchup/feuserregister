@@ -2,6 +2,7 @@
 
 	* Added feature: Integrate possibility to return cancel status by observers
 	* Added feature: Integrate ext_autoload.php file for TYPO3 4.3 disposal
+	* Cleanup: Added inline type hints
 
 2010-04-15  Oliver Hader  <oliver@typo3.org>
 
