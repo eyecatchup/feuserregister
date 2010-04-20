@@ -37,12 +37,17 @@ class tx_feuserregister_Mailer {
 	
 	static function send($to, $event, array $marker) {
 		$controller = tx_feuserregister_Registry::get('tx_feuserregister_controller');
-		$controller->notifyObservers('onSendMail', array(
+		$cancel = $controller->notifyObservers('onSendMail', array(
 			'to'		=> &$to,
 			'event'		=> &$event,
 			'marker'	=> &$marker
 		));
-		
+
+		// Stop processing if event requested to cancel:
+		if ($cancel) {
+			return void;
+		}
+
 		$className = t3lib_div::makeInstanceClassName('tx_feuserregister_LocalizationManager');
 		$localizationManager = call_user_func(array($className, 'getInstance'),
 			'EXT:feuserregister/lang/locallang_emails.xml', 

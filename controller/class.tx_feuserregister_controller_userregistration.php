@@ -122,10 +122,11 @@ class tx_feuserregister_controller_UserRegistration extends tslib_pibase impleme
 	public function execute($content, $configuration) {
 		try {
 			$this->initialize($configuration);
-			
+
+			/* @var $commandResolver tx_feuserregister_CommandResolver */
 			$commandResolver = t3lib_div::makeInstance('tx_feuserregister_CommandResolver');
 			$command = $commandResolver->getCommand();
-			
+
 			$content = $command->execute();			
 			return $this->pi_wrapInBaseClass($content);
 		
@@ -176,11 +177,19 @@ class tx_feuserregister_controller_UserRegistration extends tslib_pibase impleme
 	/**
 	 * @see tx_feuserregister_interface_Observable::notifyObservers()
 	 *
+	 * @param string $event Name of the event
+	 * @param array $params Parameters to be forwarded to the observer
+	 * @return boolean Whether to cancel further processing
 	 */
 	public function notifyObservers($event, array $params = array()) {
+		$cancel = FALSE;
+
 		foreach ($this->_observers as $observer) {
-			$observer->update($event, $params, $this);
+			$result = (bool) $observer->update($event, $params, $this);
+			$cancel = ($cancel || $result);
 		}
+
+		return $cancel;
 	}
 }
 

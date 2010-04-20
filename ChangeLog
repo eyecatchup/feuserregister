@@ -1,4 +1,8 @@
-2010-04-15  OLiver Hader  <oliver@typo3.org>
+2010-04-20  Oliver Hader  <oliver@typo3.org>
+
+	* Added feature: Integrate possibility to return cancel status by observers
+
+2010-04-15  Oliver Hader  <oliver@typo3.org>
 
 	* Fixed bug: Wrong plugin registration lead to PHP fatal error
 	* Information: Added short notice to add include statics after e.g. CSC
