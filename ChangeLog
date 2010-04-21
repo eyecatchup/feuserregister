@@ -1,3 +1,7 @@
+2010-04-21  Oliver Hader  <oliver@typo3.org>
+
+	* Added feature: Integrate saltedpasswords transformer
+
 2010-04-20  Oliver Hader  <oliver@typo3.org>
 
 	* Added feature: Integrate possibility to return cancel status by observers

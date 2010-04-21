@@ -33,6 +33,7 @@ class tx_feuserregister_TransformerFactory {
 	const TRANSFORMER_NL2BR				= 'nl2br';
 	const TRANSFORMER_STRIPTAGS			= 'striptags';
 	const TRANSFORMER_T3SEC_SALTEDPW	= 't3sec_saltedpw';
+	const TRANSFORMER_SALTEDPASSWORDS	= 'saltedpasswords';
 	const TRANSFORMER_TIMESTAMP			= 'timestamp';
 	
 	static public function getTransformer($typ) {
@@ -57,6 +58,9 @@ class tx_feuserregister_TransformerFactory {
 			break;
 			case self::TRANSFORMER_T3SEC_SALTEDPW:
 				$transformerClass = 'tx_feuserregister_transformer_T3sec_saltedpw';
+			break;
+			case self::TRANSFORMER_SALTEDPASSWORDS:
+				$transformerClass = 'tx_feuserregister_transformer_saltedpasswords';
 			break;
 			case self::TRANSFORMER_TIMESTAMP:
 				$transformerClass = 'tx_feuserregister_transformer_Timestamp';
