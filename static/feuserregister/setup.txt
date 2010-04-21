@@ -91,7 +91,9 @@ plugin.tx_feuserregister {
 					min = 6
 				}
 			}
-			transformer = t3sec_saltedpw
+			transformers {
+				db = saltedpasswords,t3sec_saltedpw
+			}
 		}
 		password_confirm {
 			type = password

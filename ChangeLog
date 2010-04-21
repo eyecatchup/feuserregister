@@ -1,6 +1,7 @@
 2010-04-21  Oliver Hader  <oliver@typo3.org>
 
 	* Added feature: Integrate saltedpasswords transformer
+	* Fixed bug: Password transformer was not triggered due to wrong TypoScript configuration
 
 2010-04-20  Oliver Hader  <oliver@typo3.org>
 
