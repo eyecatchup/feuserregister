@@ -45,6 +45,7 @@ class tx_feuserregister_ValidatorFactory {
 	const VALIDATOR_UNIQUEINDB	= 'uniqueInDb';
 	const VALIDATOR_UNIQUEINPID	= 'uniqueInPid';
 	const VALIDATOR_URL 		= 'url';
+	const VALIDATOR_FILE		= 'file';
 	
 	static public function getValidator($typ) {
 		switch ($typ) {
@@ -104,6 +105,9 @@ class tx_feuserregister_ValidatorFactory {
 			break;
 			case self::VALIDATOR_URL:
 				$validatorClass = 'tx_feuserregister_validator_Url';
+			break;
+			case self::VALIDATOR_FILE:
+				$validatorClass = 'tx_feuserregister_validator_File';
 			break;
 			default:
 				$validatorClass = $typ;

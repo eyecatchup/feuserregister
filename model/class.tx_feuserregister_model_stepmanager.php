@@ -69,10 +69,20 @@ class tx_feuserregister_model_StepManager {
 		}
 	}
 	
+	/**
+	 * Gets the current step.
+	 *
+	 * @return tx_feuserregister_model_Step
+	 */
 	public function getCurrentStep() {
 		return $this->_steps[$this->_currentStep]; 
 	}
-		
+	
+	/**
+	 * Gets the next step.
+	 *
+	 * @return tx_feuserregister_model_Step
+	 */
 	public function getNextStep() {
 		$found = false;
 		foreach ($this->_steps as $stepName => $step) {
@@ -84,7 +94,12 @@ class tx_feuserregister_model_StepManager {
 			}
 		}
 	}
-		
+	
+	/**
+	 * Gets the previous step.
+	 *
+	 * @return tx_feuserregister_model_Step
+	 */
 	public function getPreviousStep() {
 		$lastStep = null;
 		foreach ($this->_steps as $stepName => $step) {

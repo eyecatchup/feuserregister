@@ -24,6 +24,7 @@
 			<label index="error_validator_uniqueInDb">the value is allready used</label>
 			<label index="error_validator_uniqueInPid">the value is allready used</label>
 			<label index="error_validator_url">the value is not an valid url</label>
+			<label index="error_validator_file">the file is invalid</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="error_validator_between">Der Werte liegt nicht zwischen ###MIN### und ###MAX###</label>
@@ -43,6 +44,7 @@
 			<label index="error_validator_uniqueInDb">Dieser Wert wird bereits verwendet</label>
 			<label index="error_validator_uniqueInPid">Dieser Wert wird bereits verwendet</label>
 			<label index="error_validator_url">Der Wert ist keine URL</label>
+			<label index="error_validator_file">Die Datei ist ungültig</label>
 		</languageKey>
 	</data>
 </T3locallang>

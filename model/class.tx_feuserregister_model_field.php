@@ -70,12 +70,11 @@ class tx_feuserregister_model_Field {
 			$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']
 		);
 		$this->_request = t3lib_div::makeInstance('tx_feuserregister_Request');
-		$requestData	= $this->_request->get('data');
 		$sessionUser = t3lib_div::makeInstance('tx_feuserregister_model_SessionUser');
 		if (strlen(trim($sessionUser->get($this->_fieldName))) == 0 && isset($this->_fieldConfiguration['aliasField'])) {
 			$sessionUser->set($this->_fieldName, $sessionUser->get($this->_fieldConfiguration['aliasField']));
 		}
-		$this->_value = (isset($requestData[$this->_fieldName])) ? $requestData[$this->_fieldName] : $sessionUser->get($this->_fieldName);
+		$this->determineValue();
 		$this->_controller->notifyObservers('afterInitFieldValue', array('field' => &$this));
 		
 			// init validators
@@ -156,7 +155,29 @@ class tx_feuserregister_model_Field {
 			break;
 		}
 	}
-	
+
+	/**
+	 * Determines the current value.
+	 *
+	 * @return string
+	 */
+	protected function determineValue() {
+		$fieldType = $this->_fieldConfiguration['type'];
+		$requestData = $this->_request->get('data');
+		$filesData = $this->_request->files('data');
+
+		if ($fieldType !== self::TYPE_FILE) {
+			$this->_value = (isset($requestData[$this->_fieldName])) ? $requestData[$this->_fieldName] : $sessionUser->get($this->_fieldName);
+		} elseif (isset($filesData[$this->_fieldName])) {
+			// @todo Move file handling to a separate class
+			$this->_value = t3lib_div::shortMD5(uniqid()) . '-' . $filesData[$this->_fieldName]['name'];
+			t3lib_div::upload_copy_move(
+				$filesData[$this->_fieldName]['tmp_name'],
+				PATH_site . 'uploads/tx_feuserregister/' . $this->_value
+			);
+		}
+	}
+
 	public function getErrorString() {
 		$wrapConfig = (isset($this->_fieldConfiguration['errorWrap.'])) ? $this->_fieldConfiguration['errorWrap.'] : $this->_configuration['defaultWraps.']['error.'];
 		if (is_array($wrapConfig) && strlen($this->_errorString) > 0) {

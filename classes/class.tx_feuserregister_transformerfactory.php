@@ -35,6 +35,7 @@ class tx_feuserregister_TransformerFactory {
 	const TRANSFORMER_T3SEC_SALTEDPW	= 't3sec_saltedpw';
 	const TRANSFORMER_SALTEDPASSWORDS	= 'saltedpasswords';
 	const TRANSFORMER_TIMESTAMP			= 'timestamp';
+	const TRANSFORMAR_IMAGE				= 'image';
 	
 	static public function getTransformer($typ) {
 		switch ($typ) {
@@ -64,6 +65,9 @@ class tx_feuserregister_TransformerFactory {
 			break;
 			case self::TRANSFORMER_TIMESTAMP:
 				$transformerClass = 'tx_feuserregister_transformer_Timestamp';
+			break;
+			case self::TRANSFORMAR_IMAGE:
+				$transformerClass = 'tx_feuserregister_transformer_Image';
 			break;
 			default:
 				$transformerClass = $typ;

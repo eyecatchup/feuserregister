@@ -75,6 +75,7 @@ abstract class tx_feuserregister_model_AbstractStep {
 	}
 
 	public function storeData() {
+		/* @var $sessionUser tx_feuserregister_model_SessionUser */
 		$sessionUser = t3lib_div::makeInstance('tx_feuserregister_model_SessionUser');
 		foreach ( $this->_fields as $field ) {
 			$sessionUser->set($field->getFieldName(), $field->getValue());

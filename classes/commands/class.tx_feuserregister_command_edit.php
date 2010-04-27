@@ -62,6 +62,7 @@ class tx_feuserregister_command_Edit implements tx_feuserregister_interface_Comm
 	 */
 	public function execute() {
 		$this->_controller->notifyObservers('onEditStart');
+		/* @var $stepManager tx_feuserregister_model_StepManager */
 		$stepManager = t3lib_div::makeInstance('tx_feuserregister_model_StepManager');
 		$currentStep = $stepManager->getCurrentStep();
 		switch ($this->_request->get('action')) {

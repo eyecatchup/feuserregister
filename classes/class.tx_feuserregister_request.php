@@ -27,9 +27,11 @@
 
 class tx_feuserregister_Request {
 	protected $_request = array();
+	protected $_files = array();
 	
 	public function __construct() {
 		$this->_request = t3lib_div::GParrayMerged('tx_feuserregister');
+		$this->_files = isset($_FILES['tx_feuserregister']) ? $_FILES['tx_feuserregister'] : array();
 	}
 	
 	/**
@@ -53,6 +55,30 @@ class tx_feuserregister_Request {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * @param string $index
+	 * @return array
+	 */
+	public function files($index) {
+		$files = NULL;
+
+		if (isset($this->_files['name'][$index])) {
+			$files = array();
+			$keys = array_keys($this->_files);
+			$fields = array_keys($this->_files['name'][$index]);
+
+			foreach ($fields as $field) {
+				$fieldArray = array();
+				foreach ($keys as $key) {
+					$fieldArray[$key] = $this->_files[$key][$index][$field];
+				}
+				$files[$field] = $fieldArray;
+			}
+		}
+
+		return $files;
 	}
 }
 
