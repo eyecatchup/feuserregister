@@ -37,7 +37,8 @@ class tx_feuserregister_model_Field {
 	const TYPE_TCA					= 'TCA';
 	const TYPE_TEXT					= 'text';
 	const TYPE_TEXTAREA				= 'textarea';
-	
+	const TYPE_FILE					= 'file';
+
 	protected $_configuration = array();
 	protected $_controller = null;
 	protected $_databaseTransformers = array();
@@ -145,6 +146,9 @@ class tx_feuserregister_model_Field {
 			break;
 			case self::TYPE_TEXTAREA:
 				$this->_createTextareaField();
+			break;
+			case self::TYPE_FILE:
+				$this->_createFileField();
 			break;
 			default:
 				$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_Field');
@@ -362,7 +366,23 @@ class tx_feuserregister_model_Field {
 		$this->_tcaField->setTransformers($this->_htmlTransformers, tx_feuserregister_AbstractTransformer::TYPE_HTML);
 		$this->_htmlField = $this->_tcaField->getHtmlField();
 	}
-	
+
+	protected function _createFileField() {
+		$value = $this->getValue(self::PARSE_HTML);
+		$attributes = array();
+		$attributes[] = "type=\"file\"";
+		$attributes[] = "name=\"tx_feuserregister[data][{$this->_fieldName}]\"";
+		$attributes[] = "id=\"tx-feuserregister-field-{$this->_fieldName}\"";
+		if ($this->_fieldConfiguration['maxLength']) {
+			$attributes[] = 'maxlength="'.$this->_fieldConfiguration['maxLength'].'"';
+		}
+		if ($this->_fieldConfiguration['additionalAttributes']) {
+			$attributes[] = $this->_fieldConfiguration['additionalAttributes'];
+		}
+		
+		$this->_htmlField = '<input '.implode(' ', $attributes).'/>';
+	}
+
 	protected function _prepareForDatabase() {
 		$value = $this->_value;
 		switch ($this->_fieldConfiguration['type']) {
@@ -383,6 +403,9 @@ class tx_feuserregister_model_Field {
 					// at this moment we don't need to prepare this field type
 			break;
 			case self::TYPE_TEXTAREA:
+					// at this moment we don't need to prepare this field type
+			break;
+			case self::TYPE_FILE:
 					// at this moment we don't need to prepare this field type
 			break;
 			default:
@@ -413,6 +436,9 @@ class tx_feuserregister_model_Field {
 			break;
 			case self::TYPE_TEXTAREA:
 				// we don't need to prepare this field type use transformer to
+			break;
+			case self::TYPE_FILE:
+					// at this moment we don't need to prepare this field type
 			break;
 			default:
 				$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_Field');
