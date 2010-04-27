@@ -143,7 +143,7 @@ class tx_feuserregister_LocalizationManager {
 			);
 		}
 
-		$this->localLanguageLabels = array_merge(
+		$this->localLanguageLabels = t3lib_div::array_merge_recursive_overrule(
 			(array) $this->localLanguageLabels,
 			$localLanguageLabels
 		);
