@@ -105,26 +105,56 @@ class tx_feuserregister_LocalizationManager {
 	 * @author	Frank Naegler <typo3@naegler.net>
 	 */
 	protected function loadLL() {
-		$this->localLanguageLabels = t3lib_div::readLLfile(
-			$this->localLanguageFile,
+		$this->loadAdditionalLocalLanguageFile($this->localLanguageFile);
+
+		if (isset($this->configuration['additionalLocalLanguageFiles.'])) {
+			foreach ($this->configuration['additionalLocalLanguageFiles.'] as $additionalLocalLanguageFile) {
+				if (!empty($additionalLocalLanguageFile)) {
+					$this->loadAdditionalLocalLanguageFile($additionalLocalLanguageFile);
+				}
+			}
+		}
+
+		$this->processLabelOverlays();
+	}
+
+	/**
+	 * Loads labels from an addition local language file
+	 *
+	 * @param string $fileName Local language file to be loaded
+	 * @return void
+	 */
+	protected function loadAdditionalLocalLanguageFile($fileName) {
+		$localLanguageLabels = t3lib_div::readLLfile(
+			$fileName,
 			$this->localLanguageKey,
 			$GLOBALS['TSFE']->renderCharset
 		);
 
 		if ($this->alternativeLocalLanguageKey) {
 			$tempLocalLangueLabels = t3lib_div::readLLfile(
-				$this->localLanguageFile,
+				$fileName,
 				$this->alternativeLocalLanguageKey
 			);
 
-			$this->localLanguageLabels = array_merge(
-				is_array($this->localLanguageLabels) ?
-					$this->localLanguageLabels :
-					array(),
+			$localLanguageLabels = array_merge(
+				(array) $localLanguageLabels,
 				$tempLocalLangueLabels
 			);
 		}
 
+		$this->localLanguageLabels = array_merge(
+			(array) $this->localLanguageLabels,
+			$localLanguageLabels
+		);
+	}
+
+	/**
+	 * Processes the label overlays defined in TypoScript.
+	 *
+	 * @return void
+	 */
+	protected function processLabelOverlays() {
 			// Overlaying labels from TypoScript (including fictitious language keys for non-system languages!):
 		if (is_array($this->configuration['_LOCAL_LANG.'])) {
 

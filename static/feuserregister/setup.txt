@@ -7,6 +7,10 @@ plugin.tx_feuserregister {
 		error_validator_required_email = Bitte geben Sie eine E-Mail-Adresse ein
 		error_validator_email_email = Bitte geben Sie eine E-Mail-Adresse ein
 	}
+	additionalLocalLanguageFiles {
+		# Example:
+		# tx_myextension = EXT:myextension/lang/locallang_fields.xml
+	}
 	pages {
 		register	=
 		confirm		=
