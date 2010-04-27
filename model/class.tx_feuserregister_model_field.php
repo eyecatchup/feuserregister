@@ -320,7 +320,6 @@ class tx_feuserregister_model_Field {
 		$attributes = array();
 		$attributes[] = "type=\"password\"";
 		$attributes[] = "name=\"tx_feuserregister[data][{$this->_fieldName}]\"";
-		$attributes[] = "value=\"{$value}\"";
 		$attributes[] = "id=\"tx-feuserregister-field-{$this->_fieldName}\"";
 		if ($this->_fieldConfiguration['maxLength']) {
 			$attributes[] = 'maxlength="'.$this->_fieldConfiguration['maxLength'].'"';

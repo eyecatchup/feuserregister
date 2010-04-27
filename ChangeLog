@@ -3,6 +3,7 @@
 	* Extended onEditBeforeSave event to forward all fields and values to be compared to the observer
 	* Added feature: Integrate possibility to define additional local language files via TypoScript
 	* Added feature: Integrate possibility to upload files
+	* Fixed bug: Password value is shown on editing the profile
 
 2010-04-21  Oliver Hader  <oliver@typo3.org>
 
