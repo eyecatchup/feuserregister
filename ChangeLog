@@ -1,3 +1,7 @@
+2010-04-27  Oliver Hader  <oliver@typo3.org>
+
+	* Extended onEditBeforeSave event to forward all fields and values to be compared to the observer
+
 2010-04-21  Oliver Hader  <oliver@typo3.org>
 
 	* Added feature: Integrate saltedpasswords transformer

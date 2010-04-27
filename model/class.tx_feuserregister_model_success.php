@@ -94,7 +94,7 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 				$feuser->set($field->getFieldName(), $field->getValue(tx_feuserregister_model_Field::PARSE_DATEBASE));
 			}
 		}
-		$this->_controller->notifyObservers('onEditBeforeSave', array('feuser' => &$feuser));
+		$this->_controller->notifyObservers('onEditBeforeSave', array('feuser' => &$feuser, 'allFields' => $allFields, 'confirmValues' => $confirmValues));
 		if (count($confirmValues) > 0) {
 			$confirmValuesDb = serialize($confirmValues);
 			$feuser->set('tx_feuserregister_temporarydata', $confirmValuesDb);
