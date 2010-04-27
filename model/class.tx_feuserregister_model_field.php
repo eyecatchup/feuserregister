@@ -53,11 +53,18 @@ class tx_feuserregister_model_Field {
 	protected $_tcaField = null;
 	protected $_validators = array();
 	protected $_value = '';
+
+	/**
+	 * 
+	 * @var tx_feuserregister_model_SessionUser
+	 */
+	protected $_sessionUser;
+
 	/**
 	 * @var tx_feuserregister_LocalizationManager
 	 */
 	protected $_localizationManager = null;
-	
+
 	public function __construct($fieldname) {
 		$this->_fieldName = $fieldname;
 		$this->_configuration = tx_feuserregister_Registry::get('tx_feuserregister_configuration');
@@ -70,9 +77,9 @@ class tx_feuserregister_model_Field {
 			$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']
 		);
 		$this->_request = t3lib_div::makeInstance('tx_feuserregister_Request');
-		$sessionUser = t3lib_div::makeInstance('tx_feuserregister_model_SessionUser');
-		if (strlen(trim($sessionUser->get($this->_fieldName))) == 0 && isset($this->_fieldConfiguration['aliasField'])) {
-			$sessionUser->set($this->_fieldName, $sessionUser->get($this->_fieldConfiguration['aliasField']));
+		$this->_sessionUser = t3lib_div::makeInstance('tx_feuserregister_model_SessionUser');
+		if (strlen(trim($this->_sessionUser->get($this->_fieldName))) == 0 && isset($this->_fieldConfiguration['aliasField'])) {
+			$this->_sessionUser->set($this->_fieldName, $this->_sessionUser->get($this->_fieldConfiguration['aliasField']));
 		}
 		$this->determineValue();
 		$this->_controller->notifyObservers('afterInitFieldValue', array('field' => &$this));
@@ -167,7 +174,7 @@ class tx_feuserregister_model_Field {
 		$filesData = $this->_request->files('data');
 
 		if ($fieldType !== self::TYPE_FILE) {
-			$this->_value = (isset($requestData[$this->_fieldName])) ? $requestData[$this->_fieldName] : $sessionUser->get($this->_fieldName);
+			$this->_value = (isset($requestData[$this->_fieldName])) ? $requestData[$this->_fieldName] : $this->_sessionUser->get($this->_fieldName);
 		} elseif (isset($filesData[$this->_fieldName])) {
 			// @todo Move file handling to a separate class
 			$this->_value = t3lib_div::shortMD5(uniqid()) . '-' . $filesData[$this->_fieldName]['name'];
