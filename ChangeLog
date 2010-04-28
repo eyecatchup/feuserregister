@@ -1,3 +1,7 @@
+2010-04-28  Oliver Hader  <oliver@typo3.org>
+
+	* Fixed bug: Confirmation mail on editing the profile is triggered also if not required
+
 2010-04-27  Oliver Hader  <oliver@typo3.org>
 
 	* Extended onEditBeforeSave event to forward all fields and values to be compared to the observer

@@ -71,7 +71,7 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 		$feuser = tx_feuserregister_SessionRegistry::get('tx_feuserregister_feuser');
 		/* @var $currentFeuser tx_feuserregister_model_FeUser */
 		$currentFeuser = tx_feuserregister_SessionRegistry::get('tx_feuserregister_currentFeuser');
-		$confirmFields = t3lib_div::trimExplode(',', $this->_configuration['global.']['confirmationOnUpdateFields']);					
+		$confirmFields = t3lib_div::trimExplode(',', $this->_configuration['global.']['confirmationOnUpdateFields']);
 		$confirmValues = array();
 		foreach ($allFields as $field) {
 			if (in_array($field->getFieldname(), $confirmFields)) {
@@ -94,32 +94,36 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 				$feuser->set($field->getFieldName(), $field->getValue(tx_feuserregister_model_Field::PARSE_DATEBASE));
 			}
 		}
+
 		$this->_controller->notifyObservers('onEditBeforeSave', array('feuser' => &$feuser, 'allFields' => $allFields, 'confirmValues' => $confirmValues));
-		if (count($confirmValues) > 0) {
+
+		$isConfirmationRequired = (count($confirmValues) > 0 || $this->_configuration['global.']['userEmail.']['onUpdate']);
+
+		if ($isConfirmationRequired) {
 			$confirmValuesDb = serialize($confirmValues);
 			$feuser->set('tx_feuserregister_temporarydata', $confirmValuesDb);
-			if (strlen(trim($this->_configuration['global.']['confirmationOnUpdateFields'])) > 0 || $this->_configuration['global.']['userEmail.']['onUpdate']) {
-				$controller = tx_feuserregister_Registry::get('tx_feuserregister_controller');
-				$marker['###CONFIRMATION_URL###'] = t3lib_div::makeRedirectUrl(
-					str_replace('tx_feuserregister_controller_UserRegistration', 'tx_feuserregister',
-						t3lib_div::getIndpEnv('TYPO3_SITE_URL').$controller->pi_linkTP_keepPIvars_url(array(
-							'confirmationCode'	=> md5($feuser->uid . $feuser->crdate . $confirmValuesDb . $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']),
-							'cmd'				=> 'confirm'
-						), 0, 1, $this->_configuration['pages.']['confirm'])
-					)
-				);
+			$controller = tx_feuserregister_Registry::get('tx_feuserregister_controller');
+			$marker['###CONFIRMATION_URL###'] = t3lib_div::makeRedirectUrl(
+				str_replace('tx_feuserregister_controller_UserRegistration', 'tx_feuserregister',
+					t3lib_div::getIndpEnv('TYPO3_SITE_URL').$controller->pi_linkTP_keepPIvars_url(array(
+						'confirmationCode'	=> md5($feuser->uid . $feuser->crdate . $confirmValuesDb . $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']),
+						'cmd'				=> 'confirm'
+					), 0, 1, $this->_configuration['pages.']['confirm'])
+				)
+			);
+
+			if ($this->_configuration['global.']['userGroupsAfterUpdate']) {
+				$feuser->set('usergroup', $this->_configuration['global.']['userGroupsAfterRegistration']);
 			}
-		}	
-		if ($this->_configuration['global.']['userGroupsAfterUpdate']) {
-			$feuser->set('usergroup', $this->_configuration['global.']['userGroupsAfterRegistration']);
 		}
+
 		if ($feuser->save()) {
 			$this->clearData();
 			tx_feuserregister_SessionRegistry::set('tx_feuserregister_reloadhash', $reloadHash);
 			if ($this->_configuration['global.']['adminEmail.']['onUpdate']) {
 				tx_feuserregister_Mailer::send('admin', 'onupdate', $marker);
 			}
-			if (strlen(trim($this->_configuration['global.']['confirmationOnUpdateFields'])) > 0 || $this->_configuration['global.']['userEmail.']['onUpdate']) {
+			if ($isConfirmationRequired) {
 				tx_feuserregister_Mailer::send('user', 'onupdate', $marker);
 			}
 		} else {
