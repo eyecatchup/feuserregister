@@ -175,7 +175,7 @@ class tx_feuserregister_model_Field {
 
 		if ($fieldType !== self::TYPE_FILE) {
 			$this->_value = (isset($requestData[$this->_fieldName])) ? $requestData[$this->_fieldName] : $this->_sessionUser->get($this->_fieldName);
-		} elseif (isset($filesData[$this->_fieldName])) {
+		} elseif (isset($filesData[$this->_fieldName]['name']) && $filesData[$this->_fieldName]['name']) {
 			// @todo Move file handling to a separate class
 			$this->_value = t3lib_div::shortMD5(uniqid()) . '-' . $filesData[$this->_fieldName]['name'];
 			t3lib_div::upload_copy_move(
