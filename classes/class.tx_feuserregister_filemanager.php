@@ -66,7 +66,7 @@ class tx_feuserregister_FileManager {
 		$fileName = NULL;
 		$filesData = $this->request->files('data');
 
-		if (isset($filesData[$fieldName]['name']) && $filesData[$fieldName]['name']) {
+		if (isset($filesData[$fieldName]['name']) && $this->isAllowed($filesData[$fieldName]['name'])) {
 			$destinationFileName = $this->basicFileFunctions->getUniqueName(
 				$this->basicFileFunctions->cleanFileName($filesData[$fieldName]['name']),
 				$destinationFolder
@@ -80,6 +80,19 @@ class tx_feuserregister_FileManager {
 		}
 
 		return $fileName;
+	}
+
+	/**
+	 * Determines whether the file extensin is allowed.
+	 *
+	 * @param string $fileName
+	 * @return boolean
+	 */
+	public function isAllowed($fileName) {
+		$fileInformation = t3lib_div::split_fileref($fileName);
+		$allowedExtensions = t3lib_div::trimExplode(',', strtolower($GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']), TRUE);
+
+		return ($fileInformation['fileext'] && in_array($fileInformation['fileext'], $allowedExtensions));
 	}
 }
 
