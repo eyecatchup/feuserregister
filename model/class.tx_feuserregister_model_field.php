@@ -209,7 +209,7 @@ class tx_feuserregister_model_Field {
 	 */
 	protected function getUploadFolder() {
 		$uploadFolder = (isset($this->_fieldConfiguration['uploadFolder']) ? $this->_fieldConfiguration['uploadFolder'] : 'uploads/tx_feuserregister');
-		$uploadFolder = rtrim($uploadFolder, '/');
+		$uploadFolder = rtrim($uploadFolder, '/') . '/';
 		return $uploadFolder;
 	}
 
