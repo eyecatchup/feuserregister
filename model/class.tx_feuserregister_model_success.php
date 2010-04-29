@@ -34,10 +34,11 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 		
 		$fieldMarker	= $this->_getFieldMarker();
 		$labelMarker	= $this->_getLabelmarker();
+		$valueMarker	= $this->_getValueMarker();
 		$globalMarker	= $this->_getGlobalMarker();
 		$lllMarker		= $this->_getLllMarker();
 		
-		$marker = array_merge($fieldMarker, $labelMarker, $globalMarker, $lllMarker);
+		$marker = array_merge($fieldMarker, $labelMarker, $valueMarker, $globalMarker, $lllMarker);
 
 		$this->_controller->notifyObservers('renderSuccessAdditionalMarker', array('marker' => &$marker));
 		

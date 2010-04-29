@@ -35,12 +35,13 @@ class tx_feuserregister_model_Step extends tx_feuserregister_model_AbstractStep 
 		}
 		$fieldMarker	= $this->_getFieldMarker();
 		$labelMarker	= $this->_getLabelmarker();
+		$valueMarker	= $this->_getValueMarker();
 		$requiredMarker	= $this->_getRequiredMarker();
 		$errorMarker	= $this->_getErrorMarker();
 		$globalMarker	= $this->_getGlobalMarker();
 		$lllMarker		= $this->_getLllMarker();
 		
-		$marker = array_merge($fieldMarker, $labelMarker, $requiredMarker, $errorMarker, $globalMarker, $lllMarker);
+		$marker = array_merge($fieldMarker, $labelMarker, $valueMarker, $requiredMarker, $errorMarker, $globalMarker, $lllMarker);
 		
 		$this->_controller->notifyObservers('renderStepAdditionalMarker', array('marker' => &$marker));
 		

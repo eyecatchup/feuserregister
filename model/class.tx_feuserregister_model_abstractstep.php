@@ -114,6 +114,14 @@ abstract class tx_feuserregister_model_AbstractStep {
 		return $marker;
 	}
 
+	protected function _getValueMarker() {
+		$marker = array();
+		foreach ($this->_fields as $field) {
+			$marker['###VALUE_' . $field->getFieldName() . '###'] = $field->getValue(tx_feuserregister_model_Field::PARSE_HTML);
+		}
+		return $marker;
+	}
+
 	protected function _getRequiredMarker() {
 		$marker = array();
 		foreach ( $this->_fields as $field ) {

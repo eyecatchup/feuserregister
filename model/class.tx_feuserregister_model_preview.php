@@ -34,10 +34,11 @@ class tx_feuserregister_model_Preview extends tx_feuserregister_model_AbstractSt
 	public function render() {
 		$fieldMarker	= $this->_getFieldMarker();
 		$labelMarker	= $this->_getLabelmarker();
+		$valueMarker	= $this->_getValueMarker();
 		$globalMarker	= $this->_getGlobalMarker();
 		$lllMarker		= $this->_getLllMarker();
 		
-		$marker = array_merge($fieldMarker, $labelMarker, $globalMarker, $lllMarker);
+		$marker = array_merge($fieldMarker, $labelMarker, $valueMarker, $globalMarker, $lllMarker);
 
 		$this->_controller->notifyObservers('renderPreviewAdditionalMarker', array('marker' => &$marker));
 		
@@ -70,7 +71,18 @@ class tx_feuserregister_model_Preview extends tx_feuserregister_model_AbstractSt
 		}
 		return $marker;
 	}
-	
+
+	protected function _getValueMarker() {
+		$marker = array();
+		foreach ($this->_steps as $step) {
+			$fields = $step->getFields();
+			foreach ($fields as $field) {
+				$marker['###VALUE_' . $field->getFieldName() . '###'] = $field->getValue(tx_feuserregister_model_Field::PARSE_HTML);
+			}
+		}
+		return $marker;
+	}
+
 	protected function _getGlobalMarker() {
 		$marker = array(
 			'###FORM_URL###' 		=> $this->_controller->cObj->typoLink_URL(array('parameter' => $GLOBALS['TSFE']->id)),
