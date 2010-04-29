@@ -37,7 +37,7 @@ class tx_feuserregister_transformer_Image extends tx_feuserregister_AbstractTran
 		$controller = tx_feuserregister_Registry::get('tx_feuserregister_controller');
 
 		$configuration = array(
-			'file' => 'uploads/tx_feuserregister/' . $this->_value,
+			'file' => $this->_value,
 			'file.' => $this->_options,
 		);
 
