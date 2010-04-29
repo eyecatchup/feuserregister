@@ -175,31 +175,14 @@ class tx_feuserregister_model_Field {
 		if ($fieldType !== self::TYPE_FILE) {
 			$this->_value = (isset($requestData[$this->_fieldName])) ? $requestData[$this->_fieldName] : $this->_sessionUser->get($this->_fieldName);
 		} else {
-			$fileName = $this->getUploadedFileName();
+			/* @var $fileManager tx_feuserregister_FileManager */
+			$fileManager = t3lib_div::makeInstance('tx_feuserregister_FileManager', $this->_request);
+			$fileName = $fileManager->processFormUpload(
+				$this->_fieldName,
+				t3lib_div::getFileAbsFileName($this->getUploadFolder())
+			);
 			$this->_value = ($fileName ? $fileName : $this->_sessionUser->get($this->_fieldName));
 		}
-	}
-
-	/**
-	 * Gets the name of an uploaded file.
-	 *
-	 * @return string Name of the uploaded file
-	 * @todo Move file handling to a separate class
-	 */
-	protected function getUploadedFileName() {
-		$fileName = NULL;
-		$filesData = $this->_request->files('data');
-
-		if (isset($filesData[$this->_fieldName]['name']) && $filesData[$this->_fieldName]['name']) {
-			$fileName = t3lib_div::shortMD5(uniqid()) . '-' . $filesData[$this->_fieldName]['name'];
-
-			t3lib_div::upload_copy_move(
-				$filesData[$this->_fieldName]['tmp_name'],
-				PATH_site . $this->getUploadFolder() . $fileName
-			);
-		}
-
-		return $fileName;
 	}
 
 	/**

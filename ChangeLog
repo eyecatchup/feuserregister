@@ -2,6 +2,7 @@
 
 	* Fixed bug: String data to be persisted in the database is escaped twice
 	* Added feature: Integrate possibility to render HTML transformed values as markers
+	* Added feature: Use internal TYPO3 filehandling to modify filenames etc.
 
 2010-04-28  Oliver Hader  <oliver@typo3.org>
 
