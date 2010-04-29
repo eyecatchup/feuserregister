@@ -123,7 +123,12 @@ abstract class tx_feuserregister_model_dbtable {
 		$this->_data['uid'] = $GLOBALS['TYPO3_DB']->sql_insert_id();
 		return $this->_data['uid'];
 	}
-	
+
+	/**
+	 * Prepares values to be stored in database.
+	 *
+	 * @return array
+	 */
 	protected function _prepareDataForDatabase() {
 		$preparedData = array();
 		foreach ($this->_dataDefinitions as $field => $type) {
@@ -163,7 +168,7 @@ abstract class tx_feuserregister_model_dbtable {
 				case 'ENUM':
 				case 'SET':
 				default:
-					$preparedData[$field] = $GLOBALS['TYPO3_DB']->quoteStr($this->_data[$field], $this->_table);
+					$preparedData[$field] = $this->_data[$field];
 				break;
 			}
 		}
