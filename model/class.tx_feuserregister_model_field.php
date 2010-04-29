@@ -166,23 +166,51 @@ class tx_feuserregister_model_Field {
 	/**
 	 * Determines the current value.
 	 *
-	 * @return string
+	 * @return void
 	 */
 	protected function determineValue() {
 		$fieldType = $this->_fieldConfiguration['type'];
 		$requestData = $this->_request->get('data');
-		$filesData = $this->_request->files('data');
 
 		if ($fieldType !== self::TYPE_FILE) {
 			$this->_value = (isset($requestData[$this->_fieldName])) ? $requestData[$this->_fieldName] : $this->_sessionUser->get($this->_fieldName);
-		} elseif (isset($filesData[$this->_fieldName]['name']) && $filesData[$this->_fieldName]['name']) {
-			// @todo Move file handling to a separate class
-			$this->_value = t3lib_div::shortMD5(uniqid()) . '-' . $filesData[$this->_fieldName]['name'];
+		} else {
+			$fileName = $this->getUploadedFileName();
+			$this->_value = ($fileName ? $fileName : $this->_sessionUser->get($this->_fieldName));
+		}
+	}
+
+	/**
+	 * Gets the name of an uploaded file.
+	 *
+	 * @return string Name of the uploaded file
+	 * @todo Move file handling to a separate class
+	 */
+	protected function getUploadedFileName() {
+		$fileName = NULL;
+		$filesData = $this->_request->files('data');
+
+		if (isset($filesData[$this->_fieldName]['name']) && $filesData[$this->_fieldName]['name']) {
+			$fileName = t3lib_div::shortMD5(uniqid()) . '-' . $filesData[$this->_fieldName]['name'];
+
 			t3lib_div::upload_copy_move(
 				$filesData[$this->_fieldName]['tmp_name'],
-				PATH_site . 'uploads/tx_feuserregister/' . $this->_value
+				PATH_site . $this->getUploadFolder() . $fileName
 			);
 		}
+
+		return $fileName;
+	}
+
+	/**
+	 * Gets the upload folder of this field.
+	 *
+	 * @return string
+	 */
+	protected function getUploadFolder() {
+		$uploadFolder = (isset($this->_fieldConfiguration['uploadFolder']) ? $this->_fieldConfiguration['uploadFolder'] : 'uploads/tx_feuserregister');
+		$uploadFolder = rtrim($uploadFolder, '/');
+		return $uploadFolder;
 	}
 
 	public function getErrorString() {
