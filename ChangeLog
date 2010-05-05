@@ -1,5 +1,9 @@
 2010-05-05  Oliver Hader  <oliver@typo3.org>
 
+	* Set compatibility to TYPO3 4.3
+
+2010-05-05  Oliver Hader  <oliver@typo3.org>
+
 	* Raised version number to 0.1.0
 
 2010-04-29  Oliver Hader  <oliver@typo3.org>
