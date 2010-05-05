@@ -1,3 +1,7 @@
+2010-05-05  Oliver Hader  <oliver@typo3.org>
+
+	* Raised version number to 0.1.0
+
 2010-04-29  Oliver Hader  <oliver@typo3.org>
 
 	* Fixed bug: String data to be persisted in the database is escaped twice
