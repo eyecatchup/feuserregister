@@ -110,6 +110,29 @@ plugin.tx_feuserregister {
 				}
 			}
 		}
+		# avatar image of the regular fe_user record
+		image {
+			type = file
+			uploadFolder = uploads/pics
+			validators = file
+			validatorOptions {
+				file {
+					types = gif,jpg,png
+				}
+			}
+			transformers {
+				html = image
+			}
+			transformerOptions {
+				image {
+					uploadFolder = uploads/pics/
+					file {
+						maxW = 50px
+						maxH = 100px
+					}
+				}
+			}
+		}
 		tx_feuserregister_gender {
 			type = TCA
 		}
