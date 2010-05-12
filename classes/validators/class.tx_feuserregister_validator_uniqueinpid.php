@@ -44,7 +44,7 @@ class tx_feuserregister_validator_UniqueInPid extends tx_feuserregister_Abstract
 			$definitions[$data['Field']] = $data['Type'];
 		}
 		$value = (substr_count($definitions[$this->_fieldname], 'int') > 0) ? intval($this->_value) : $GLOBALS['TYPO3_DB']->fullQuoteStr($this->_value, 'fe_users');
-		$enableFields = ($this->_options['disableEnableFields']) ? '' : $pageSelect->enableFields('fe_users', TRUE);
+		$enableFields = ($this->_options['disableEnableFields']) ? '' : $pageSelect->enableFields('fe_users');
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'uid',
 			'fe_users',
