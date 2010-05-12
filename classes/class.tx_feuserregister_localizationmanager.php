@@ -66,7 +66,7 @@ class tx_feuserregister_LocalizationManager {
 	/**
 	 * constructor for class tx_feuserregister_LocalizationManager
 	 */
-	protected function __construct($localLanguageFile, array $configuration) {
+	public function __construct($localLanguageFile, array $configuration) {
 		$this->localLanguageFile = $localLanguageFile;
 		$this->configuration     = $configuration;
 
