@@ -62,8 +62,8 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 				return $this->_processRegister($allFields, $marker,$reloadHash);
 			}
 		} else {
-			$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_StepManager');
-			throw new $exceptionClass('second reload', 3300);
+			$exception = t3lib_div::makeInstance('tx_feuserregister_exception_StepManager', 'second reload', 3300);
+			throw $exception;
 		}
 	}
 	
@@ -128,8 +128,8 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 				tx_feuserregister_Mailer::send('user', 'onupdate', $marker);
 			}
 		} else {
-			$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_Database');
-			throw new $exceptionClass('error while updae fe user', 1200);
+			$exception = t3lib_div::makeInstance('tx_feuserregister_exception_Database', 'error while updae fe user', 1200);
+			throw $exception;
 		}
 		tx_feuserregister_Registry::set('tx_feuserregister_feuser', $feuser);
 		$this->_controller->notifyObservers('onEditAfterSave', array('feuser' => &$feuser));
@@ -176,8 +176,8 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 				tx_feuserregister_Mailer::send('admin', 'onregister', $marker);
 			}
 		} else {
-			$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_Database');
-			throw new $exceptionClass('error while creating fe user', 1100);
+			$exception = t3lib_div::makeInstance('tx_feuserregister_exception_Database', 'error while creating fe user', 1100);
+			throw $exception;
 		}
 		tx_feuserregister_Registry::set('tx_feuserregister_feuser', $feuser);
 		$this->_controller->notifyObservers('onRegisterAfterSave', array('feuser' => &$feuser, 'allFields' => $allFields));

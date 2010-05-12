@@ -45,8 +45,7 @@ abstract class tx_feuserregister_model_AbstractStep {
 			$fields = t3lib_div::trimExplode(',', $this->_configuration['fields']);
 			if (is_array($fields)) {
 				foreach ( $fields as $field ) {
-					$className = t3lib_div::makeInstanceClassName('tx_feuserregister_model_Field');
-					$this->_fields[] = new $className($field);
+					$this->_fields[] = t3lib_div::makeInstance('tx_feuserregister_model_Field', $field);
 				}
 			}
 		}

@@ -131,27 +131,27 @@ class tx_feuserregister_controller_UserRegistration extends tslib_pibase impleme
 			return $this->pi_wrapInBaseClass($content);
 		
 		} catch (tx_feuserregister_exception_Confirm $exception) {
-			$viewName = t3lib_div::makeInstanceClassName('tx_feuserregister_view_Error');
+			$viewName = 'tx_feuserregister_view_Error';
 			$model = $exception;
 		} catch (tx_feuserregister_exception_Field $exception) {
-			$viewName = t3lib_div::makeInstanceClassName('tx_feuserregister_view_Error');
+			$viewName = 'tx_feuserregister_view_Error';
 			$model = $exception;
 		} catch (tx_feuserregister_exception_Database $exception) {
-			$viewName = t3lib_div::makeInstanceClassName('tx_feuserregister_view_Error');
+			$viewName = 'tx_feuserregister_view_Error';
 			$model = $exception;
 		} catch (tx_feuserregister_exception_StepManager $exception) {
-			$viewName = t3lib_div::makeInstanceClassName('tx_feuserregister_view_Error');
+			$viewName = 'tx_feuserregister_view_Error';
 			$model = $exception;
 		} catch (tx_feuserregister_exception_Tca $exception) {
-			$viewName = t3lib_div::makeInstanceClassName('tx_feuserregister_view_Error');
+			$viewName = 'tx_feuserregister_view_Error';
 			$model = $exception;
 		} catch (tx_feuserregister_exception_Transformer $exception) {
-			$viewName = t3lib_div::makeInstanceClassName('tx_feuserregister_view_Error');
+			$viewName = 'tx_feuserregister_view_Error';
 			$model = $exception;
 		} catch (Exception $exception) {
 			die ('unhandled exception: ' . $exception);
 		}
-		$view = new $viewName();
+		$view = t3lib_div::makeInstance($viewName);
 		$view->setModel($model);
 		return $view->render();
 	}

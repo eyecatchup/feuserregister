@@ -157,8 +157,11 @@ class tx_feuserregister_model_Field {
 				$this->_createFileField();
 			break;
 			default:
-				$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_Field');
-				throw new $exceptionClass('unknown field type: ' . $this->_fieldConfiguration['type'] . ' for field ' . $this->_fieldName);
+				$exception = t3lib_div::makeInstance(
+					'tx_feuserregister_exception_Field',
+					'unknown field type: ' . $this->_fieldConfiguration['type'] . ' for field ' . $this->_fieldName
+				);
+				throw $exception;
 			break;
 		}
 	}
@@ -332,8 +335,12 @@ class tx_feuserregister_model_Field {
 			
 			
 		} else {
-			$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_Field');
-			throw new $exceptionClass('field of type: ' . $this->_fieldConfiguration['type'] . ' need the extension "static_info_tables".', 6100);
+			$exception = t3lib_div::makeInstance(
+				'tx_feuserregister_exception_Field',
+				'field of type: ' . $this->_fieldConfiguration['type'] . ' need the extension "static_info_tables".',
+				6100
+			);
+			throw $exception;
 		}
 	}
 	
@@ -447,8 +454,11 @@ class tx_feuserregister_model_Field {
 					// at this moment we don't need to prepare this field type
 			break;
 			default:
-				$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_Field');
-				throw new $exceptionClass('unknown field type: ' . $this->_fieldConfiguration['type'] . ' for field ' . $this->_fieldName);
+				$exception = t3lib_div::makeInstance(
+					'tx_feuserregister_exception_Field',
+					'unknown field type: ' . $this->_fieldConfiguration['type'] . ' for field ' . $this->_fieldName
+				);
+				throw $exception;
 			break;
 		}
 		return $value;
@@ -479,8 +489,11 @@ class tx_feuserregister_model_Field {
 					// at this moment we don't need to prepare this field type
 			break;
 			default:
-				$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_Field');
-				throw new $exceptionClass('unknown field type: ' . $this->_fieldConfiguration['type'] . ' for field ' . $this->_fieldName);
+				$exception = t3lib_div::makeInstance(
+					'tx_feuserregister_exception_Field',
+					'unknown field type: ' . $this->_fieldConfiguration['type'] . ' for field ' . $this->_fieldName
+				);
+				throw $exception;
 			break;
 		}
 		return $value;

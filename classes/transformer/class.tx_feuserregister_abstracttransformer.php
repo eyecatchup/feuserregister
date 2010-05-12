@@ -53,8 +53,12 @@ abstract class tx_feuserregister_AbstractTransformer {
 	 */
 	public function getType() {
 		if ($this->_type === null) {
-			$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_Transformer');
-			throw new $exceptionClass("Transformer '{$this->_name}' has no type defined", 4100);
+			$exception = t3lib_div::makeInstance(
+				'tx_feuserregister_exception_Transformer',
+				"Transformer '{$this->_name}' has no type defined",
+				4100
+			);
+			throw $exception;
 		}
 		return $this->_type;
 	}

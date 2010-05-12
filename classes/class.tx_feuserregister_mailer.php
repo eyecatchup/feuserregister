@@ -48,8 +48,7 @@ class tx_feuserregister_Mailer {
 			return void;
 		}
 
-		$className = t3lib_div::makeInstanceClassName('tx_feuserregister_LocalizationManager');
-		$localizationManager = call_user_func(array($className, 'getInstance'),
+		$localizationManager = tx_feuserregister_LocalizationManager::getInstance(
 			'EXT:feuserregister/lang/locallang_emails.xml', 
 			$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']
 		);

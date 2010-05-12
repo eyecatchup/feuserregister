@@ -82,16 +82,10 @@ class tx_feuserregister_CommandResolver {
 	protected function loadCommand($cmdName) {
 		$cmdName = ucfirst($cmdName);
 		$class = "tx_feuserregister_command_{$cmdName}";
-		$file  = "{$this->_path}/class.".strtolower($class).".php";
-		$class = t3lib_div::makeInstanceClassName($class);
-		if (!file_exists($file)) {
-			return false;
-		}
-		include_once $file;
-		if (!class_exists($class)) {
-			return false;
-		}
-		$command = new $class();
+		$command = t3lib_div::makeInstance($class);
+
+		// @todo: Throw exception if object does not implement the interface
+
 		return $command;
 	}
 }

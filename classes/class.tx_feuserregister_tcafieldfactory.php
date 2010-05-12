@@ -50,8 +50,8 @@ class tx_feuserregister_TcaFieldFactory {
 				$tcaFieldClass = 'tx_feuserregister_tca_TextField';
 			break;
 			default:
-				$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_Tca');
-				throw new $exceptionClass("no support for TCA field type '{$type}'");
+				$exception = t3lib_div::makeInstance('tx_feuserregister_exception_Tca', "no support for TCA field type '{$type}'");
+				throw $exception;
 			break;
 		}
 		if (!class_exists($tcaFieldClass)) {

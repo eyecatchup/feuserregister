@@ -53,8 +53,12 @@ class tx_feuserregister_command_Register implements tx_feuserregister_interface_
 					$currentStep->storeData();
 					$currentStep = $stepManager->getPreviousStep();
 					if ($currentStep === null) {
-						$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_StepManager');
-						throw new $exceptionClass('previous step not available', 3100);
+						$exception = t3lib_div::makeInstance(
+							'tx_feuserregister_exception_StepManager',
+							'previous step not available',
+							3100
+						);
+						throw $exception;
 					} else {
 						$currentStep->setValidate(false);
 					}
@@ -66,8 +70,12 @@ class tx_feuserregister_command_Register implements tx_feuserregister_interface_
 					$currentStep->storeData();
 					$currentStep = $stepManager->getStepByNumber($this->_request->get('step'));
 					if ($currentStep === null) {
-						$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_StepManager');
-						throw new $exceptionClass('step '.$this->_request->get('step').' not available', 3200);
+						$exception = t3lib_div::makeInstance(
+							'tx_feuserregister_exception_StepManager',
+							'step '.$this->_request->get('step').' not available',
+							3200
+						);
+						throw $exception;
 					} else {
 						$currentStep->setValidate(false);
 					}

@@ -35,15 +35,14 @@ class tx_feuserregister_command_Edit implements tx_feuserregister_interface_Comm
 	public function __construct() {
 		$this->_request = t3lib_div::makeInstance('tx_feuserregister_Request');
 		$this->_controller = tx_feuserregister_Registry::get('tx_feuserregister_controller');
-		$feuserClassName = t3lib_div::makeInstanceClassName('tx_feuserregister_model_FeUser');
 		$feuser = tx_feuserregister_SessionRegistry::get('tx_feuserregister_feuser');
-		if (!$feuser instanceof $feuserClassName) {
-			$feuser = new $feuserClassName($GLOBALS['TSFE']->fe_user->user['uid']);
+		if (!$feuser instanceof tx_feuserregister_model_FeUser) {
+			$feuser = t3lib_div::makeInstance('tx_feuserregister_model_FeUser', $GLOBALS['TSFE']->fe_user->user['uid']);
 			tx_feuserregister_SessionRegistry::set('tx_feuserregister_feuser', $feuser);
 		}
 		$currentFeuser = tx_feuserregister_SessionRegistry::get('tx_feuserregister_currentFeuser');
-		if (!$currentFeuser instanceof $feuserClassName) {
-			$currentFeuser = new $feuserClassName($GLOBALS['TSFE']->fe_user->user['uid']);
+		if (!$currentFeuser instanceof tx_feuserregister_model_FeUser) {
+			$currentFeuser = t3lib_div::makeInstance('tx_feuserregister_model_FeUser', $GLOBALS['TSFE']->fe_user->user['uid']);
 			tx_feuserregister_SessionRegistry::set('tx_feuserregister_currentFeuser', $currentFeuser);
 			$sessionUser = t3lib_div::makeInstance('tx_feuserregister_model_SessionUser');
 			$attributes = $currentFeuser->getAttributes();
@@ -72,8 +71,12 @@ class tx_feuserregister_command_Edit implements tx_feuserregister_interface_Comm
 					$currentStep->storeData();
 					$currentStep = $stepManager->getPreviousStep();
 					if ($currentStep === null) {
-						$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_StepManager');
-						throw new $exceptionClass('previous step not available', 3100);
+						$exception = t3lib_div::makeInstance(
+							'tx_feuserregister_exception_StepManager',
+							'previous step not available',
+							3100
+						);
+						throw $exception;
 					} else {
 						$currentStep->setValidate(false);
 					}
@@ -85,8 +88,12 @@ class tx_feuserregister_command_Edit implements tx_feuserregister_interface_Comm
 					$currentStep->storeData();
 					$currentStep = $stepManager->getStepByNumber($this->_request->get('step'));
 					if ($currentStep === null) {
-						$exceptionClass = t3lib_div::makeInstanceClassName('tx_feuserregister_exception_StepManager');
-						throw new $exceptionClass('step '.$this->_request->get('step').' not available', 3200);
+						$exception = t3lib_div::makeInstance(
+							'tx_feuserregister_exception_StepManager',
+							'step ' . $this->_request->get('step') . ' not available',
+							3200
+						);
+						throw $exception;
 					} else {
 						$currentStep->setValidate(false);
 					}

@@ -84,15 +84,20 @@ class tx_feuserregister_LocalizationManager {
 	private function __clone() {}
 
 	/**
-	 * returns a LocalizationManager instance
+	 * Returns a LocalizationManager instance
+	 * This method cannot be overridden!
 	 *
 	 * @param	string	local language file path
 	 * @param	array	TypoScript configuration
 	 * @return	tx_feuserregister_LocalizationManager	instance of the localization manager for the given LLL file
 	 */
-	public static function getInstance($localLanguageFile, array $configuration) {
+	final public static function getInstance($localLanguageFile, array $configuration) {
 		if (!isset(self::$instances[$localLanguageFile])) {
-			self::$instances[$localLanguageFile] = new tx_feuserregister_LocalizationManager($localLanguageFile, $configuration);
+			self::$instances[$localLanguageFile] = t3lib_div::makeInstance(
+				'tx_feuserregister_LocalizationManager',
+				$localLanguageFile,
+				$configuration
+			);
 		}
 
 		return self::$instances[$localLanguageFile];

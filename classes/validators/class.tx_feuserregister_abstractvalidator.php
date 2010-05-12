@@ -34,8 +34,7 @@ abstract class tx_feuserregister_AbstractValidator {
 	protected $_value = null;
 	
 	public function __construct() {
-		$className = t3lib_div::makeInstanceClassName('tx_feuserregister_LocalizationManager');
-		$this->_localizationManager = call_user_func(array($className, 'getInstance'),
+		$this->_localizationManager = tx_feuserregister_LocalizationManager::getInstance(
 			'EXT:feuserregister/lang/locallang_validators.xml', 
 			$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']
 		);

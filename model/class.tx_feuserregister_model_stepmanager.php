@@ -47,18 +47,24 @@ class tx_feuserregister_model_StepManager {
 			}
 			switch ($stepName) {
 				case 'preview':
-					$className = t3lib_div::makeInstanceClassName('tx_feuserregister_model_Preview');
-					$this->_steps[$stepName] = new $className($stepName, $stepConfiguration, $mode);
+					$this->_steps[$stepName] = t3lib_div::makeInstance(
+						'tx_feuserregister_model_Preview',
+						$stepName, $stepConfiguration, $mode
+					);
 					$this->_steps[$stepName]->setSteps($this->_steps);
 				break;
 				case 'success':
-					$className = t3lib_div::makeInstanceClassName('tx_feuserregister_model_Success');
-					$this->_steps[$stepName] = new $className($stepName, $stepConfiguration, $mode);
+					$this->_steps[$stepName] = t3lib_div::makeInstance(
+						'tx_feuserregister_model_Success',
+						$stepName, $stepConfiguration, $mode
+					);
 					$this->_steps[$stepName]->setSteps($this->_steps);
 				break;
 				default:
-					$className = t3lib_div::makeInstanceClassName('tx_feuserregister_model_Step');
-					$this->_steps[$stepName] = new $className($stepName, $stepConfiguration, $mode);
+					$this->_steps[$stepName] = t3lib_div::makeInstance(
+						'tx_feuserregister_model_Step',
+						$stepName, $stepConfiguration, $mode
+					);
 				break;
 			}
 		}
