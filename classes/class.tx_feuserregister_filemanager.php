@@ -22,6 +22,10 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+/**
+ * Class to handle file uploads.
+ * Currently only image files are supported.
+ */
 class tx_feuserregister_FileManager {
 	/**
 	 * @var t3lib_basicFileFunctions
@@ -66,7 +70,12 @@ class tx_feuserregister_FileManager {
 		$fileName = NULL;
 		$filesData = $this->request->files('data');
 
-		if (isset($filesData[$fieldName]['name']) && $this->isAllowed($filesData[$fieldName]['name'])) {
+		if (isset($filesData[$fieldName]['name'])) {
+			if (!$this->isAllowedFileExtension($filesData[$fieldName]['name'])
+				|| !$this->isAllowedMimeType($filesData[$fieldName]['tmp_name'])) {
+				return NULL;
+			}
+
 			$destinationFileName = $this->basicFileFunctions->getUniqueName(
 				$this->basicFileFunctions->cleanFileName($filesData[$fieldName]['name']),
 				$destinationFolder
@@ -88,11 +97,44 @@ class tx_feuserregister_FileManager {
 	 * @param string $fileName
 	 * @return boolean
 	 */
-	public function isAllowed($fileName) {
+	protected function isAllowedFileExtension($fileName) {
 		$fileInformation = t3lib_div::split_fileref($fileName);
 		$allowedExtensions = t3lib_div::trimExplode(',', strtolower($GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']), TRUE);
 
 		return ($fileInformation['fileext'] && in_array($fileInformation['fileext'], $allowedExtensions));
+	}
+
+	/**
+	 * Determines whether the MIME type is allowed.
+	 *
+	 * @param string $filePath
+	 * @return boolean
+	 */
+	protected function isAllowedMimeType($filePath) {
+		return (stripos($this->getMimeType($filePath), 'image/') === 0);
+	}
+
+	/**
+	 * Gets the MIME type of a file.
+	 *
+	 * @param string $filePath
+	 * @return string
+	 */
+	protected function getMimeType($filePath) {
+		$mimeType = NULL;
+
+		// Fileinfo is packaged to PHP 5.3 by default:
+		if (function_exists('finfo_file')) {
+			$mimeType = finfo_file(
+				finfo_open(FILEINFO_MIME_TYPE),
+				$filePath
+			);
+		// mime_content_type is packaged to PHP <= 5.2, but deprecated in 5.3:
+		} else {
+			$mimeType = mime_content_type($filePath);
+		}
+
+		return $mimeType;
 	}
 }
 
