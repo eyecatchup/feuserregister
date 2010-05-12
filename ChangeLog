@@ -3,6 +3,7 @@
 	* Fixed bug: Replaced deprecated t3lib_div::makeInstanceClassName() calls
 	* Fixed bug: Check against MIME type on file upload
 	* Added feature: Default TypoScript definition for an avatar field
+	* Fixed bug: Unique validation does not consider disabled user records
 
 2010-05-05  Oliver Hader  <oliver@typo3.org>
 
