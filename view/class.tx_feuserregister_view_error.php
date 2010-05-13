@@ -23,7 +23,7 @@
  ***************************************************************/
 /**
  * $Id$
- */ 
+ */
 
 class tx_feuserregister_view_Error {
 	protected $_configuration = null;
@@ -31,13 +31,13 @@ class tx_feuserregister_view_Error {
 	protected $_marker = array();
 	protected $_model = null;
 	protected $_templateContent = '';
-	
+
 	public function __construct() {
 		$this->_configuration	= tx_feuserregister_Registry::get('tx_feuserregister_configuration');
 		$this->_controller		= tx_feuserregister_Registry::get('tx_feuserregister_controller');
 		$this->_templateContent = $this->_controller->cObj->fileResource($this->_configuration['templates.']['error']);
 	}
-	
+
 	public function setModel(Exception $model) {
 		$this->_model = $model;
 		$exceptionCode = $this->_model->getCode();
@@ -48,19 +48,19 @@ class tx_feuserregister_view_Error {
 			$this->_templateContent = t3lib_parsehtml::getSubpart($this->_templateContent, "###TEMPLATE_ERROR###");
 		}
 	}
-	
+
 	public function render() {
 		$this->_createMarker();
 		return t3lib_parsehtml::substituteMarkerArray($this->_templateContent, $this->_marker, '', 0, 1);
 	}
-	
+
 	protected function _createMarker() {
 		$localizationManager = tx_feuserregister_LocalizationManager::getInstance(
-			'EXT:feuserregister/lang/locallang_fields.xml', 
+			'EXT:feuserregister/lang/locallang_fields.xml',
 			$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']
 		);
 		$this->_marker = $localizationManager->getAllAsMarkerArray();
-		
+	
 		if ($this->_model instanceof Exception) {
 			$this->_marker['###EXCEPTION_MESSAGE###']		= $this->_model->getMessage();
 			$this->_marker['###EXCEPTION_CODE###']			= $this->_model->getCode();

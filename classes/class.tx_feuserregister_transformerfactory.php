@@ -36,7 +36,7 @@ class tx_feuserregister_TransformerFactory {
 	const TRANSFORMER_SALTEDPASSWORDS	= 'saltedpasswords';
 	const TRANSFORMER_TIMESTAMP			= 'timestamp';
 	const TRANSFORMAR_IMAGE				= 'image';
-	
+
 	static public function getTransformer($typ) {
 		switch ($typ) {
 			case self::TRANSFORMER_BR2NL:
@@ -76,7 +76,7 @@ class tx_feuserregister_TransformerFactory {
 		if (!class_exists($transformerClass)) {
 			$classFile = t3lib_extMgm::extPath('feuserregister').'classes/transformer/class.'.strtolower($transformerClass).'.php';
 			if (file_exists($classFile)) {
-				require_once($classFile);	
+				require_once($classFile);
 			}
 			if (!class_exists($transformerClass)) {
 				die ($transformerClass . ' not found!');
@@ -84,7 +84,7 @@ class tx_feuserregister_TransformerFactory {
 		}
 		$class = t3lib_div::makeInstance($transformerClass);
 		return $class;
-	}	
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/feuserregister/classes/class.tx_feuserregister_transformerfactory.php'])	{

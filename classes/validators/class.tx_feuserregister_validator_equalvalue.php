@@ -30,7 +30,7 @@ require_once(PATH_feuserregister . 'classes/validators/class.tx_feuserregister_a
 
 class tx_feuserregister_validator_EqualValue extends tx_feuserregister_AbstractValidator {
 	protected $_name = 'equalValue';
-	
+
 	/**
 	 * @see tx_feuserregister_AbstractValidator::validate()
 	 *

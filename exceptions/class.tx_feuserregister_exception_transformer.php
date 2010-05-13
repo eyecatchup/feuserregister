@@ -27,7 +27,7 @@
 
 class tx_feuserregister_exception_Transformer extends Exception {
 	protected $code	= 4000;
-	
+
 	public function __construct($message = null, $code = 4000) {
 		$this->code = $code;
 		parent::__construct($message, $this->code);

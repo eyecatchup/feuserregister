@@ -31,7 +31,7 @@ class tx_feuserregister_model_StepManager {
 	protected $_stepCounter = 0;
 	protected $_request = null;
 	protected $_configuration = null;
-	
+
 	public function __construct() {
 		$mode 					= tx_feuserregister_Registry::get('tx_feuserregister_mode');
 		$this->_configuration	= tx_feuserregister_Registry::get('tx_feuserregister_configuration');
@@ -39,7 +39,7 @@ class tx_feuserregister_model_StepManager {
 		$this->_stepCounter		= count($stepConfigurations);
 		$this->_request			= t3lib_div::makeInstance('tx_feuserregister_Request');
 		$firstStep				= null;
-		
+	
 		foreach ($stepConfigurations as $stepName => $stepConfiguration) {
 			$stepName = substr($stepName, 0, -1);
 			if ($firstStep === null) {
@@ -74,16 +74,16 @@ class tx_feuserregister_model_StepManager {
 			$this->_currentStep = $firstStep;
 		}
 	}
-	
+
 	/**
 	 * Gets the current step.
 	 *
 	 * @return tx_feuserregister_model_Step
 	 */
 	public function getCurrentStep() {
-		return $this->_steps[$this->_currentStep]; 
+		return $this->_steps[$this->_currentStep];
 	}
-	
+
 	/**
 	 * Gets the next step.
 	 *
@@ -100,7 +100,7 @@ class tx_feuserregister_model_StepManager {
 			}
 		}
 	}
-	
+
 	/**
 	 * Gets the previous step.
 	 *
@@ -115,7 +115,7 @@ class tx_feuserregister_model_StepManager {
 			$lastStep = $step;
 		}
 	}
-	
+
 	public function getStep($stepName) {
 		return $this->_steps[$stepName];
 	}

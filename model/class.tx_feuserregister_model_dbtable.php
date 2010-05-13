@@ -27,17 +27,17 @@
 
 /**
  * tx_feuserregister_model_dbtable
- *  
+ * 
  * @author Frank Naegler
- * @version 
+ * @version
  */
 
 abstract class tx_feuserregister_model_dbtable {
 	protected $_table = '';
-	
+
 	protected $_data = array ();
 	protected $_dataDefinitions = array ();
-	
+
 	public function __construct($uid = null) {
 		$res = $GLOBALS['TYPO3_DB']->sql_query("describe {$this->_table}");
 		if ($GLOBALS['TYPO3_DB']->sql_num_rows($res)) {
@@ -58,7 +58,7 @@ abstract class tx_feuserregister_model_dbtable {
 			$this->_data = $rows[0];
 		}
 	}
-	
+
 	public function select($where) {
 		$rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
 			'*',
@@ -69,33 +69,33 @@ abstract class tx_feuserregister_model_dbtable {
 			$this->_data = $rows[0];
 		}
 	}
-	
+
 	public function set($property, $value) {
 		return $this->__set($property, $value);
 	}
-	
+
 	public function get($property) {
 		return $this->__get($property);
 	}
-	
+
 	public function getAttributes() {
 		return array_keys($this->_data);
 	}
-	
+
 	public function __set($name, $value) {
 		if (array_key_exists($name, $this->_data)) {
 			$this->_data[$name] = $value;
 		}
 		return $this;
 	}
-	
+
 	public function __get($name) {
 		if (array_key_exists($name, $this->_data)) {
 			return $this->_data[$name];
 		}
 		return null;
 	}
-	
+
 	public function save() {
 		if (intval($this->_data['uid'])) {
 			return $this->_doUpdate();
@@ -103,7 +103,7 @@ abstract class tx_feuserregister_model_dbtable {
 			return $this->_doInsert();
 		}
 	}
-	
+
 	protected function _doUpdate() {
 		if (array_key_exists('tstamp', $this->_data)) {
 			$this->_data['tstamp'] = time();
@@ -111,7 +111,7 @@ abstract class tx_feuserregister_model_dbtable {
 		$GLOBALS ['TYPO3_DB']->exec_UPDATEquery($this->_table, 'uid = ' . $this->_data['uid'], $this->_prepareDataForDatabase());
 		return ($GLOBALS ['TYPO3_DB']->sql_affected_rows ());
 	}
-	
+
 	protected function _doInsert() {
 		if (array_key_exists('tstamp', $this->_data)) {
 			$this->_data['tstamp'] = time();

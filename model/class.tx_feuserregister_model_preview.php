@@ -30,18 +30,18 @@ require_once(PATH_feuserregister . 'model/class.tx_feuserregister_model_abstract
 class tx_feuserregister_model_Preview extends tx_feuserregister_model_AbstractStep {
 	protected $_stepName 	= 'preview';
 	protected $_steps		= array();
-	
+
 	public function render() {
 		$fieldMarker	= $this->_getFieldMarker();
 		$labelMarker	= $this->_getLabelmarker();
 		$valueMarker	= $this->_getValueMarker();
 		$globalMarker	= $this->_getGlobalMarker();
 		$lllMarker		= $this->_getLllMarker();
-		
+	
 		$marker = array_merge($fieldMarker, $labelMarker, $valueMarker, $globalMarker, $lllMarker);
 
 		$this->_controller->notifyObservers('renderPreviewAdditionalMarker', array('marker' => &$marker));
-		
+	
 		return t3lib_parsehtml::substituteMarkerArray($this->_templateContent, $marker, '', 0, 1);
 	}
 

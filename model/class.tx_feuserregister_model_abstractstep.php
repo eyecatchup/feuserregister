@@ -50,7 +50,7 @@ abstract class tx_feuserregister_model_AbstractStep {
 			}
 		}
 		$this->_request = t3lib_div::makeInstance('tx_feuserregister_Request');
-		
+	
 		$mode = tx_feuserregister_Registry::get('tx_feuserregister_mode');
 		$template = (strlen($mode)) ? $mode : 'register';
 		$this->_templateContent = $this->_controller->cObj->fileResource($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']['templates.'][$template]);
@@ -139,7 +139,7 @@ abstract class tx_feuserregister_model_AbstractStep {
 
 	protected function _getGlobalMarker() {
 		$marker = array(
-			'###FORM_URL###' 		=> $this->_controller->cObj->typoLink_URL(array('parameter' => $GLOBALS['TSFE']->id)), 
+			'###FORM_URL###' 		=> $this->_controller->cObj->typoLink_URL(array('parameter' => $GLOBALS['TSFE']->id)),
 			'###HIDDEN_FIELDS###' 	=> $this->_getHiddenFields()
 		);
 		$this->_controller->notifyObservers('globalMarker', array(
@@ -148,10 +148,10 @@ abstract class tx_feuserregister_model_AbstractStep {
 		));
 		return $marker;
 	}
-	
+
 	protected function _getLllMarker() {
 		$localizationManager = tx_feuserregister_LocalizationManager::getInstance(
-			'EXT:feuserregister/lang/locallang_fields.xml', 
+			'EXT:feuserregister/lang/locallang_fields.xml',
 			$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']
 		);
 		return $localizationManager->getAllAsMarkerArray();

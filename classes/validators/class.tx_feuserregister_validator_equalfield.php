@@ -30,7 +30,7 @@ require_once(PATH_feuserregister . 'classes/validators/class.tx_feuserregister_a
 
 class tx_feuserregister_validator_EqualField extends tx_feuserregister_AbstractValidator {
 	protected $_name = 'equalField';
-	
+
 	/**
 	 * @see tx_feuserregister_AbstractValidator::validate()
 	 *
@@ -40,9 +40,9 @@ class tx_feuserregister_validator_EqualField extends tx_feuserregister_AbstractV
 		$request = t3lib_div::makeInstance('tx_feuserregister_Request');
 		$requestData = $request->get('data');
 		$this->_errorMessage = str_replace('###FIELDS###', $this->_options['fieldList'], $this->_errorMessage);
-		
+	
 		$fields = t3lib_div::trimExplode(',', $this->_options['fieldList']);
-		
+	
 		$result = true;
 		if (is_array($fields)) {
 			foreach ($fields as $field) {
@@ -56,10 +56,10 @@ class tx_feuserregister_validator_EqualField extends tx_feuserregister_AbstractV
 						$result = false;
 						break;
 					}
-				} 
+				}
 			}
 		}
-		
+	
 		return $result;
 	}
 }

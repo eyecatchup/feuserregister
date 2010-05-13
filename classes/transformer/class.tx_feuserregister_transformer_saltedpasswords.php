@@ -39,7 +39,7 @@ class tx_feuserregister_transformer_Saltedpasswords extends tx_feuserregister_Ab
 		if (t3lib_extMgm::isLoaded('saltedpasswords') && tx_saltedpasswords_div::isUsageEnabled('FE')) {
 			$saltedPasswords = tx_saltedpasswords_salts_factory::getSaltingInstance();
 			$this->_value = $saltedPasswords->getHashedPassword($this->_value);
-		} 
+		}
 		return $this->_value;
 	}
 }

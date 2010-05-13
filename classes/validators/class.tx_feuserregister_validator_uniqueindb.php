@@ -29,7 +29,7 @@ require_once(PATH_feuserregister . 'classes/validators/class.tx_feuserregister_a
 
 class tx_feuserregister_validator_UniqueInDb extends tx_feuserregister_AbstractValidator {
 	protected $_name = 'uniqueInDb';
-	
+
 	/**
 	 * @see tx_feuserregister_AbstractValidator::validate()
 	 *
@@ -39,7 +39,7 @@ class tx_feuserregister_validator_UniqueInDb extends tx_feuserregister_AbstractV
 		$feuserClassName = t3lib_div::makeInstance('tx_feuserregister_model_FeUser');
 		/* @var $pageSelect t3lib_pageSelect */
 		$pageSelect			= t3lib_div::makeInstance('t3lib_pageSelect');
-		
+	
 		$res = $GLOBALS ['TYPO3_DB']->sql_query('describe fe_users');
 		while ($data = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
 			$definitions[$data['Field']] = $data['Type'];
@@ -52,7 +52,7 @@ class tx_feuserregister_validator_UniqueInDb extends tx_feuserregister_AbstractV
 			$this->_fieldname . ' = ' . $value . $enableFields
 		);
 		$result = ($GLOBALS['TYPO3_DB']->sql_num_rows($res) > 0) ? false : true;
-		
+	
 		$currentFeuser = tx_feuserregister_SessionRegistry::get('tx_feuserregister_currentFeuser');
 		if ($currentFeuser instanceof $feuserClassName) {
 			if ($currentFeuser->get($this->_fieldname) === $this->_value) {

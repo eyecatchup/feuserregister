@@ -20,7 +20,7 @@
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/ 
+ ***************************************************************/
 /**
  * $Id$
  */
@@ -55,7 +55,7 @@ class tx_feuserregister_model_Field {
 	protected $_value = '';
 
 	/**
-	 * 
+	 *
 	 * @var tx_feuserregister_model_SessionUser
 	 */
 	protected $_sessionUser;
@@ -69,11 +69,11 @@ class tx_feuserregister_model_Field {
 		$this->_fieldName = $fieldname;
 		$this->_configuration = tx_feuserregister_Registry::get('tx_feuserregister_configuration');
 		$this->_fieldConfiguration = $this->_configuration['fields.'][$fieldname.'.'];
-		
+	
 		$this->_controller = tx_feuserregister_Registry::get('tx_feuserregister_controller');
-		
+	
 		$this->_localizationManager = tx_feuserregister_LocalizationManager::getInstance(
-			'EXT:feuserregister/lang/locallang_fields.xml', 
+			'EXT:feuserregister/lang/locallang_fields.xml',
 			$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']
 		);
 		$this->_request = t3lib_div::makeInstance('tx_feuserregister_Request');
@@ -83,7 +83,7 @@ class tx_feuserregister_model_Field {
 		}
 		$this->determineValue();
 		$this->_controller->notifyObservers('afterInitFieldValue', array('field' => &$this));
-		
+	
 			// init validators
 		$validators = $this->_fieldConfiguration['validators'];
 		if (strlen($validators)) {
@@ -118,7 +118,7 @@ class tx_feuserregister_model_Field {
 				$this->_databaseTransformers[] = $transformerObject;
 			}
 		}
-		
+	
 		$htmlTransformers = $this->_fieldConfiguration['transformers.']['html'];
 		if (strlen($htmlTransformers)) {
 			$htmlTransformers = t3lib_div::trimExplode(',', $htmlTransformers);
@@ -133,7 +133,7 @@ class tx_feuserregister_model_Field {
 				$this->_htmlTransformers[] = $transformerObject;
 			}
 		}
-		
+	
 		switch ($this->_fieldConfiguration['type']) {
 			case self::TYPE_HIDDEN:
 				$this->_createHiddenField();
@@ -206,7 +206,7 @@ class tx_feuserregister_model_Field {
 		}
 		return $this->_errorString;
 	}
-	
+
 	public function getField() {
 		$wrapConfig = (isset($this->_fieldConfiguration['fieldWrap.'])) ? $this->_fieldConfiguration['fieldWrap.'] : $this->_configuration['defaultWraps.']['fields.'];
 		if (is_array($wrapConfig)) {
@@ -214,11 +214,11 @@ class tx_feuserregister_model_Field {
 		}
 		return $this->_htmlField;
 	}
-	
+
 	public function getFieldName() {
 		return $this->_fieldName;
 	}
-	
+
 	public function getLabel() {
 		$label = '';
 		if ($this->_fieldConfiguration['type'] == 'TCA') {
@@ -226,11 +226,11 @@ class tx_feuserregister_model_Field {
 		} else {
 			$label = $this->_localizationManager->getLL('label_field_'.$this->_fieldName);
 		}
-		
+	
 		if ($this->_configuration['global.']['useRequiredStringInLabel']) {
 			$label .= ' ' . $this->getRequiredString();
 		}
-		
+	
 		$wrapConfig = (isset($this->_fieldConfiguration['labelWrap.'])) ? $this->_fieldConfiguration['labelWrap.'] : $this->_configuration['defaultWraps.']['label.'];
 		if (is_array($wrapConfig)) {
 			$label = $this->_controller->cObj->stdWrap($label, $wrapConfig);
@@ -238,11 +238,11 @@ class tx_feuserregister_model_Field {
 		$label = str_replace('###FIELDNAME###', $this->_fieldName, $label);
 		return $label;
 	}
-	
+
 	public function getRequiredString() {
 		return ($this->_isRequired) ? $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']['global.']['requiredString'] : '';
 	}
-	
+
 	public function getValue($format = null) {
 		switch ($format) {
 			case self::PARSE_DATEBASE:
@@ -269,7 +269,7 @@ class tx_feuserregister_model_Field {
 		}
 		return $value;
 	}
-	
+
 	public function setErrorString($errorString) {
 		return $this->_errorString = $errorString;
 	}
@@ -277,7 +277,7 @@ class tx_feuserregister_model_Field {
 	public function setValue($value) {
 		$this->_value = $value;
 	}
-	
+
 	public function validate() {
 		$this->_isValid = true;
 		if (count($this->_validators)) {
@@ -293,7 +293,7 @@ class tx_feuserregister_model_Field {
 		}
 		return $this->_isValid;
 	}
-	
+
 	protected function _createHiddenField() {
 		$value = $this->getValue(self::PARSE_HTML);
 		$attributes = array();
@@ -304,10 +304,10 @@ class tx_feuserregister_model_Field {
 		if ($this->_fieldConfiguration['additionalAttributes']) {
 			$attributes[] = $this->_fieldConfiguration['additionalAttributes'];
 		}
-		
+	
 		$this->_htmlField = '<input '.implode(' ', $attributes).'/>';
 	}
-	
+
 	protected function _createStaticInfoTablesField() {
 		if (t3lib_extMgm::isLoaded('static_info_tables')) {
 			require_once(t3lib_extMgm::extPath('static_info_tables').'pi1/class.tx_staticinfotables_pi1.php');
@@ -315,7 +315,7 @@ class tx_feuserregister_model_Field {
 			if ($staticInfoObj->needsInit()){
 				$staticInfoObj->init();
 			}
-			
+		
 			switch ($this->_fieldConfiguration['staticType']) {
 				case 'LANGUAGES':
 					$this->_htmlField = $staticInfoObj->buildStaticInfoSelector('LANGUAGES', "tx_feuserregister[data][{$this->_fieldName}]", $this->_fieldConfiguration['CSSClassName'], array(), '', $this->_fieldConfiguration['submitFlag'], "tx-feuserregister-field-{$this->_fieldName}", $this->_fieldConfiguration['title']);
@@ -332,8 +332,8 @@ class tx_feuserregister_model_Field {
 				break;
 			}
 			$value = $this->getValue(self::PARSE_HTML);
-			
-			
+		
+		
 		} else {
 			$exception = t3lib_div::makeInstance(
 				'tx_feuserregister_exception_Field',
@@ -343,7 +343,7 @@ class tx_feuserregister_model_Field {
 			throw $exception;
 		}
 	}
-	
+
 	protected function _createTextField() {
 		$value = $this->getValue(self::PARSE_HTML);
 		$attributes = array();
@@ -357,10 +357,10 @@ class tx_feuserregister_model_Field {
 		if ($this->_fieldConfiguration['additionalAttributes']) {
 			$attributes[] = $this->_fieldConfiguration['additionalAttributes'];
 		}
-		
+	
 		$this->_htmlField = '<input '.implode(' ', $attributes).'/>';
 	}
-	
+
 	protected function _createPasswordField() {
 		$value = $this->getValue(self::PARSE_HTML);
 		$attributes = array();
@@ -373,10 +373,10 @@ class tx_feuserregister_model_Field {
 		if ($this->_fieldConfiguration['additionalAttributes']) {
 			$attributes[] = $this->_fieldConfiguration['additionalAttributes'];
 		}
-		
+	
 		$this->_htmlField = '<input '.implode(' ', $attributes).'/>';
 	}
-	
+
 	protected function _createTextareaField() {
 		$value = $this->getValue(self::PARSE_HTML);
 		$attributes = array();
@@ -388,20 +388,20 @@ class tx_feuserregister_model_Field {
 		if ($this->_fieldConfiguration['additionalAttributes']) {
 			$attributes[] = $this->_fieldConfiguration['additionalAttributes'];
 		}
-		
+	
 		$this->_htmlField = '<textarea '.implode(' ', $attributes).'>'.$value.'</textarea>';
 	}
-	
+
 	protected function _createTCAField() {
 		$GLOBALS['TSFE']->includeTCA();
 		$fieldConfig = $GLOBALS['TCA']['fe_users']['columns'][$this->_fieldName];
-		
+	
 		$requestData	= $this->_request->get('data');
-		
+	
 		if ($fieldConfig['config']['type'] == 'check' && !isset($requestData[$this->_fieldName])) {
 			$this->_value = '';
 		}
-		
+	
 		$this->_tcaField = tx_feuserregister_TcaFieldFactory::getTcaField($fieldConfig['config']['type']);
 		$this->_tcaField->setConfiguration($fieldConfig);
 		$this->_tcaField->setFieldConfiguration($this->_fieldConfiguration);
@@ -424,7 +424,7 @@ class tx_feuserregister_model_Field {
 		if ($this->_fieldConfiguration['additionalAttributes']) {
 			$attributes[] = $this->_fieldConfiguration['additionalAttributes'];
 		}
-		
+	
 		$this->_htmlField = '<input '.implode(' ', $attributes).'/>';
 	}
 
@@ -463,7 +463,7 @@ class tx_feuserregister_model_Field {
 		}
 		return $value;
 	}
-		
+	
 	protected function _prepareForHtml() {
 		$value = $this->_value;
 		switch ($this->_fieldConfiguration['type']) {

@@ -28,7 +28,7 @@ require_once(PATH_feuserregister . 'interfaces/interface.tx_feuserregister_inter
 
 class tx_feuserregister_command_Edit implements tx_feuserregister_interface_Command {
 	const MODE = 'edit';
-	
+
 	protected $_controller = null;
 	protected $_request = null;
 
@@ -54,7 +54,7 @@ class tx_feuserregister_command_Edit implements tx_feuserregister_interface_Comm
 
 		tx_feuserregister_Registry::set('tx_feuserregister_mode', self::MODE);
 	}
-	
+
 	/**
 	 * @see tx_feuserregister_interface_Command::execute()
 	 *

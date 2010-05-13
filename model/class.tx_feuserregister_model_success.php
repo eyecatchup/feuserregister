@@ -28,20 +28,20 @@
 require_once(PATH_feuserregister . 'model/class.tx_feuserregister_model_abstractstep.php');
 
 class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractStep {
-	
+
 	public function render() {
 		$this->_configuration = tx_feuserregister_Registry::get('tx_feuserregister_configuration');
-		
+	
 		$fieldMarker	= $this->_getFieldMarker();
 		$labelMarker	= $this->_getLabelmarker();
 		$valueMarker	= $this->_getValueMarker();
 		$globalMarker	= $this->_getGlobalMarker();
 		$lllMarker		= $this->_getLllMarker();
-		
+	
 		$marker = array_merge($fieldMarker, $labelMarker, $valueMarker, $globalMarker, $lllMarker);
 
 		$this->_controller->notifyObservers('renderSuccessAdditionalMarker', array('marker' => &$marker));
-		
+	
 		$allFields = array();
 		foreach ($this->_steps as $step) {
 			$fields = $step->getFields();
@@ -49,10 +49,10 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 				$allFields[] = $field;
 			}
 		}
-		
+	
 		$reloadHash_session = tx_feuserregister_SessionRegistry::get('tx_feuserregister_reloadhash');
 		$reloadHash = md5(serialize($allFields));
-		
+	
 		if ($reloadHash_session === null || $reloadHash !== $reloadHash_session) {
 			$mode = tx_feuserregister_Registry::get('tx_feuserregister_mode');
 			if ($mode === 'edit') {
@@ -66,7 +66,7 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 			throw $exception;
 		}
 	}
-	
+
 	protected function _processEdit($allFields, $marker, $reloadHash) {
 		/* @var $feuser tx_feuserregister_model_FeUser */
 		$feuser = tx_feuserregister_SessionRegistry::get('tx_feuserregister_feuser');
@@ -150,9 +150,9 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 			}
 			$feuser->set($field->getFieldName(), $field->getValue(tx_feuserregister_model_Field::PARSE_DATEBASE));
 		}
-		
+	
 		$this->_controller->notifyObservers('onRegisterBeforeSave', array('feuser' => &$feuser, 'allFields' => $allFields));
-			
+		
 		if ($this->_configuration['global.']['emailConfirmation'] || $this->_configuration['global.']['userEmail.']['onRegister']) {
 			$controller = tx_feuserregister_Registry::get('tx_feuserregister_controller');
 			$marker['###CONFIRMATION_URL###'] = t3lib_div::makeRedirectUrl(
@@ -210,10 +210,10 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 		}
 		return $marker;
 	}
-	
+
 	protected function _getGlobalMarker() {
 		$marker = array(
-			'###FORM_URL###' 		=> $this->_controller->cObj->typoLink_URL(array('parameter' => $GLOBALS['TSFE']->id)),	
+			'###FORM_URL###' 		=> $this->_controller->cObj->typoLink_URL(array('parameter' => $GLOBALS['TSFE']->id)),
 			'###HIDDEN_FIELDS###'		=> $this->_getHiddenFields()
 		);
 		return $marker;

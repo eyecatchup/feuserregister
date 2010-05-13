@@ -32,14 +32,14 @@ abstract class tx_feuserregister_AbstractValidator {
 	protected $_name = '';
 	protected $_options = array();
 	protected $_value = null;
-	
+
 	public function __construct() {
 		$this->_localizationManager = tx_feuserregister_LocalizationManager::getInstance(
-			'EXT:feuserregister/lang/locallang_validators.xml', 
+			'EXT:feuserregister/lang/locallang_validators.xml',
 			$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']
 		);
 	}
-	
+
 	/**
 	 * get the error message for wrong validation
 	 *
@@ -48,7 +48,7 @@ abstract class tx_feuserregister_AbstractValidator {
 	public function getErrorMessage() {
 		return $this->_errorMessage;
 	}
-	
+
 	/**
 	 * get the name of the validator
 	 *
@@ -57,7 +57,7 @@ abstract class tx_feuserregister_AbstractValidator {
 	public function getName() {
 		return $this->_name;
 	}
-	
+
 	/**
 	 * set array of options for the validator
 	 *
@@ -67,7 +67,7 @@ abstract class tx_feuserregister_AbstractValidator {
 		$this->_fieldname = $fieldname;
 		$this->_updateErrorMessage();
 	}
-	
+
 	/**
 	 * set array of options for the validator
 	 *
@@ -76,7 +76,7 @@ abstract class tx_feuserregister_AbstractValidator {
 	public function setOptions(array $options) {
 		$this->_options = $options;
 	}
-	
+
 	/**
 	 * set the value to validate
 	 *
@@ -85,7 +85,7 @@ abstract class tx_feuserregister_AbstractValidator {
 	public function setValue($value) {
 		$this->_value = $value;
 	}
-	
+
 	protected function _updateErrorMessage() {
 		$fieldname = ($this->_fieldname) ? '_'.$this->_fieldname : '';
 		$this->_errorMessage = $this->_localizationManager->getLL('error_validator_'.$this->_name.$fieldname);
@@ -93,14 +93,14 @@ abstract class tx_feuserregister_AbstractValidator {
 			$this->_errorMessage = $this->_localizationManager->getLL('error_validator_'.$this->_name);
 		}
 	}
-	
+
 	/**
 	 * abstract method for validation, you have to implement this function in your own class
-	 * @abstract 
+	 * @abstract
 	 * @return boolean
 	 */
 	abstract public function validate();
-	
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/feuserregister/classes/validators/class.tx_feuserregister_abstractvalidator.php'])	{

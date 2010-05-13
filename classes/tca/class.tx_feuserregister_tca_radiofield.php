@@ -48,13 +48,13 @@ class tx_feuserregister_tca_RadioField extends tx_feuserregister_AbstractTcaFiel
 			} else {
 				unset($this->_attributes['checked']);
 			}
-			
+		
 			$elements[] = "<input{$this->_getAttributesString()} /> <label for=\"{$this->_attributes['id']}\">{$label}</label>";
 			$this->_attributes['id'] = $id;
 		}
 		return implode(' ', $elements);
 	}
-	
+
 	protected function _prepareForDatabase() {
 		return $this->_value;
 	}

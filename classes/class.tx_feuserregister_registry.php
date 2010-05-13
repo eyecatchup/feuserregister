@@ -27,13 +27,13 @@
 
 class tx_feuserregister_Registry {
 	protected static $_registry = array();
-	
+
 	protected function __construct() {
 	}
-	
+
 	private function __clone() {
 	}
-	
+
 	/**
 	 * getter method.
 	 *

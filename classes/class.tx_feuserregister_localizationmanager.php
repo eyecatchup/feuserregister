@@ -201,7 +201,7 @@ class tx_feuserregister_LocalizationManager {
 		} else {
 			$word = $this->alternativeLocalLanguageTestPrefix . $alternativeLabel;
 		}
-	
+
 		$output = $this->localLanguageTestPrefix . $word;
 
 		if ($hsc) {
@@ -209,7 +209,7 @@ class tx_feuserregister_LocalizationManager {
 		}
 		return $output;
 	}
-	
+
 	public function getAllAsMarkerArray() {
 		$marker = array();
 		$languages = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']['_LOCAL_LANG.'];

@@ -28,7 +28,7 @@
 class tx_feuserregister_CommandResolver {
 	protected $_path;
 	protected $_request;
-	
+
 	public function __construct() {
 		$this->_path			= PATH_feuserregister . 'classes/commands';
 		$this->_request			= t3lib_div::makeInstance('tx_feuserregister_Request');
@@ -54,7 +54,7 @@ class tx_feuserregister_CommandResolver {
 				$cmdName = '';
 			break;
 		}
-		
+	
 		if (strlen($cmdName) == 0) {
 			$flexform = tx_feuserregister_Registry::get('tx_feuserregister_flexform');
 			switch ($flexform['modus']) {

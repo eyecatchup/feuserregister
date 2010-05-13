@@ -27,27 +27,27 @@
 
 /**
  * tx_feuserregister_model_feuser
- *  
+ * 
  * @author frank
- * @version 
+ * @version
  */
 
 class tx_feuserregister_model_SessionUser {
 	protected $_data = array();
-	
+
 	public function __construct() {
 		$data = tx_feuserregister_SessionRegistry::get('tx_feuserregister_sessionuser');
 		$this->_data = (is_array($data)) ? $data : array();
 	}
-	
+
 	public function get($key) {
 		return $this->_data[$key];
 	}
-		
+	
 	public function set($key, $value) {
 		$this->_data[$key] = $value;
 	}
-	
+
 	public function storeData() {
 		tx_feuserregister_SessionRegistry::set('tx_feuserregister_sessionuser', $this->_data);
 	}

@@ -27,7 +27,7 @@
 
 class tx_feuserregister_SessionRegistry extends tx_feuserregister_Registry {
 	const SESSION_SPACE = 'ses';
-	
+
 	/**
 	 * getter method.
 	 *

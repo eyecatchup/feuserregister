@@ -28,17 +28,17 @@
 abstract class tx_feuserregister_AbstractTcaField {
 	const PARSE_DATABASE	= 'database';
 	const PARSE_HTML		= 'html';
-	
+
 	protected $_attributes = array();
 	protected $_configuration = array();
 	protected $_fieldConfiguration = array();
 	protected $_fieldName = '';
 	protected $_transformers = array();
 	protected $_value = '';
-	
+
 	public function __construct() {
 	}
-	
+
 	/**
 	 * get the tca field label
 	 *
@@ -47,7 +47,7 @@ abstract class tx_feuserregister_AbstractTcaField {
 	public function getLabel() {
 		return $this->_getLllValue($this->_configuration['label']);
 	}
-	
+
 	public function getValue($format = null) {
 		switch ($format) {
 			case self::PARSE_DATABASE:
@@ -64,7 +64,7 @@ abstract class tx_feuserregister_AbstractTcaField {
 		}
 		return $value;
 	}
-	
+
 	/**
 	 * set array of config the tca field
 	 *
@@ -73,7 +73,7 @@ abstract class tx_feuserregister_AbstractTcaField {
 	public function setConfiguration(array $configuration) {
 		$this->_configuration = $configuration;
 	}
-	
+
 	/**
 	 * set array of field config
 	 *
@@ -85,7 +85,7 @@ abstract class tx_feuserregister_AbstractTcaField {
 			$this->_attributes['__STRING__'] = $fieldConfiguration['additionalAttributes'];
 		}
 	}
-	
+
 	/**
 	 * set array of transformers
 	 *
@@ -95,7 +95,7 @@ abstract class tx_feuserregister_AbstractTcaField {
 	public function setTransformers(array $transformers, $type) {
 		$this->_transformers[$type] = $transformers;
 	}
-	
+
 	/**
 	 * set fieldname
 	 *
@@ -106,7 +106,7 @@ abstract class tx_feuserregister_AbstractTcaField {
 		$this->_attributes['name'] = "tx_feuserregister[data][{$this->_fieldName}]";
 		$this->_attributes['id'] = "tx-feuserregister-field-{$this->_fieldName}";
 	}
-	
+
 	/**
 	 * set value
 	 *
@@ -115,7 +115,7 @@ abstract class tx_feuserregister_AbstractTcaField {
 	public function setValue($value) {
 		$this->_value = $value;
 	}
-	
+
 	protected function _getLllValue($key) {
 		$controller = tx_feuserregister_Registry::get('tx_feuserregister_controller');
 		$keyParts = explode(':', $key);
@@ -129,7 +129,7 @@ abstract class tx_feuserregister_AbstractTcaField {
 		}
 		return $key;
 	}
-	
+
 	protected function _getAttributesString() {
 		$attributeString = '';
 		foreach ($this->_attributes as $attribute => $value) {
@@ -141,7 +141,7 @@ abstract class tx_feuserregister_AbstractTcaField {
 		}
 		return $attributeString;
 	}
-	
+
 	protected function _processTransformers($value, $type) {
 		if (is_array($this->_transformers[$type])) {
 			if (count($this->_transformers[$type])) {
@@ -153,24 +153,24 @@ abstract class tx_feuserregister_AbstractTcaField {
 		}
 		return $value;
 	}
-	
+
 	/**
 	 * abstract method for validation, you have to implement this function in your own class
-	 * @abstract 
+	 * @abstract
 	 * @return string the html field
 	 */
 	abstract public function getHtmlField();
 
 	/**
 	 * abstract method for preapring $this->_value for the database
-	 * @abstract 
+	 * @abstract
 	 * @return mixed the database value
 	 */
 	abstract protected function _prepareForDatabase();
 
 	/**
 	 * abstract method for preapring $this->_value for the html output
-	 * @abstract 
+	 * @abstract
 	 * @return mixed the for html output prepared value
 	 */
 	abstract protected function _prepareForHtml();

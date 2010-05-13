@@ -37,7 +37,7 @@ class tx_feuserregister_tca_SelectField extends tx_feuserregister_AbstractTcaFie
 			$this->_attributes['multiple'] = 'multiple';
 			$this->_attributes['name'] = $this->_attributes['name'] . '[]';
 		}
-		
+	
 		$htmlOptions = array();
 		if (is_array($this->_configuration['config']['items'])) {
 			foreach ($this->_configuration['config']['items'] as $option) {
@@ -61,11 +61,11 @@ class tx_feuserregister_tca_SelectField extends tx_feuserregister_AbstractTcaFie
 			}
 		}
 		$htmlOptions = implode("\n", $htmlOptions);
-		
+	
 		$element = "<select{$this->_getAttributesString()}>\n{$htmlOptions}</select>";
 		return $element;
 	}
-	
+
 	protected function _prepareForDatabase() {
 		return (is_array($this->_value)) ? implode(',', $this->_value) : $this->_value;
 	}

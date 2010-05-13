@@ -39,11 +39,11 @@ class tx_feuserregister_tca_InputField extends tx_feuserregister_AbstractTcaFiel
 			$classes = str_replace(',', ' ', $this->_configuration['config']['eval']);
 			$this->_attributes['class'] = $classes;
 		}
-		
+	
 		$element = "<input{$this->_getAttributesString()} />";
 		return $element;
 	}
-	
+
 	protected function _prepareForDatabase() {
 		return $this->_value;
 	}

@@ -27,7 +27,7 @@
 
 class tx_feuserregister_exception_Confirm extends Exception {
 	protected $code	= 2000;
-	
+
 	public function __construct($message = null, $code = 2000) {
 		$this->code = $code;
 		parent::__construct($message, $this->code);

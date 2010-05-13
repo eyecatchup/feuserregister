@@ -39,12 +39,12 @@ class tx_feuserregister_tca_TextField extends tx_feuserregister_AbstractTcaField
 		if ($this->_configuration['config']['wrap'] == 'off') {
 			$this->_attributes['wrap'] = 'off';
 		}
-		
+	
 		$value = $this->getValue(self::PARSE_HTML);
 		$element = "<textarea{$this->_getAttributesString()}>{$value}</textarea>";
 		return $element;
 	}
-	
+
 	protected function _prepareForDatabase() {
 		return $this->_value;
 	}

@@ -66,14 +66,14 @@ require_once(PATH_feuserregister . 'view/class.tx_feuserregister_view_error.php'
  */
 class tx_feuserregister_controller_UserRegistration extends tslib_pibase implements tx_feuserregister_interface_Observable  {
 	protected $_observers = array();
-	
+
 	public $prefixId      = 'tx_feuserregister_controller_UserRegistration';		// Same as class name
 	public $scriptRelPath = 'controller/class.tx_feuserregister_controller_userregistration.php';	// Path to this script relative to the extension dir.
 	public $extKey        = 'feuserregister';	// The extension key.
 
 	public $configuration;
 	public $flexform;
-	
+
 	/**
 	 * constructor for class tx_feuserregister_controller_UserRegistration
 	 */
@@ -96,14 +96,14 @@ class tx_feuserregister_controller_UserRegistration extends tslib_pibase impleme
 		);
 			// we need this public $conf array for the locallang functions
 		$this->conf = $this->configuration;
-		
+	
 		$this->tslib_pibase();
 		$this->pi_setPiVarDefaults();
 		$this->pi_USER_INT_obj = 1; // Configuring so caching is not expected. This value means that no cHash params are ever set. We do this, because it's a USER_INT object!
 		$this->pi_initPIflexForm();
 		$this->pi_loadLL();
-		
-		
+	
+	
 		$piFlexForm = $this->cObj->data['pi_flexform'];
 		foreach ( $piFlexForm['data'] as $sheet => $data ) {
 			foreach ( $data as $lang => $value ) {
@@ -127,9 +127,9 @@ class tx_feuserregister_controller_UserRegistration extends tslib_pibase impleme
 			$commandResolver = t3lib_div::makeInstance('tx_feuserregister_CommandResolver');
 			$command = $commandResolver->getCommand();
 
-			$content = $command->execute();			
+			$content = $command->execute();		
 			return $this->pi_wrapInBaseClass($content);
-		
+	
 		} catch (tx_feuserregister_exception_Confirm $exception) {
 			$viewName = 'tx_feuserregister_view_Error';
 			$model = $exception;
@@ -155,7 +155,7 @@ class tx_feuserregister_controller_UserRegistration extends tslib_pibase impleme
 		$view->setModel($model);
 		return $view->render();
 	}
-	
+
 	/**
 	 * @see tx_feuserregister_interface_Observable::attachObserver()
 	 *
@@ -164,7 +164,7 @@ class tx_feuserregister_controller_UserRegistration extends tslib_pibase impleme
 	public function attachObserver(tx_feuserregister_interface_Observer $observer) {
 		$this->_observers[] = $observer;
 	}
-	
+
 	/**
 	 * @see tx_feuserregister_interface_Observable::detachObserver()
 	 *
@@ -173,7 +173,7 @@ class tx_feuserregister_controller_UserRegistration extends tslib_pibase impleme
 	public function detachObserver(tx_feuserregister_interface_Observer $observer) {
 		$this->_observers = array_diff($this->_observers, array($observer));
 	}
-	
+
 	/**
 	 * @see tx_feuserregister_interface_Observable::notifyObservers()
 	 *

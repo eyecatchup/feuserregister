@@ -41,9 +41,9 @@ class tx_feuserregister_userregistration_wizicon {
 	 */
 	function proc($wizardItems) {
 		global $LANG;
-		
+	
 		$LL = $this->includeLocalLang();
-		
+	
 		$tmpWizardItems = array();
 		foreach ($wizardItems as $wizardId => $wizardConfig) {
 			$tmpWizardItems[$wizardId] = $wizardConfig;
@@ -56,7 +56,7 @@ class tx_feuserregister_userregistration_wizicon {
 				);
 			}
 		}
-		
+	
 		return $tmpWizardItems;
 	}
 
@@ -68,7 +68,7 @@ class tx_feuserregister_userregistration_wizicon {
 	function includeLocalLang() {
 		$llFile = t3lib_extMgm::extPath('feuserregister') . 'lang/locallang_db.xml';
 		$LOCAL_LANG = t3lib_div::readLLXMLfile($llFile, $GLOBALS['LANG']->lang);
-		
+	
 		return $LOCAL_LANG;
 	}
 }

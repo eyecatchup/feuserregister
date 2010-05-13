@@ -49,7 +49,7 @@ class tx_feuserregister_tca_CheckboxField extends tx_feuserregister_AbstractTcaF
 				} else {
 					unset($this->_attributes['checked']);
 				}
-				
+			
 				$elements[] = "<input{$this->_getAttributesString()} /> <label for=\"{$this->_attributes['id']}\">{$label}</label>";
 				$this->_attributes['id'] = $id;
 			}
@@ -65,7 +65,7 @@ class tx_feuserregister_tca_CheckboxField extends tx_feuserregister_AbstractTcaF
 			return $element;
 		}
 	}
-	
+
 	protected function _prepareForDatabase() {
 		return $this->_value;
 	}

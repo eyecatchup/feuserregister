@@ -27,7 +27,7 @@
 
 class tx_feuserregister_exception_Field extends Exception {
 	protected $code	= 6000;
-	
+
 	public function __construct($message = null, $code = 6000) {
 		$this->code = $code;
 		parent::__construct($message, $this->code);

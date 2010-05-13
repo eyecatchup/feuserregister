@@ -28,7 +28,7 @@ require_once(PATH_feuserregister . 'interfaces/interface.tx_feuserregister_inter
 
 class tx_feuserregister_command_Register implements tx_feuserregister_interface_Command {
 	const MODE = 'register';
-	
+
 	protected $_controller = null;
 	protected $_request = null;
 
@@ -37,7 +37,7 @@ class tx_feuserregister_command_Register implements tx_feuserregister_interface_
 		$this->_controller = tx_feuserregister_Registry::get('tx_feuserregister_controller');
 		tx_feuserregister_Registry::set('tx_feuserregister_mode', self::MODE);
 	}
-	
+
 	/**
 	 * @see tx_feuserregister_interface_Command::execute()
 	 *

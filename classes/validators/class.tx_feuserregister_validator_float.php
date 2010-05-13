@@ -29,7 +29,7 @@ require_once (PATH_feuserregister . 'classes/validators/class.tx_feuserregister_
 
 class tx_feuserregister_validator_Float extends tx_feuserregister_AbstractValidator {
 	protected $_name = 'float';
-	
+
 	/**
 	 * @see tx_feuserregister_AbstractValidator::validate()
 	 *

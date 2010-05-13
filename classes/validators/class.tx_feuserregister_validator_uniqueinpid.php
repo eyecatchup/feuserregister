@@ -29,7 +29,7 @@ require_once(PATH_feuserregister . 'classes/validators/class.tx_feuserregister_a
 
 class tx_feuserregister_validator_UniqueInPid extends tx_feuserregister_AbstractValidator {
 	protected $_name = 'uniqueInPid';
-	
+
 	/**
 	 * @see tx_feuserregister_AbstractValidator::validate()
 	 *
@@ -38,7 +38,7 @@ class tx_feuserregister_validator_UniqueInPid extends tx_feuserregister_Abstract
 	public function validate() {
 		$feuserClassName	= t3lib_div::makeInstance('tx_feuserregister_model_FeUser');
 		$pageSelect			= t3lib_div::makeInstance('t3lib_pageSelect');
-		
+	
 		$res = $GLOBALS ['TYPO3_DB']->sql_query('describe fe_users');
 		while ($data = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
 			$definitions[$data['Field']] = $data['Type'];

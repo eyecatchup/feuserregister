@@ -38,7 +38,7 @@ class tx_feuserregister_validator_Length extends tx_feuserregister_AbstractValid
 	public function validate() {
 		$this->_errorMessage = str_replace('###MIN###', $this->_options['min'], $this->_errorMessage);
 		$this->_errorMessage = str_replace('###MAX###', $this->_options['max'], $this->_errorMessage);
-		
+	
 		if ($this->_options['min'] && $this->_options['max']) {
 			return (strlen($this->_value) >= $this->_options['min'] && strlen($this->_value) <= $this->_options['max']) ? true : false;
 		}

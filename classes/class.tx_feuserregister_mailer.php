@@ -34,7 +34,7 @@
  * @subpackage feuserregister
  */
 class tx_feuserregister_Mailer {
-	
+
 	static function send($to, $event, array $marker) {
 		$controller = tx_feuserregister_Registry::get('tx_feuserregister_controller');
 		$cancel = $controller->notifyObservers('onSendMail', array(
@@ -49,17 +49,17 @@ class tx_feuserregister_Mailer {
 		}
 
 		$localizationManager = tx_feuserregister_LocalizationManager::getInstance(
-			'EXT:feuserregister/lang/locallang_emails.xml', 
+			'EXT:feuserregister/lang/locallang_emails.xml',
 			$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']
 		);
 		$subject	= $localizationManager->getLL("email_{$to}_{$event}_subject");
-		
+	
 		$bodytext = $controller->cObj->fileResource($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']['templates.']['mails']);
-		
+	
 		$templatePrefix = strtoupper("TEMPLATE_{$to}_{$event}");
 		$bodytextHtml  = t3lib_parsehtml::getSubpart($bodytext, "###{$templatePrefix}_HTML###");
 		$bodytextPlain = t3lib_parsehtml::getSubpart($bodytext, "###{$templatePrefix}_PLAIN###");
-		
+	
 		$subject		= t3lib_parsehtml::substituteMarkerArray($subject, $marker, '', 0, 1);
 		$bodytextHtml	= t3lib_parsehtml::substituteMarkerArray($bodytextHtml, $marker, '', 0, 1);
 		$bodytextPlain	= t3lib_parsehtml::substituteMarkerArray($bodytextPlain, $marker, '', 0, 1);
@@ -72,7 +72,7 @@ class tx_feuserregister_Mailer {
 		$fromEmail	= $mailConfiguration['sender.']['email'];
 
 		$mail = t3lib_div::makeInstance('t3lib_htmlmail');
-		
+	
 		$mail->start();
 		$mail->mailer = 'TYPO3 Mailer :: feuserregister';
 		$mail->subject = $subject;
@@ -82,7 +82,7 @@ class tx_feuserregister_Mailer {
 		$mail->replyto_email = $fromEmail;
 		$mail->replyto_name = $fromName;
 		$mail->priority = 3;
-		
+	
 		if (trim($bodytextHtml)) {
 			$mail->theParts['html']['content'] = $bodytextHtml;
 			$mail->theParts['html']['path'] = '';

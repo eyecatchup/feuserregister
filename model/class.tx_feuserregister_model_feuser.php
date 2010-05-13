@@ -29,9 +29,9 @@ require_once(PATH_feuserregister . 'model/class.tx_feuserregister_model_dbtable.
 
 /**
  * tx_feuserregister_model_feuser
- *  
+ * 
  * @author frank
- * @version 
+ * @version
  */
 
 class tx_feuserregister_model_FeUser extends tx_feuserregister_model_dbtable {

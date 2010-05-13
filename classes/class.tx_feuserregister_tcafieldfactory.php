@@ -31,7 +31,7 @@ class tx_feuserregister_TcaFieldFactory {
 	const FIELD_RADIO			= 'radio';
 	const FIELD_SELECT			= 'select';
 	const FIELD_TEXT			= 'text';
-	
+
 	static public function getTcaField($type) {
 		switch ($type) {
 			case self::FIELD_CHECK:
@@ -57,7 +57,7 @@ class tx_feuserregister_TcaFieldFactory {
 		if (!class_exists($tcaFieldClass)) {
 			$classFile = t3lib_extMgm::extPath('feuserregister').'classes/tca/class.'.strtolower($tcaFieldClass).'.php';
 			if (file_exists($classFile)) {
-				require_once($classFile);	
+				require_once($classFile);
 			}
 			if (!class_exists($tcaFieldClass)) {
 				die ($tcaFieldClass . ' not found!');
@@ -65,7 +65,7 @@ class tx_feuserregister_TcaFieldFactory {
 		}
 		$class = t3lib_div::makeInstance($tcaFieldClass);
 		return $class;
-	}	
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/feuserregister/classes/class.tx_feuserregister_tcafieldfactory.php'])	{

@@ -1,3 +1,7 @@
+2010-05-13  Oliver Hader  <oliver@typo3.org>
+
+	* Cleanup: Removed whitespaces at end of line
+
 2010-05-12  Oliver Hader  <oliver@typo3.org>
 
 	* Fixed bug: Replaced deprecated t3lib_div::makeInstanceClassName() calls

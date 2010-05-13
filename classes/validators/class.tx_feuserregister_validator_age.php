@@ -38,7 +38,7 @@ class tx_feuserregister_validator_Age extends tx_feuserregister_AbstractValidato
 	public function validate() {
 		$this->_errorMessage = str_replace('###MINAGE###', $this->_options['minAge'], $this->_errorMessage);
 		$this->_errorMessage = str_replace('###MAXAGE###', $this->_options['maxAge'], $this->_errorMessage);
-		
+	
 		$value = $this->_value;
 		if (isset($this->_options['format'])) {
 			$transformer = t3lib_div::makeInstance('tx_feuserregister_transformer_Timestamp');

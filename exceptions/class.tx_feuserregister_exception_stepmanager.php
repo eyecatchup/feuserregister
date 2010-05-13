@@ -27,7 +27,7 @@
 
 class tx_feuserregister_exception_StepManager extends Exception {
 	protected $code	= 3000;
-	
+
 	public function __construct($message = null, $code = 3000) {
 		$this->code = $code;
 		parent::__construct($message, $this->code);

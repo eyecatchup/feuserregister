@@ -36,14 +36,14 @@ class tx_feuserregister_transformer_T3sec_saltedpw extends tx_feuserregister_Abs
 	 * @return mixed
 	 */
 	public function transform() {
-		if (t3lib_extMgm::isLoaded('t3sec_saltedpw')) { 
-			require_once t3lib_extMgm::extPath('t3sec_saltedpw').'res/staticlib/class.tx_t3secsaltedpw_div.php'; 
-			if (tx_t3secsaltedpw_div::isUsageEnabled()) { 
-			require_once t3lib_extMgm::extPath('t3sec_saltedpw').'res/lib/class.tx_t3secsaltedpw_phpass.php'; 
-				$objPHPass = t3lib_div::makeInstance('tx_t3secsaltedpw_phpass'); 
-				$this->_value = $objPHPass->getHashedPassword($this->_value); 
-			} 
-		} 
+		if (t3lib_extMgm::isLoaded('t3sec_saltedpw')) {
+			require_once t3lib_extMgm::extPath('t3sec_saltedpw').'res/staticlib/class.tx_t3secsaltedpw_div.php';
+			if (tx_t3secsaltedpw_div::isUsageEnabled()) {
+			require_once t3lib_extMgm::extPath('t3sec_saltedpw').'res/lib/class.tx_t3secsaltedpw_phpass.php';
+				$objPHPass = t3lib_div::makeInstance('tx_t3secsaltedpw_phpass');
+				$this->_value = $objPHPass->getHashedPassword($this->_value);
+			}
+		}
 		return $this->_value;
 	}
 }

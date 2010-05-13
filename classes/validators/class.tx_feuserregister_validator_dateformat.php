@@ -50,7 +50,7 @@ class tx_feuserregister_validator_Dateformat extends tx_feuserregister_AbstractV
 				return false;
 			}
 			$compareDateString = strftime($this->_options['format'], $timestamp);
-			
+		
 			$dateString = (string) $this->_value;
 			if ($compareDateString === $dateString) {
 				return true;

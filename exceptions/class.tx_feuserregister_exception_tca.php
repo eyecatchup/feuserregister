@@ -27,7 +27,7 @@
 
 class tx_feuserregister_exception_Tca extends Exception {
 	protected $code	= 5000;
-	
+
 	public function __construct($message = null, $code = 5000) {
 		$this->code = $code;
 		parent::__construct($message, $this->code);

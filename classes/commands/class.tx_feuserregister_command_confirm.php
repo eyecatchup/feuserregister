@@ -33,7 +33,7 @@ class tx_feuserregister_command_Confirm implements tx_feuserregister_interface_C
 	protected $_controller = null;
 	protected $_request = null;
 	protected $_templateContent = '';
-	
+
 	public function __construct() {
 		$this->_request = t3lib_div::makeInstance('tx_feuserregister_Request');
 		$this->_configuration = tx_feuserregister_Registry::get('tx_feuserregister_configuration');
@@ -41,11 +41,11 @@ class tx_feuserregister_command_Confirm implements tx_feuserregister_interface_C
 
 		$this->_templateContent = $this->_controller->cObj->fileResource($this->_configuration['templates.']['confirm']);
 		$this->_templateContent = t3lib_parsehtml::getSubpart($this->_templateContent, '###TEMPLATE_SUCCESS###');
-		
+	
 		tx_feuserregister_Registry::set('tx_feuserregister_mode', self::MODE);
 	}
+
 	
-		
 	/**
 	 * @see tx_feuserregister_interface_Command::execute()
 	 *
@@ -119,15 +119,15 @@ class tx_feuserregister_command_Confirm implements tx_feuserregister_interface_C
 		}
 		$this->_controller->notifyObservers('onConfirmEnd');
 	}
-	
+
 	public function getMode() {
 		return self::MODE;
 	}
-	
+
 	protected function _createGlobalMarker() {
 		$marker = array();
 		$localizationManager = tx_feuserregister_LocalizationManager::getInstance(
-			'EXT:feuserregister/lang/locallang_db.xml', 
+			'EXT:feuserregister/lang/locallang_db.xml',
 			$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_feuserregister.']
 		);
 		$marker = $localizationManager->getAllAsMarkerArray();

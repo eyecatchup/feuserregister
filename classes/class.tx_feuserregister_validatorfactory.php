@@ -46,7 +46,7 @@ class tx_feuserregister_ValidatorFactory {
 	const VALIDATOR_UNIQUEINPID	= 'uniqueInPid';
 	const VALIDATOR_URL 		= 'url';
 	const VALIDATOR_FILE		= 'file';
-	
+
 	static public function getValidator($typ) {
 		switch ($typ) {
 			case self::VALIDATOR_AGE:
@@ -116,7 +116,7 @@ class tx_feuserregister_ValidatorFactory {
 		if (!class_exists($validatorClass)) {
 			$classFile = t3lib_extMgm::extPath('feuserregister').'classes/validators/class.'.strtolower($validatorClass).'.php';
 			if (file_exists($classFile)) {
-				require_once($classFile);	
+				require_once($classFile);
 			}
 			if (!class_exists($validatorClass)) {
 				die ($validatorClass . ' not found!');
@@ -124,7 +124,7 @@ class tx_feuserregister_ValidatorFactory {
 		}
 		$class = t3lib_div::makeInstance($validatorClass);
 		return $class;
-	}	
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/feuserregister/classes/class.tx_feuserregister_validatorfactory.php'])	{

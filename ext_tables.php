@@ -5,12 +5,12 @@ if (!defined ('TYPO3_MODE')) {
 
 /**
  * $Id$
- */ 
+ */
 
 $tempColumns = array (
-     'tx_feuserregister_birthday' => array (        
-        'exclude' => 0,        
-        'label' => 'LLL:EXT:feuserregister/lang/locallang_db.xml:fe_users_tx_feuserregister_birthday',        
+     'tx_feuserregister_birthday' => array (       
+        'exclude' => 0,       
+        'label' => 'LLL:EXT:feuserregister/lang/locallang_db.xml:fe_users_tx_feuserregister_birthday',       
         'config' => array (
             'type'     => 'input',
             'size'     => '8',
@@ -20,9 +20,9 @@ $tempColumns = array (
             'default'  => '0'
         )
     ),
-    'tx_feuserregister_gender' => array (        
-        'exclude' => 1,        
-        'label' => 'LLL:EXT:feuserregister/lang/locallang_db.xml:fe_users_tx_feuserregister_gender',        
+    'tx_feuserregister_gender' => array (       
+        'exclude' => 1,       
+        'label' => 'LLL:EXT:feuserregister/lang/locallang_db.xml:fe_users_tx_feuserregister_gender',       
         'config' => array (
             'type' => 'select',
             'items' => array (
@@ -30,25 +30,25 @@ $tempColumns = array (
 				array('LLL:EXT:feuserregister/lang/locallang_db.xml:fe_users_tx_feuserregister_gender_I_1', '0'),
                 array('LLL:EXT:feuserregister/lang/locallang_db.xml:fe_users_tx_feuserregister_gender_I_2', '1'),
             ),
-            'size' => 1,    
+            'size' => 1,   
             'maxitems' => 1,
         )
     ),
-    'tx_feuserregister_firstname' => array (        
-        'exclude' => 1,        
-        'label' => 'LLL:EXT:feuserregister/lang/locallang_db.xml:fe_users_tx_feuserregister_firstname',        
+    'tx_feuserregister_firstname' => array (       
+        'exclude' => 1,       
+        'label' => 'LLL:EXT:feuserregister/lang/locallang_db.xml:fe_users_tx_feuserregister_firstname',       
         'config' => array (
-            'type' => 'input',    
-            'size' => '30',    
+            'type' => 'input',   
+            'size' => '30',   
             'eval' => 'trim',
         )
     ),
-    'tx_feuserregister_lastname' => array (        
-        'exclude' => 1,        
-        'label' => 'LLL:EXT:feuserregister/lang/locallang_db.xml:fe_users_tx_feuserregister_lastname',        
+    'tx_feuserregister_lastname' => array (       
+        'exclude' => 1,       
+        'label' => 'LLL:EXT:feuserregister/lang/locallang_db.xml:fe_users_tx_feuserregister_lastname',       
         'config' => array (
-            'type' => 'input',    
-            'size' => '30',    
+            'type' => 'input',   
+            'size' => '30',   
             'eval' => 'trim',
         )
     ),
@@ -75,7 +75,7 @@ if (TYPO3_MODE=="BE")   {
 t3lib_extMgm::addStaticFile($_EXTKEY,'static/feuserregister/', 'feuserregister');
 
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_UserRegistration'] = 'layout,select_key,pages,recusive';
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_UserRegistration']='pi_flexform'; 
+$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_UserRegistration']='pi_flexform';
 
 t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_UserRegistration', 'FILE:EXT:feuserregister/flexforms/feuserregister.xml');
 
