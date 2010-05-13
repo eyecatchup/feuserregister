@@ -191,8 +191,10 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 
 	protected function _getFieldMarker() {
 		$marker = array();
+		/* @var $step tx_feuserregister_model_Step */
 		foreach ($this->_steps as $step) {
 			$fields = $step->getFields();
+			/* @var $field tx_feuserregister_model_Field */
 			foreach ($fields as $field) {
 				$marker['###FIELD_'.$field->getFieldName().'###'] = $field->getValue(tx_feuserregister_model_Field::PARSE_HTML);
 			}
@@ -202,8 +204,10 @@ class tx_feuserregister_model_Success extends tx_feuserregister_model_AbstractSt
 
 	protected function _getLabelmarker() {
 		$marker = array();
+		/* @var $step tx_feuserregister_model_Step */
 		foreach ($this->_steps as $step) {
 			$fields = $step->getFields();
+			/* @var $field tx_feuserregister_model_Field */
 			foreach ($fields as $field) {
 				$marker['###LABEL_'.$field->getFieldName().'###'] = $field->getLabel();
 			}
