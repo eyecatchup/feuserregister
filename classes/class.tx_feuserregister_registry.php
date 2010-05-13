@@ -35,13 +35,23 @@ class tx_feuserregister_Registry {
 	}
 
 	/**
+	 * Determines whether an index is set.
+	 *
+	 * @param string $index
+	 * return boolean
+	 */
+	public static function has($index) {
+		return array_key_exists($index, self::$_registry);
+	}
+
+	/**
 	 * getter method.
 	 *
 	 * @param string $index - get the value associated with $index
 	 * @return mixed
 	 */
 	public static function get($index) {
-		if (array_key_exists($index, self::$_registry)) {
+		if (self::has($index)) {
 			return self::$_registry[$index];
 		}
 		return null;

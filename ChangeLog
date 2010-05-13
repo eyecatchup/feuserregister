@@ -1,6 +1,7 @@
 2010-05-13  Oliver Hader  <oliver@typo3.org>
 
 	* Cleanup: Removed whitespaces at end of line
+	* Added feature: Add has() method to registry object
 
 2010-05-12  Oliver Hader  <oliver@typo3.org>
 
