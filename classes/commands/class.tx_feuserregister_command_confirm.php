@@ -109,11 +109,11 @@ class tx_feuserregister_command_Confirm implements tx_feuserregister_interface_C
 						throw $exception;
 					}
 				} else {
-					$exception = t3lib_div::makeInstance('tx_feuserregister_exception_Confirm', 'wrong hash code or user always confirmed', 1400);
+					$exception = t3lib_div::makeInstance('tx_feuserregister_exception_Confirm', 'wrong hash code or user already confirmed', 1400);
 					throw $exception;
 				}
 			} else {
-				$exception = t3lib_div::makeInstance('tx_feuserregister_exception_Confirm', 'wrong hash code or user always confirmed', 1400);
+				$exception = t3lib_div::makeInstance('tx_feuserregister_exception_Confirm', 'wrong hash code or user already confirmed', 1400);
 				throw $exception;
 			}
 		}

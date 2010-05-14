@@ -15,7 +15,7 @@
 		1100	error while creating fe user
 		1200	error while updae fe user
 		1300	error while saving fe user
-		1400	wrong hash code or user always confirmed
+		1400	wrong hash code or user already confirmed
 		3100	previous step not available
 		3200	step [...] not available
 		3300	second reload
