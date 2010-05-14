@@ -1,6 +1,7 @@
 2010-05-14  Oliver Hader  <oliver@typo3.org>
 
 	* Added feature: Extended exception codes to be used in the HTML template
+	* Fixed bug: Replace deprecated t3lib_div::GParrayMerged() call
 
 2010-05-13  Oliver Hader  <oliver@typo3.org>
 

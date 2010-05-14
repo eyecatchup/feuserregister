@@ -30,7 +30,7 @@ class tx_feuserregister_Request {
 	protected $_files = array();
 
 	public function __construct() {
-		$this->_request = t3lib_div::GParrayMerged('tx_feuserregister');
+		$this->_request = t3lib_div::_GPmerged('tx_feuserregister');
 		$this->_files = isset($_FILES['tx_feuserregister']) ? $_FILES['tx_feuserregister'] : array();
 	}
 
