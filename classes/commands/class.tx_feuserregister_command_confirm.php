@@ -75,7 +75,7 @@ class tx_feuserregister_command_Confirm implements tx_feuserregister_interface_C
 					}
 					return t3lib_parsehtml::substituteMarkerArray($this->_templateContent, $marker, '', 0, 1);
 				} else {
-					$exception = t3lib_div::makeInstance('tx_feuserregister_exception_Database', 'error while saving fe user');
+					$exception = t3lib_div::makeInstance('tx_feuserregister_exception_Database', 'error while saving fe user', 1300);
 					throw $exception;
 				}
 			}
@@ -105,15 +105,15 @@ class tx_feuserregister_command_Confirm implements tx_feuserregister_interface_C
 						}
 						return t3lib_parsehtml::substituteMarkerArray($this->_templateContent, $marker, '', 0, 1);
 					} else {
-						$exception = t3lib_div::makeInstance('tx_feuserregister_exception_Database', 'error while saving fe user');
+						$exception = t3lib_div::makeInstance('tx_feuserregister_exception_Database', 'error while saving fe user', 1300);
 						throw $exception;
 					}
 				} else {
-					$exception = t3lib_div::makeInstance('tx_feuserregister_exception_Confirm', 'wrong hash code or user allways confirmed');
+					$exception = t3lib_div::makeInstance('tx_feuserregister_exception_Confirm', 'wrong hash code or user always confirmed', 1400);
 					throw $exception;
 				}
 			} else {
-				$exception = t3lib_div::makeInstance('tx_feuserregister_exception_Confirm', 'wrong hash code or user allways confirmed');
+				$exception = t3lib_div::makeInstance('tx_feuserregister_exception_Confirm', 'wrong hash code or user always confirmed', 1400);
 				throw $exception;
 			}
 		}

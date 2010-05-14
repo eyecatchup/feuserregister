@@ -159,7 +159,8 @@ class tx_feuserregister_model_Field {
 			default:
 				$exception = t3lib_div::makeInstance(
 					'tx_feuserregister_exception_Field',
-					'unknown field type: ' . $this->_fieldConfiguration['type'] . ' for field ' . $this->_fieldName
+					'unknown field type: ' . $this->_fieldConfiguration['type'] . ' for field ' . $this->_fieldName,
+					5200
 				);
 				throw $exception;
 			break;
@@ -456,7 +457,8 @@ class tx_feuserregister_model_Field {
 			default:
 				$exception = t3lib_div::makeInstance(
 					'tx_feuserregister_exception_Field',
-					'unknown field type: ' . $this->_fieldConfiguration['type'] . ' for field ' . $this->_fieldName
+					'unknown field type: ' . $this->_fieldConfiguration['type'] . ' for field ' . $this->_fieldName,
+					5200
 				);
 				throw $exception;
 			break;
@@ -491,7 +493,8 @@ class tx_feuserregister_model_Field {
 			default:
 				$exception = t3lib_div::makeInstance(
 					'tx_feuserregister_exception_Field',
-					'unknown field type: ' . $this->_fieldConfiguration['type'] . ' for field ' . $this->_fieldName
+					'unknown field type: ' . $this->_fieldConfiguration['type'] . ' for field ' . $this->_fieldName,
+					5200
 				);
 				throw $exception;
 			break;
