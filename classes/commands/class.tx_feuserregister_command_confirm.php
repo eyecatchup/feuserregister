@@ -54,6 +54,11 @@ class tx_feuserregister_command_Confirm implements tx_feuserregister_interface_C
 		$this->_controller->notifyObservers('onConfirmStart');
 		$hashCode = $GLOBALS['TYPO3_DB']->quoteStr($this->_request->get('confirmationCode'), 'fe_users');
 		$feuser = t3lib_div::makeInstance('tx_feuserregister_model_FeUser');
+
+		// Unset current stored user in the session:
+		tx_feuserregister_SessionRegistry::set('tx_feuserregister_currentFeuser', NULL);
+
+		// Creation of a new user:
 		$feuser->select("md5(concat(uid,crdate,'{$GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']}')) = '{$hashCode}' AND disable = 1");
 		if ($feuser->uid) {
 			if ($this->_configuration['global.']['userGroupsAfterConfirmation']) {
@@ -79,7 +84,9 @@ class tx_feuserregister_command_Confirm implements tx_feuserregister_interface_C
 					throw $exception;
 				}
 			}
+
 		} else {
+			// Modification of an existing user:
 			$feuser->select("md5(concat(uid,crdate,tx_feuserregister_temporarydata,'{$GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']}')) = '{$hashCode}'");
 			if ($feuser->uid) {
 				if ($this->_configuration['global.']['userGroupsAfterUpdateConfirmation']) {

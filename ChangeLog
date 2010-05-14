@@ -2,6 +2,7 @@
 
 	* Added feature: Extended exception codes to be used in the HTML template
 	* Fixed bug: Replace deprecated t3lib_div::GParrayMerged() call
+	* Fixed bug: FrontendUser in session is not removed if updates have been confirmed
 
 2010-05-13  Oliver Hader  <oliver@typo3.org>
 
