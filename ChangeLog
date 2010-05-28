@@ -1,3 +1,7 @@
+2010-05-28  Frank Naegler <typo3@naegler.net>
+
+	* implement patch of Christoph Niewerth, Bug #4798. Thanks to Christoph for the patch
+
 2010-05-14  Oliver Hader  <oliver@typo3.org>
 
 	* Added feature: Extended exception codes to be used in the HTML template
