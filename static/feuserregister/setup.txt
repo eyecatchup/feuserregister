@@ -172,7 +172,7 @@ plugin.tx_feuserregister {
 		}
 		zip {
 			type = text
-			validators  = required,int,length
+			validators  = required,length
 			validatorOptions {
 				length {
 					min = 5
