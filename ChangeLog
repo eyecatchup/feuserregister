@@ -1,6 +1,7 @@
 2010-06-16  Oliver Hader  <oliver@typo3.org>
 
 	* Fixed bug: TEXT field cannot have a DEFAULT value assigned
+	* Raised version number to 0.2.1
 
 2010-05-28  Frank Naegler <typo3@naegler.net>
 
