@@ -1,4 +1,4 @@
-2010-05-14  Oliver Hader  <oliver@typo3.org>
+2010-06-16  Oliver Hader  <oliver@typo3.org>
 
 	* Fixed bug: TEXT field cannot have a DEFAULT value assigned
 
