@@ -1,3 +1,7 @@
+2010-09-06  Oliver Hader  <oliver@typo3.org>
+
+	* Fixed bug: uid field is persisted explicitly on update actions
+
 2010-06-16  Oliver Hader  <oliver@typo3.org>
 
 	* Fixed bug: TEXT field cannot have a DEFAULT value assigned

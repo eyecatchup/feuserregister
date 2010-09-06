@@ -132,6 +132,12 @@ abstract class tx_feuserregister_model_dbtable {
 	protected function _prepareDataForDatabase() {
 		$preparedData = array();
 		foreach ($this->_dataDefinitions as $field => $type) {
+				// It's not required to update the uid field explicitly:
+				// (some database replication mechanisms might even break)
+			if ($field === 'uid') {
+				continue;
+			}
+
 			switch (strtoupper($type)) {
 				case 'TINYINT':
 				case 'SMALLINT':
