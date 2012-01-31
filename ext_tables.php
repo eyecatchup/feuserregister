@@ -67,10 +67,13 @@ $TCA['pages']['columns']['module']['config']['items']['fe_users']['0'] = 'LLL:EX
 $TCA['pages']['columns']['module']['config']['items']['fe_users']['1'] = 'fe_users';
 
 if (TYPO3_MODE=="BE")   {
-        // add icon
-        $ICON_TYPES['fe_users'] = array('icon' => t3lib_extMgm::extRelPath($_EXTKEY).'resources/icons/icon_tx_feuserregister_fe_users.gif');
+	// add icon
+	if (t3lib_div::compat_version('4.4')) {
+		t3lib_SpriteManager::addTcaTypeIcon('pages', 'contains-fe_users', t3lib_extMgm::extRelPath($_EXTKEY).'resources/icons/icon_tx_feuserregister_fe_users.gif');
+	} else {
+		$ICON_TYPES['fe_users'] = array('icon' => t3lib_extMgm::extRelPath($_EXTKEY).'resources/icons/icon_tx_feuserregister_fe_users.gif');
+	}
 }
-
 
 t3lib_extMgm::addStaticFile($_EXTKEY,'static/feuserregister/', 'feuserregister');
 
